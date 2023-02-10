@@ -1,7 +1,6 @@
 package com.momo.sdk.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.momo.sdk.BaseResponse;
 
 public class StatusResponse extends BaseResponse {
 

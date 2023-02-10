@@ -1,4 +1,4 @@
-package com.momo.sdk;
+package com.momo.sdk.util;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 

@@ -1,10 +1,12 @@
-package com.momo.sdk;
+package com.momo.sdk.network;
 
 import androidx.annotation.NonNull;
 
+import com.momo.sdk.MomoApplication;
 import com.momo.sdk.network.APIService;
 import com.momo.sdk.network.NetworkConnectionInterceptor;
 import com.momo.sdk.network.NullOnEmptyConverterFactory;
+import com.momo.sdk.util.AppConstants;
 
 import java.util.concurrent.TimeUnit;
 

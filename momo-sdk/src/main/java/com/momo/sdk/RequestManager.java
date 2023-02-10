@@ -4,6 +4,7 @@ import androidx.annotation.RestrictTo;
 
 import com.momo.sdk.callbacks.APIRequestCallback;
 import com.momo.sdk.callbacks.BaseCallback;
+import com.momo.sdk.model.BaseResponse;
 import com.momo.sdk.model.MtnError;
 
 import java.io.IOException;

@@ -4,12 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
-import android.content.Context;
-
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.ErrorResponse;
+import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
 import org.junit.Test;

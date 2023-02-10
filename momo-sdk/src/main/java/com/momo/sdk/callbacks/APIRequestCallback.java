@@ -2,7 +2,7 @@ package com.momo.sdk.callbacks;
 
 import androidx.annotation.RestrictTo;
 
-import com.momo.sdk.BaseResponse;
+import com.momo.sdk.model.BaseResponse;
 import com.momo.sdk.model.MtnError;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)

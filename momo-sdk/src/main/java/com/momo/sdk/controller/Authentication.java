@@ -2,7 +2,7 @@ package com.momo.sdk.controller;
 
 import androidx.annotation.NonNull;
 
-import com.momo.sdk.AppConstants;
+import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.MomoApi;
 import com.momo.sdk.config.UserConfiguration;
 import com.momo.sdk.callbacks.APIRequestCallback;

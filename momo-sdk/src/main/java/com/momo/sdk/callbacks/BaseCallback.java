@@ -4,8 +4,8 @@ import static com.momo.sdk.model.MtnError.ERROR_CODE_UNAVAILABLE;
 
 import androidx.annotation.NonNull;
 
-import com.momo.sdk.AppConstants;
-import com.momo.sdk.BaseResponse;
+import com.momo.sdk.util.AppConstants;
+import com.momo.sdk.model.BaseResponse;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.network.NoConnectivityException;
 import com.momo.sdk.util.Utils;

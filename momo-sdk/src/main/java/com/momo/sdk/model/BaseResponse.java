@@ -1,4 +1,4 @@
-package com.momo.sdk;
+package com.momo.sdk.model;
 
 
 import com.google.gson.annotations.SerializedName;

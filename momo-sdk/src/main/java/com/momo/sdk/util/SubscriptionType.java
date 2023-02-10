@@ -1,4 +1,4 @@
-package com.momo.sdk;
+package com.momo.sdk.util;
 
 @SuppressWarnings("ALL")
 public enum SubscriptionType {

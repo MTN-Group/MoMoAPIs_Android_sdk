@@ -1,16 +1,10 @@
 package com.momo.sdk.util;
 
-import com.momo.sdk.APIConstants;
-import com.momo.sdk.AppConstants;
-import com.momo.sdk.SubscriptionType;
-import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.ErrorResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
 
 public class Utils {
