@@ -1,0 +1,8 @@
+{
+  "given_name": "string",
+  "family_name": "string",
+  "birthdate": "string",
+  "locale": "string",
+  "gender": "string",
+  "status": "string"
+}

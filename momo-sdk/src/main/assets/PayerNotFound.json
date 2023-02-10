@@ -1,0 +1,14 @@
+{
+  "amount": 100,
+  "currency": "UGX",
+  "externalId": 947354,
+  "payer": {
+    "partyIdType": "MSISDN",
+    "partyId": 4656473839.0
+  },
+  "status": "FAILED",
+  "reason": {
+    "code": "PAYER_NOT_FOUND",
+    "message": "Payee does not exist"
+  }
+}

@@ -1,0 +1,55 @@
+plugins {
+    id "com.android.library"
+}
+
+android {
+    namespace 'com.momo.sdk'
+    compileSdk 33
+
+    testOptions {
+        testOptions {
+            unitTests.returnDefaultValues = true
+            unitTests.includeAndroidResources = true
+        }
+
+    }
+    defaultConfig {
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    //retrofit library
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+    testImplementation 'org.json:json:20180813'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.4.0'
+    testImplementation "org.robolectric:robolectric:4.7.3"
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation "androidx.security:security-crypto:1.1.0-alpha04"
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+}

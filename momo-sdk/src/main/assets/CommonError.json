@@ -1,0 +1,4 @@
+{
+  "message": "Duplicated reference id. Creation of resource failed.",
+  "code": "RESOURCE_ALREADY_EXIST"
+}
