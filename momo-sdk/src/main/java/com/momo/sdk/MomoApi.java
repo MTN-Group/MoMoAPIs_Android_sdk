@@ -57,8 +57,7 @@ public class MomoApi {
 
     /**************************************Authentication*********************************************?
 
-    /**
-     * Create token user
+    /* Create token user
      *
      * @param callBackRequest    The request model containing callback url
      * @param apiRequestCallback Listener for api operation
@@ -73,8 +72,7 @@ public class MomoApi {
 
     }
 
-    /**
-     *  get User details
+    /** get User details
      *
      * @param xReferenceId       Reference id of created user
      * @param apiRequestCallback Listener for api operation
@@ -88,8 +86,7 @@ public class MomoApi {
     }
 
 
-    /**
-     * get User details
+    /** get User details
      *
      * @param xReferenceId       Reference id of created user
      * @param apiRequestCallback Listener for api operation
@@ -104,8 +101,7 @@ public class MomoApi {
 
     /**************************************Common*********************************************?
 
-     /**
-     * Account balance
+     /** Account balance
      *
      * @param subscriptionType The SubscriptionType object
      * @param  getBalanceAPIRequestCallback Listener for api operation
@@ -122,8 +118,7 @@ public class MomoApi {
     }
 
 
-    /**
-     * Request to validate Account holder Status
+    /** Request to validate Account holder Status
      *
      * @param accountIdentifier Account identifier
      * @param subscriptionType The SubscriptionType object
@@ -143,8 +138,7 @@ public class MomoApi {
 
     }
 
-    /**
-     * Request to get Basic User Info
+    /** Request to get Basic User Info
      *
      * @param accountMsisdn MSISDN string
      * @param subscriptionType SubscriptionType object
@@ -163,8 +157,7 @@ public class MomoApi {
                 accountMsisdn,headers),requestPayAPIRequestCallback));
     }
 
-    /**
-     *  Request to pay delivery Notification
+    /** Request to pay delivery Notification
      *
      * @param referenceId Reference Id of user
      * @param language language String
@@ -194,8 +187,8 @@ public class MomoApi {
 
     /**************************************Collection*********************************************?
 
-     /**
-     * Request pay
+     /** Request pay
+     *
      * @param requestPay The payment object
      * @param callBakUrl server url for callback
      * @param apiRequestCallback Listener for api operation
@@ -209,8 +202,8 @@ public class MomoApi {
 
     }
 
-    /**
-     * Request transaction status
+    /** Request transaction status
+     *
      * @param referenceId Reference id
      * @param requestPayAPIRequestCallback Listener for api operation
      */
@@ -225,9 +218,7 @@ public class MomoApi {
     }
 
 
-    /**
-     * Request withdraw V1
-     *
+    /** Request withdraw V1
      *
      * @param withdraw The Withdraw object
      * @param callBakUrl server url for callback
@@ -242,8 +233,7 @@ public class MomoApi {
 
     }
 
-    /**
-     * Request withdraw V2
+    /** Request withdraw V2
      *
      * @param withdraw The payment object
      * @param callBakUrl server url for callback
@@ -258,8 +248,7 @@ public class MomoApi {
 
 
 
-    /**
-     * Request withdraw transaction status
+    /** Request withdraw transaction status
      *
      * @param referenceId Reference id
      * @param requestPayAPIRequestCallback Listener for api operation
@@ -272,11 +261,6 @@ public class MomoApi {
                 requestPayAPIRequestCallback));
 
     }
-
-
-
-
-
 
     private static class SingletonCreationAdmin {
         @SuppressLint("StaticFieldLeak")

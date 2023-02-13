@@ -38,7 +38,7 @@ import com.momo.sdk.util.Utils;
 public class Collection {
 
 
-    /**  Request pay
+    /** Request pay
      *
      * @param requestPay The payment object
      * @param callBakUrl server url for callback
@@ -93,7 +93,8 @@ public class Collection {
 
     }
 
-    /**  Request Pay transaction status
+    /** Request Pay transaction status
+     *
      * @param referenceId Reference id
      * @param requestPayStateInterface Listener for api operation callback
      */
@@ -122,7 +123,7 @@ public class Collection {
 
     }
 
-    /**  Request to validate Account holder Status
+    /** Request to validate Account holder Status
      *
      * @param accountIdentifier Account identifier
      * @param validateAccountInterface Listener
@@ -211,9 +212,6 @@ public class Collection {
             });
         }
     }
-
-
-
 
     /**  Request withdraw V1
      *
@@ -310,8 +308,7 @@ public class Collection {
         }
     }
 
-    /**
-     * Request to pay delivery Notification
+    /** Request to pay delivery Notification
      *
      * @param referenceId Reference Id of user
      * @param notificationMessage Notification message string

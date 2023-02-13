@@ -13,10 +13,28 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.momo.sdk.SDKManager;
 import com.momo.sdk.config.CollectionConfiguration;
+import com.momo.sdk.interfaces.RequestInterface;
+import com.momo.sdk.interfaces.UserInfoInterface;
+import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;
+import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
+import com.momo.sdk.interfaces.collection.requestpay.RequestPayStatusInterface;
+import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawInterface;
+import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawStatusInterface;
+import com.momo.sdk.model.AccountBalance;
+import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
+import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.Payer;
+import com.momo.sdk.model.collection.RequestPay;
+import com.momo.sdk.model.collection.RequestPayStatus;
+import com.momo.sdk.model.collection.Result;
+import com.momo.sdk.model.collection.Withdraw;
+import com.momo.sdk.model.collection.WithdrawStatus;
+import com.momo.sdk.model.user.BasicUserInfo;
 import com.momo.sdk.util.Environment;
 import com.momo.sdk.util.SubscriptionType;
 
@@ -122,9 +140,352 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
 
 
 
+
     @Override
     public void onItemClick(View view, int position) {
 
+        switch (position) {
+            case 0:
+                //Request Pay
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Request Pay - Output \n\n");
+                requestPay(0);
+                break;
+            case 1:
+                //ValidateAccount Account holder
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Validate account holder - Output \n\n");
+                validateAccountHolder(1);
+                break;
+            case 2:
+                //Get Account Balance
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Get Balance - Output \n\n");
+                getAccountBalance(2);
+                break;
 
+            case 3:
+                //Get Account Balance in specific currency
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Get Balance in specific currency - Output \n\n");
+
+                break;
+            case 4:
+                //Request to withdraw V1
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Request to withdraw V1 - Output \n\n");
+                requestToWithdrawV1(4);
+                break;
+
+
+
+            case 5:
+                //Validate Consumer Identity
+                sbOutPut = new StringBuilder();
+                sbOutPut.append("Validate Consumer Identity - Output \n\n");
+                getBasicUserInfo("0248888736",5);
+                break;
+
+            default:
+                break;
+
+        }
+
+    }
+    private void requestPay(int position) {
+        showProgress();
+
+        RequestPay requestPay = new RequestPay();
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
+
+        Payer payer = new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        requestPay.setPayer(payer);
+
+        SDKManager.collection.requestToPay(requestPay, "", new RequestInterface() {
+            @Override
+            public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
+                hideProgress();
+                if (statusResponse == null || statusResponse.getStatus() == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(statusResponse));
+                    getTransactionStatus(statusResponse.getXReferenceId(),position);
+
+                }
+            }
+
+            @Override
+            public void onRequestInterFaceFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+
+            }
+
+
+        });
+
+    }
+
+    public void validateAccountHolder(int position) {
+
+        AccountIdentifier identifier = new AccountIdentifier();
+        identifier.setAccountHolderIdType("msisdn");
+        identifier.setAccountHolderId("0248888736");
+
+        SDKManager.collection.validateAccountHolderStatus(identifier, new ValidateAccountInterface() {
+            @Override
+            public void onValidateSuccess(Result result) {
+                hideProgress();
+                if (result == null || !result.getResult()) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(result));
+                    txtResponse.setText(sbOutPut);
+                }
+
+            }
+
+            @Override
+            public void onValidateFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+    }
+
+    public void getAccountBalance(int position) {
+
+        SDKManager.collection.getAccountBalance(new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+                hideProgress();
+                if (accountBalance == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(accountBalance));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+
+    }
+
+    public void requestToWithdrawV1(int position) {
+
+        Withdraw withdraw = new Withdraw();
+        withdraw.setAmount("5.0");
+        withdraw.setCurrency("EUR");
+        withdraw.setExternalId("6353636");
+        withdraw.setPayerMessage("Pay for product a");
+        withdraw.setPayeeNote("payer note");
+
+        Payer payer = new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        withdraw.setPayer(payer);
+
+
+        SDKManager.collection.requestToWithdrawV1(withdraw, "", new RequestToWithdrawInterface() {
+            @Override
+            public void onRequestToWithdrawSuccess(StatusResponse withdrawResponse) {
+                hideProgress();
+                if (withdrawResponse == null || withdrawResponse.getStatus() == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(withdrawResponse));
+                    requestToWithdrawV2(position);
+                }
+
+            }
+
+            @Override
+            public void onRequestToWithdrawFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+    }
+
+
+    public void requestToWithdrawV2(int position) {
+        sbOutPut.append("\n\nRequest to withdraw v2\n\n");
+        Withdraw withdraw = new Withdraw();
+        withdraw.setAmount("5.0");
+        withdraw.setCurrency("EUR");
+        withdraw.setExternalId("6353636");
+        withdraw.setPayerMessage("Pay for product a");
+        withdraw.setPayeeNote("payer note");
+
+        Payer payer = new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        withdraw.setPayer(payer);
+
+
+        SDKManager.collection.requestToWithdrawV2(withdraw, "", new RequestToWithdrawInterface() {
+            @Override
+            public void onRequestToWithdrawSuccess(StatusResponse withdrawResponse) {
+                hideProgress();
+                if (withdrawResponse == null || withdrawResponse.getStatus() == null) {
+                    sbOutPut.append("Data is either null or empty");
+                    txtResponse.setText(sbOutPut.toString());
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(withdrawResponse));
+                    getWithdrawTransactionStatus(withdrawResponse.getXReferenceId(),position);
+                }
+            }
+
+            @Override
+            public void onRequestToWithdrawFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+    }
+
+
+    public void getWithdrawTransactionStatus(String requestReferenceId, int position) {
+        sbOutPut.append("\n\nRequest to withdraw  status - Output\n\n");
+        SDKManager.collection.requestToWithdrawTransactionStatus(requestReferenceId, new RequestToWithdrawStatusInterface() {
+            @Override
+            public void onRequestToWithdrawStatusSuccess(WithdrawStatus withdrawStatus) {
+                hideProgress();
+                if (withdrawStatus == null || withdrawStatus == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(withdrawStatus));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+            @Override
+            public void onRequestToWithdrawStatusFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+
+    }
+
+
+    public void getTransactionStatus(String requestReferenceId, int position) {
+
+        sbOutPut.append("\n\nRequest pay transaction status - Output\n\n");
+        SDKManager.collection.requestToPayTransactionStatus(requestReferenceId, new RequestPayStatusInterface() {
+            @Override
+            public void onRequestStatusSuccess(RequestPayStatus requestPayStatus) {
+                hideProgress();
+                if (requestPayStatus == null || requestPayStatus.getPayer() == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(requestPayStatus));
+                    deliveryNotificationCollection(requestPayStatus.getXReferenceId(), position);
+                }
+
+            }
+
+            @Override
+            public void onRequestStatusFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+
+            }
+        });
+
+    }
+
+
+    public void deliveryNotificationCollection(String referenceId, int position) {
+        sbOutPut.append("\n\nDelivery notification - Output\n\n");
+
+        DeliveryNotification deliveryNotification = new DeliveryNotification();
+        deliveryNotification.setNotificationMessage("message");
+
+        SDKManager.collection.requestToPayDeliveryNotification(referenceId,
+                "Message",
+                deliveryNotification, "eng", new RequestInterface() {
+                    @Override
+                    public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
+                        hideProgress();
+                        if (statusResponse == null || statusResponse.getStatus() == null) {
+                            onApiSuccessDataEmpty(position);
+                        } else {
+                            showToast("success");
+                            customUseCaseAdapter.setStatus(1, position);
+                            sbOutPut.append(new Gson().toJson(statusResponse));
+                            txtResponse.setText(sbOutPut);
+                        }
+                    }
+
+                    @Override
+                    public void onRequestInterFaceFailure(MtnError mtnError) {
+                        onApiFailure(position, mtnError);
+                    }
+
+
+                }
+        );
+    }
+
+    public void getBasicUserInfo(String msisdnId,int position) {
+        SDKManager.collection.getBasicUserInfo(msisdnId, new UserInfoInterface() {
+            @Override
+            public void onUserInfoSuccess(BasicUserInfo basicUserInfo) {
+                hideProgress();
+                if (basicUserInfo == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(basicUserInfo));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+
+    }
+
+
+
+    public void onApiSuccessDataEmpty(int position){
+        customUseCaseAdapter.setStatus(2, position);
+        sbOutPut.append("Data is either null or empty");
+        txtResponse.setText(sbOutPut.toString());
+    }
+
+    public void onApiFailure(int position, MtnError mtnError){
+        hideProgress();
+        sbOutPut.append(new Gson().toJson(mtnError));
+        txtResponse.setText(new Gson().toJson(mtnError));
+        customUseCaseAdapter.setStatus(2, position);
     }
 }
