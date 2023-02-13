@@ -1,5 +1,6 @@
 package com.momo.sdk.network;
 
+import com.momo.sdk.model.AccessToken;
 import com.momo.sdk.model.user.ApiKey;
 import com.momo.sdk.model.user.ApiUser;
 import com.momo.sdk.model.StatusResponse;
@@ -37,6 +38,8 @@ public interface APIService {
                               @HeaderMap Map<String, String> headers);
 
 
-
+    @POST("{type}/token/")
+    Call<AccessToken> createAccessToken(@Path("type") String path,
+                                        @HeaderMap Map<String, String> headers);
 
 }
