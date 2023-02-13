@@ -9,15 +9,25 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.google.gson.Gson;
+import com.momo.sdk.model.AccessToken;
+import com.momo.sdk.model.AccountBalance;
+import com.momo.sdk.model.collection.Payer;
+import com.momo.sdk.model.collection.RequestPay;
+import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.user.ApiKey;
 import com.momo.sdk.model.user.ApiUser;
 import com.momo.sdk.model.ErrorResponse;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
+import com.momo.sdk.model.user.BasicUserInfo;
 import com.momo.sdk.model.user.CallBackHost;
 import com.momo.sdk.network.APIService;
 import com.momo.sdk.network.NetworkConnectionInterceptor;
 import com.momo.sdk.network.NullOnEmptyConverterFactory;
+import com.momo.sdk.util.APIConstants;
+import com.momo.sdk.util.AppConstants;
+import com.momo.sdk.util.Credentials;
+import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
 import org.junit.Before;
@@ -269,9 +279,509 @@ public class ApiUnitTest {
             }
 
         }
+    }
+
+
+
+
+
+    @Test
+    public void createToken_api_request_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("Token.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, "fbf949df1f964e869437ef6651e74371");
+        headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic("e560c513-dc1b-42d9-9cd6-524f6169d3cd",
+                "da904461d76b40659c27965818b0442c"));
+
+
+        Call<AccessToken> tokenCall = apiService.
+                createAccessToken(APIConstants.COLLECTION, headerMap);
+        try {
+            Response<AccessToken> response = tokenCall.execute();
+            if (response.isSuccessful()) {
+                StatusResponse statusResponse = new StatusResponse();
+                statusResponse.setStatus("true");
+                AccessToken accessToken = response.body();
+                if (accessToken.getAccessToken() != null) {
+                    assertNotEquals(accessToken.getAccessToken(),null);
+                    assertNotEquals(accessToken.getTokenType(),null);
+                    assertNotEquals(accessToken.getExpires_in(),null);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void createToken_api_request_failed_response() throws IOException {
+        String actualStatus = FileReader.readFromFile("FailedLogin.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(500));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, "fbf949df1f964e869437ef6651e74371");
+        headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic("e560c513-dc1b-42d9-9cd6-524f6169d3cd",
+                "da904461d76b40659c27965818b0442c"));
+
+        Call<AccessToken> tokenCall = apiService.
+                createAccessToken(APIConstants.COLLECTION, headerMap);
+        try {
+            Response<AccessToken> response = tokenCall.execute();
+            if (response.isSuccessful()) {
+
+
+            }else{
+                ResponseBody errorBody = response.errorBody();
+                ErrorResponse errorResponse = Utils.parseError(errorBody.string());
+                MtnError mtnError = new MtnError(response.code(), errorResponse,
+                        null);
+                assertNotEquals(mtnError.getErrorBody().getMessage(),null);
+                assertEquals(mtnError.getErrorBody().getCode(),null);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void createTokenApi_unAuthorized() throws IOException {
+        String actualStatus = FileReader.readFromFile("UnAuthorized.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(401));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, "fbf949df1f964e869437ef6651e74371");
+        headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic("e560c513-dc1b-42d9-9cd6-524f6169d3cd",
+                "da904461d76b40659c27965818b0442c"));
+
+        Call<AccessToken> tokenCall = apiService.
+                createAccessToken(APIConstants.COLLECTION, headerMap);
+        try {
+            Response<AccessToken> response = tokenCall.execute();
+            if(!response.isSuccessful()){
+                ResponseBody errorBody = response.errorBody();
+                ErrorResponse errorResponse = Utils.parseError(errorBody.string());
+                MtnError mtnError = new MtnError(response.code(), errorResponse,
+                        null);
+                assertNotEquals(mtnError.getErrorBody().getMessage(),null);
+                assertEquals(mtnError.getErrorBody().getCode(),null);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+    @Test
+    public  void requestPay_api_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("SuccessResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+        RequestPay requestPay=new RequestPay();
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
+
+        Payer payer=new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        requestPay.setPayer(payer);
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        String uuid = Utils.generateUUID();
+        AppConstants.CURRENT_X_REFERENCE_ID = uuid;
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("", SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_REFERENCE_ID, uuid);
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<StatusResponse> responseCall = apiService.requestToPay(headerMap,
+                RequestBody.create(new Gson().toJson(requestPay), mediaType));
+
+
+        Response<StatusResponse> response=responseCall.execute();
+        if (response.isSuccessful()) {
+
+            StatusResponse statusResponse=response.body();
+            assertNotEquals(statusResponse.getStatus(),null);
+
+        }
 
     }
 
+
+    @Test
+    public  void requestPay_api_get_status_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("RequestPayResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<RequestPayStatus> responseCall = apiService.
+                requestPayStatus("28f6033e-75ad-42e7-a5a0-3ff4e992f0e3",headers);
+
+
+        Response<RequestPayStatus> response=responseCall.execute();
+        if (response.isSuccessful()) {
+
+            RequestPayStatus requestPay=response.body();
+            assertNotEquals(requestPay,null);
+
+        }
+
+    }
+
+    @Test
+    public  void requestPay_api_get_payer_not_found_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("PayerNotFound.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<RequestPayStatus> responseCall = apiService.
+                requestPayStatus("28f6033e-75ad-42e7-a5a0-3ff4e992f0e3",headers);
+
+
+        Response<RequestPayStatus> response=responseCall.execute();
+        if(response.isSuccessful()){
+//            assertEquals(response.body().getReason().getCode(),null);
+//            assertNotEquals(response.body().getReason().getMessage(),null);
+        }
+    }
+
+    @Test
+    public  void requestPay_api_get_payer_not_found_error() throws IOException {
+        String actualStatus = FileReader.readFromFile("PayerNotFound.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(404));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<RequestPayStatus> responseCall = apiService.
+                requestPayStatus("28f6033e-75ad-42e7-a5a0-3ff4e992f0e3",headers);
+
+
+        Response<RequestPayStatus> response=responseCall.execute();
+        if(!response.isSuccessful()){
+            ResponseBody errorBody=response.errorBody();
+            if (errorBody != null) {
+                MtnError mtnError =new MtnError(response.code(),Utils.parseError(errorBody.string()),
+                        null);
+
+                assertNotEquals(mtnError.getErrorBody(), null);
+                assertEquals(mtnError.getErrorBody().getMessage(), "Payee does not exist");
+                assertEquals(mtnError.getErrorBody().getCode(),"PAYER_NOT_FOUND");
+            }
+
+
+        }
+    }
+
+    @Test
+    public  void requestPay_api_get_payer_request_pay_not_found() throws IOException {
+        String actualStatus = FileReader.readFromFile("EmptyResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(400));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<RequestPayStatus> responseCall = apiService.
+                requestPayStatus("28f6033e-75ad-42e7-a5a0-3ff4e992f0e3",headers);
+
+
+        Response<RequestPayStatus> response=responseCall.execute();
+        if(!response.isSuccessful()){
+            ResponseBody errorBody=response.errorBody();
+
+            if (errorBody!=null) {
+                MtnError mtnError =new MtnError(response.code(),Utils.parseError(errorBody.string()),
+                        null);
+                assertEquals("Bad Request",mtnError.getErrorBody().getCode());
+                assertEquals("Unable to fetch error information",mtnError.getErrorBody().getMessage());
+
+            }
+
+        }
+    }
+
+    @Test
+    public  void requestPay_api_get_payer_request_pay_unknown_error() throws IOException {
+        String actualStatus = FileReader.readFromFile("EmptyResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(400));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<RequestPayStatus> responseCall = apiService.
+                requestPayStatus("28f6033e-75ad-42e7-a5a0-3ff4e992f0e3",headers);
+
+
+        Response<RequestPayStatus> response=responseCall.execute();
+        if(!response.isSuccessful()){
+            ResponseBody errorBody=response.errorBody();
+
+            if (errorBody!=null) {
+                MtnError mtnError =new MtnError(response.code(),Utils.parseError(errorBody.string()),
+                        null);
+                assertEquals("Bad Request",mtnError.getErrorBody().getCode());
+                assertEquals("Unable to fetch error information",mtnError.getErrorBody().getMessage());
+
+            }
+        }
+    }
+
+
+    //200 success
+
+    @Test
+    public void basicUserInfo_api_success() throws IOException {
+
+        String actualStatus = FileReader.readFromFile("UserInfo.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headerMap.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+
+        Call<BasicUserInfo> responseCall = apiService.basicUserInfo(SubscriptionType.COLLECTION.name(),"0248888736",headerMap);
+
+
+        Response<BasicUserInfo> response=responseCall.execute();
+        if(response.isSuccessful()){
+            assertNotEquals(response.body(),null);
+        }
+
+    }
+
+
+
+
+
+
+    @Test
+    public  void getBalance_api_get_status_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("BalanceResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+        Call<AccountBalance> responseCall = apiService.
+                getBalance(SubscriptionType.COLLECTION.name(), headers);
+
+
+        Response<AccountBalance> response=responseCall.execute();
+        if (response.isSuccessful()) {
+            AccountBalance accountBalance =response.body();
+            assertNotEquals(accountBalance.getAvailableBalance(),null);
+        }
+
+    }
+
+
+
+    @Test
+    public  void getBalance_api_get_status_failure() throws IOException {
+        String actualStatus = FileReader.readFromFile("EmptyResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(400));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+        Call<AccountBalance> responseCall = apiService.
+                getBalance(SubscriptionType.COLLECTION.name(), headers);
+
+
+        Response<AccountBalance> response=responseCall.execute();
+        if(!response.isSuccessful()){
+            ResponseBody errorBody=response.errorBody();
+
+            if (errorBody!=null) {
+                MtnError mtnError =new MtnError(response.code(),Utils.parseError(errorBody.string()),
+                        null);
+                assertEquals("Bad Request",mtnError.getErrorBody().getCode());
+                assertEquals("Unable to fetch error information",mtnError.getErrorBody().getMessage());
+
+            }
+        }
+    }
+
+    @Test
+    public void getBalance_api_get_failure() throws IOException {
+        String actualStatus = FileReader.readFromFile("BalanceErrorResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(500));
+
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+
+        Call<AccountBalance> responseCall = apiService.
+                getBalance(SubscriptionType.COLLECTION.name(), headers);
+
+        try {
+            Response<AccountBalance> response=responseCall.execute();
+
+            if (response.isSuccessful()) {
+
+            }else{
+                ResponseBody errorBody = response.errorBody();
+                ErrorResponse errorResponse = Utils.parseError(errorBody.string());
+                MtnError mtnError = new MtnError(response.code(), errorResponse,
+                        null);
+                assertEquals("Access to target environment is forbidden.",mtnError.getErrorBody().getMessage());
+                assertEquals("NOT_ALLOWED_TARGET_ENVIRONMENT",mtnError.getErrorBody().getCode());
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void requestToWithdraw_api_get_failure() throws IOException {
+        String actualStatus = FileReader.readFromFile("WithdrawConflictResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(409));
+
+
+        RequestPay requestPay=new RequestPay();
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
+
+        Payer payer=new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        requestPay.setPayer(payer);
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        String uuid = Utils.generateUUID();
+        AppConstants.CURRENT_X_REFERENCE_ID = uuid;
+        headerMap.put(APIConstants.X_REFERENCE_ID, uuid);
+        headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, "fbf949df1f964e869437ef6651e74371");
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.COLLECTION));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+        headerMap.put(APIConstants.CONTENT_TYPE,"application/json");
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+        Call<StatusResponse> responseCall = apiService.requestToWithdrawV1(headerMap,RequestBody.create(new Gson().toJson(requestPay), mediaType));
+
+        try {
+            Response<StatusResponse> response=responseCall.execute();
+
+            if (response.isSuccessful()) {
+
+            }else{
+                ResponseBody errorBody = response.errorBody();
+                ErrorResponse errorResponse = Utils.parseError(errorBody.string());
+                MtnError mtnError = new MtnError(response.code(), errorResponse,
+                        null);
+                assertEquals("Duplicated reference id. Creation of resource failed.",mtnError.getErrorBody().getMessage());
+                assertEquals("RESOURCE_ALREADY_EXIST",mtnError.getErrorBody().getCode());
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
