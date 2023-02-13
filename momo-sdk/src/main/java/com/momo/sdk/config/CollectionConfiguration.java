@@ -33,6 +33,8 @@ public class CollectionConfiguration {
     private final Environment environment;
     private final String userReferenceId;
     private final String apiKey;
+    private final String xTargetEnvironment;
+
     private final SubscriptionType subscriptionType;
     private final TokenInitializeInterface tokenInitializeInterface;
 
@@ -44,10 +46,13 @@ public class CollectionConfiguration {
         this.apiKey = CollectionConfigurationBuilder.getApiKey();
         this.subscriptionType = CollectionConfigurationBuilder.getSubscriptionType();
         this.tokenInitializeInterface = CollectionConfigurationBuilder.tokenInitializeInterface;
+        this.xTargetEnvironment= CollectionConfigurationBuilder.xTargetEnvironment;
         callAccessTokenApi();
     }
 
-    //call token api synchronously
+    /**
+     * Create token api call-syncrously call for token api
+     */
     public void callAccessTokenApi() {
         HashMap<String, String> headerMap = new HashMap<>();
         headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, this.subscriptionKey);
@@ -82,7 +87,14 @@ public class CollectionConfiguration {
             ErrorResponse errorResponse = Utils.setError(3);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
+       }
+       else if(CollectionConfigurationBuilder.getxTargetEnvironment()==null||
+                CollectionConfigurationBuilder.getxTargetEnvironment().isEmpty()){
+            ErrorResponse errorResponse = Utils.setError(3);
+            tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
         }
+
        else {
             new Thread(() -> {
                 Call<AccessToken> tokenCall = (RetrofitHelper.getApiHelper().
@@ -139,6 +151,8 @@ public class CollectionConfiguration {
         private static String apiKey;
         private static SubscriptionType subscriptionType;
         private static TokenInitializeInterface tokenInitializeInterface;
+
+        private static String xTargetEnvironment;
 
         public static String getSubscriptionKey() {
             return subscriptionKey;
@@ -199,6 +213,24 @@ public class CollectionConfiguration {
             return this;
         }
 
+
+
+        public static TokenInitializeInterface getTokenInitializeInterface() {
+            return tokenInitializeInterface;
+        }
+
+        public static void setTokenInitializeInterface(TokenInitializeInterface tokenInitializeInterface) {
+            CollectionConfigurationBuilder.tokenInitializeInterface = tokenInitializeInterface;
+        }
+
+        public static String getxTargetEnvironment() {
+            return xTargetEnvironment;
+        }
+
+        public CollectionConfigurationBuilder setxTargetEnvironment(String xTargetEnvironment) {
+            CollectionConfigurationBuilder.xTargetEnvironment = xTargetEnvironment;
+          return this;
+        }
 
         public CollectionConfiguration build(Context context) {
             //initialize preference for sdk

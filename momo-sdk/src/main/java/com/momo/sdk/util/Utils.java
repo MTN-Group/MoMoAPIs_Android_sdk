@@ -166,6 +166,7 @@ public class Utils {
                 errorObject.setMessage("Invalid token");
                 break;
 
+
             default:
                 errorObject.setCode("GenericError");
                 errorObject.setMessage("");
