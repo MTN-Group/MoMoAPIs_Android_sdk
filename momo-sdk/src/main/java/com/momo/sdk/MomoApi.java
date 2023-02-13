@@ -142,7 +142,6 @@ public class MomoApi {
      *
      * @param accountMsisdn MSISDN string
      * @param subscriptionType SubscriptionType object
-     * @param accountMsisdn Msisdn of account
      * @param requestPayAPIRequestCallback Listener
      */
 

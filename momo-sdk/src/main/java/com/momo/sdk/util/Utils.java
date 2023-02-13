@@ -17,6 +17,7 @@ import java.util.UUID;
 import retrofit2.Call;
 import retrofit2.Response;
 
+@SuppressWarnings("CommentedOutCode")
 public class Utils {
 
     private static final String UNABLE_TO_FETCH_ERROR_INFO = "Unable to fetch error information";

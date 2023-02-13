@@ -1,6 +1,5 @@
 package com.momo.gsma;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +39,7 @@ import com.momo.sdk.util.SubscriptionType;
 
 import java.util.Objects;
 
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class CollectionActivity extends BaseActivity implements CustomUseCaseAdapter.ItemClickListener {
 
 
@@ -373,7 +373,7 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
             @Override
             public void onRequestToWithdrawStatusSuccess(WithdrawStatus withdrawStatus) {
                 hideProgress();
-                if (withdrawStatus == null || withdrawStatus == null) {
+                if (withdrawStatus == null) {
                     onApiSuccessDataEmpty(position);
                 } else {
                     showToast("success");

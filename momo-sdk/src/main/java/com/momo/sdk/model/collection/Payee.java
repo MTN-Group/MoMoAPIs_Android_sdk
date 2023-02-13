@@ -4,6 +4,7 @@ package com.momo.sdk.model.collection;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("ALL")
 public class Payee {
 
 		@SerializedName("partyIdType")
