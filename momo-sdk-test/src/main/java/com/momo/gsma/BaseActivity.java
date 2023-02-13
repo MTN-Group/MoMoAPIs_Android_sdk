@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+@SuppressWarnings("unused")
 public class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog progressdialog;

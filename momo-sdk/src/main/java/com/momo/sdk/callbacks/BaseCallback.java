@@ -23,6 +23,7 @@ import retrofit2.Response;
  *
  * @param <K> the type parameter
  */
+@SuppressWarnings("resource")
 public class BaseCallback<K extends BaseResponse> implements Callback<K> {
 
     private static final String UNABLE_TO_FETCH_ERROR_INFO = "Unable to fetch error information";

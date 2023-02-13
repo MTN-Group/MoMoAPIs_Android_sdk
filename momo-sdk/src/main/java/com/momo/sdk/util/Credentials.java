@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import okio.ByteString;
 
 /** Factory for HTTP authorization credentials. */
+@SuppressWarnings("unused")
 public final class Credentials {
   private Credentials() {
   }

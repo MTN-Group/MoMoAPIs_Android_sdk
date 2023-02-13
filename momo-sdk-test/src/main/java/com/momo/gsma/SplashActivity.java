@@ -1,5 +1,6 @@
 package com.momo.gsma;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
 import com.momo.sdk.model.user.CallBackHost;
 
+@SuppressWarnings("unused")
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends BaseActivity {
 
     private String userReferenceId = "";

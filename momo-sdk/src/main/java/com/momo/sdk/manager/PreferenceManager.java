@@ -16,6 +16,7 @@ import java.security.GeneralSecurityException;
  * store the application data
  */
 
+@SuppressWarnings("unused")
 public class PreferenceManager {
 
     private SharedPreferences preferences;
@@ -23,6 +24,7 @@ public class PreferenceManager {
     /**
      * @return PreferenceManager singleton instance of the class
      */
+    @SuppressWarnings("unused")
     public static PreferenceManager getInstance() {
         return SingleInstanceAdmin.instance;
     }
@@ -31,6 +33,7 @@ public class PreferenceManager {
      * @param context Context of the application
      */
 
+    @SuppressWarnings("unused")
     @SuppressLint("ObsoleteSdkInt")
     public void init(Context context) {
         if (preferences == null) {
@@ -54,6 +57,7 @@ public class PreferenceManager {
      * @param token save the token to shared preferences
      *
      */
+    @SuppressWarnings("unused")
     public void saveToken(String token, SubscriptionType subscriptionType) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(subscriptionType.name(), token);
@@ -64,6 +68,7 @@ public class PreferenceManager {
      * @return retrieve the access token
      */
 
+    @SuppressWarnings("unused")
     public String retrieveToken(SubscriptionType subscriptionType) {
         if (preferences == null) {
             return "";
@@ -75,6 +80,7 @@ public class PreferenceManager {
     /**
      * creating singleton instance of the class
      */
+    @SuppressWarnings("unused")
     private static class SingleInstanceAdmin {
         static final PreferenceManager instance = new PreferenceManager();
     }

@@ -1,5 +1,6 @@
 package com.momo.gsma;
 
+@SuppressWarnings("unused")
 public class TestAppConstants {
 
     public static String apiKey="";

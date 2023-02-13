@@ -6,21 +6,22 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.Objects;
 
+@SuppressWarnings({"CanBeFinal", "unused"})
 public class LandingActivity extends AppCompatActivity implements CustomUseCaseAdapter.ItemClickListener {
 
 
+    @SuppressWarnings("FieldCanBeLocal")
     private CustomUseCaseAdapter customRecyclerAdapter;
-    private static String LOG_TAG = "GSMA-SAMPLE";
+    private static final String LOG_TAG = "GSMA-SAMPLE";
     private Toast toastText;
-    private String[] usecasesArray = {
+    @SuppressWarnings({"FieldMayBeFinal", "RedundantSuppression"})
+    private final String[] usecasesArray = {
             "Collections",
             "Disbursements",
             "Remittance",
