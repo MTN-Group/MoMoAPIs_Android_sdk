@@ -38,7 +38,10 @@ public class CollectionConfiguration {
     private final SubscriptionType subscriptionType;
     private final TokenInitializeInterface tokenInitializeInterface;
 
-    public CollectionConfiguration(CollectionConfigurationBuilder collectionConfigurationBuilder) {
+    private Context context;
+
+
+    public CollectionConfiguration(CollectionConfigurationBuilder collectionConfigurationBuilder, Context context) {
         this.subscriptionKey = CollectionConfigurationBuilder.getSubscriptionKey();
         this.callBackUrl = CollectionConfigurationBuilder.getCallBackUrl();
         this.environment = CollectionConfigurationBuilder.getEnvironment();
@@ -46,7 +49,8 @@ public class CollectionConfiguration {
         this.apiKey = CollectionConfigurationBuilder.getApiKey();
         this.subscriptionType = CollectionConfigurationBuilder.getSubscriptionType();
         this.tokenInitializeInterface = CollectionConfigurationBuilder.tokenInitializeInterface;
-        this.xTargetEnvironment= CollectionConfigurationBuilder.xTargetEnvironment;
+        this.xTargetEnvironment = CollectionConfigurationBuilder.xTargetEnvironment;
+        this.context = context;
         callAccessTokenApi();
     }
 
@@ -58,10 +62,8 @@ public class CollectionConfiguration {
         headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, this.subscriptionKey);
         headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic(userReferenceId, apiKey));
 
-
         if (CollectionConfigurationBuilder.getSubscriptionKey() == null ||
                 CollectionConfigurationBuilder.getSubscriptionKey().isEmpty()) {
-
             ErrorResponse errorResponse = Utils.setError(1);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -70,32 +72,26 @@ public class CollectionConfiguration {
             ErrorResponse errorResponse = Utils.setError(4);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-        else if(CollectionConfigurationBuilder.getEnvironment()==null){
+        } else if (CollectionConfigurationBuilder.getEnvironment() == null) {
             ErrorResponse errorResponse = Utils.setError(5);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-        else if(CollectionConfigurationBuilder.getApiKey()==null|| CollectionConfigurationBuilder.getApiKey().isEmpty()){
+        } else if (CollectionConfigurationBuilder.getApiKey() == null || CollectionConfigurationBuilder.getApiKey().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(6);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-
-       else if(CollectionConfigurationBuilder.getUserReferenceId()==null||
-                CollectionConfigurationBuilder.getUserReferenceId().isEmpty()){
+        } else if (CollectionConfigurationBuilder.getUserReferenceId() == null ||
+                CollectionConfigurationBuilder.getUserReferenceId().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(3);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-       }
-       else if(CollectionConfigurationBuilder.getxTargetEnvironment()==null||
-                CollectionConfigurationBuilder.getxTargetEnvironment().isEmpty()){
-            ErrorResponse errorResponse = Utils.setError(3);
+        } else if (CollectionConfigurationBuilder.getxTargetEnvironment() == null ||
+                CollectionConfigurationBuilder.getxTargetEnvironment().isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(5);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-
-       else {
+        } else {
+            PreferenceManager.getInstance().init(context);
             new Thread(() -> {
                 Call<AccessToken> tokenCall = (RetrofitHelper.getApiHelper().
                         createAccessToken(APIConstants.COLLECTION, headerMap));
@@ -106,17 +102,16 @@ public class CollectionConfiguration {
                         statusResponse.setStatus("true");
                         AccessToken accessToken = response.body();
 
-                        if(CollectionConfigurationBuilder.getEnvironment().equals(Environment.SANDBOX)){
-                             AppConstants.BASE_URL = AppConstants.SANDBOX_BASE_URL;
-                        }else {
+                        if (CollectionConfigurationBuilder.getEnvironment().equals(Environment.SANDBOX)) {
+                            AppConstants.BASE_URL = AppConstants.SANDBOX_BASE_URL;
+                        } else {
                             AppConstants.BASE_URL = AppConstants.PRODUCTION_BASE_URL;
                         }
-
 
                         if (accessToken.getAccessToken() != null) {
                             PreferenceManager.getInstance().saveToken(accessToken.getAccessToken(),
                                     SubscriptionType.COLLECTION);
-                            AppConstants.COLLECTION_TOKEN=accessToken.getAccessToken();
+                            AppConstants.COLLECTION_TOKEN = accessToken.getAccessToken();
                             this.tokenInitializeInterface.onTokenInitializeSuccess(statusResponse);
                         } else {
                             MtnError mtnError = new MtnError(response.code(),
@@ -151,7 +146,7 @@ public class CollectionConfiguration {
         private static String apiKey;
         private static SubscriptionType subscriptionType;
         private static TokenInitializeInterface tokenInitializeInterface;
-
+        private Context context;
         private static String xTargetEnvironment;
 
         public static String getSubscriptionKey() {
@@ -214,7 +209,6 @@ public class CollectionConfiguration {
         }
 
 
-
         public static TokenInitializeInterface getTokenInitializeInterface() {
             return tokenInitializeInterface;
         }
@@ -229,13 +223,13 @@ public class CollectionConfiguration {
 
         public CollectionConfigurationBuilder setxTargetEnvironment(String xTargetEnvironment) {
             CollectionConfigurationBuilder.xTargetEnvironment = xTargetEnvironment;
-          return this;
+            return this;
         }
 
         public CollectionConfiguration build(Context context) {
             //initialize preference for sdk
-            PreferenceManager.getInstance().init(context);
-            return new CollectionConfiguration(this);
+            this.context = context;
+            return new CollectionConfiguration(this, context);
         }
 
     }
