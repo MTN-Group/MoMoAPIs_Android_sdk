@@ -52,6 +52,7 @@ public class RetrofitHelper {
 
         httpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
         httpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        httpClientBuilder.authenticator(new Authenticator());
         httpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
         httpClientBuilder.addInterceptor(new NetworkConnectionInterceptor(MomoApplication.getAppContext()));
 

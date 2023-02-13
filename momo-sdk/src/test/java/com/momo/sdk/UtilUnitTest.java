@@ -274,7 +274,7 @@ public class UtilUnitTest {
                 "  \"status\": \"FAILED\",\n" +
                 "  \"reason\": {\n" +
                 "    \"code\": \"PAYER_NOT_FOUND\",\n" +
-                "    \"message\": \"Payee does not exist\"\n" +
+                "    \"message\": \"com.momo.sdk.model.collection.Payee does not exist\"\n" +
                 "  }\n" +
                 "}";
 
@@ -282,7 +282,7 @@ public class UtilUnitTest {
 
         ErrorResponse expectedResponse = new ErrorResponse();
         expectedResponse.setCode("PAYER_NOT_FOUND");
-        expectedResponse.setMessage("Payee does not exist");
+        expectedResponse.setMessage("com.momo.sdk.model.collection.Payee does not exist");
 
         assertEquals(actualResponse.getMessage(), expectedResponse.getMessage());
         assertEquals(actualResponse.getCode(), expectedResponse.getCode());

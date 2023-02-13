@@ -19,8 +19,9 @@ import com.momo.sdk.util.Utils;
 
 public class Authentication {
 
-    /* Create a user in sand box account
-     * CallBackHost  model containing the call back url
+    /**  Create a user in sand box account
+     * @param callBackRequest - CallBackHost  model containing the call back url
+     * @param requestInterface - Listener for request user
      */
     public void createUser(CallBackHost callBackRequest, @NonNull RequestInterface requestInterface) {
         if (UserConfiguration.UserConfigurationBuilder.getSubscriptionKey() == null ||
@@ -50,8 +51,9 @@ public class Authentication {
         }
     }
 
-    /* Create Api Key
-     * reference id of the user
+    /** Create Api Key
+     * @param xReferenceId - reference id of the user
+     * @param keyInterface - Listener for create api key
      */
     public void createApiKey(String xReferenceId, @NonNull ApiKeyInterface keyInterface) {
         if (UserConfiguration.UserConfigurationBuilder.getSubscriptionKey() == null ||
@@ -79,8 +81,9 @@ public class Authentication {
     }
 
 
-    /* Get user Details
-     * reference id of the user
+    /** Get user Details
+     *  @param xReferenceId - reference id of the user
+     *  @param userDetailInterface - Listener for user details
      */
     public void getUserDetails(String xReferenceId, @NonNull UserDetailInterface userDetailInterface) {
         if (UserConfiguration.UserConfigurationBuilder.getSubscriptionKey() == null ||
@@ -108,6 +111,5 @@ public class Authentication {
             });
         }
     }
-
 
 }

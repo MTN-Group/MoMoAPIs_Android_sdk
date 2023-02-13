@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class LandingActivity extends AppCompatActivity implements CustomUseCaseA
         switch (position) {
             case 0:
                 //collection
+                startActivity(new Intent(LandingActivity.this, CollectionActivity.class));
+
                 break;
             case 1:
                 //Disbursement
