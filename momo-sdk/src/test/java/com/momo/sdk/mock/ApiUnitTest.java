@@ -799,6 +799,51 @@ public class ApiUnitTest {
         return httpClientBuilder.build();
     }
 
+    public void deposit_disbursement_success() throws IOException {
+        String actualStatus = FileReader.readFromFile("SuccessResponse.json");
+        mockWebServer.enqueue(new MockResponse().setBody(actualStatus).setResponseCode(200));
+
+
+        RequestPay requestPay=new RequestPay();
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
+
+        Payer payer=new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        requestPay.setPayer(payer);
+
+        HashMap<String, String> headerMap = new HashMap<>();
+        AppConstants.CURRENT_X_REFERENCE_ID ="28f6033e-75ad-42e7-a5a0-3ff4e992f0e3";
+        String uuid = Utils.generateUUID();
+        AppConstants.CURRENT_X_REFERENCE_ID = uuid;
+        headerMap.put(APIConstants.X_REFERENCE_ID, uuid);
+        headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, "56b02ac19a844c87a8dbc3ac098bc9ce");
+        headers.put(APIConstants.CALLBACK_URL,Utils.setCallbackUrl("",SubscriptionType.DISBURSEMENT));
+        headerMap.put(APIConstants.X_TARGET_ENVIRONMENT,"sandbox");
+        headerMap.put(APIConstants.CONTENT_TYPE,"application/json");
+        headerMap.put(APIConstants.AUTHORIZATION,"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjAwZmI4NjRmLTQxNGQtNDRlYy1iNmFmLWYyNDM1YzUwMmY0YyIsImV4cGlyZXMiOiIyMDIyLTEyLTE5VDEwOjQxOjU2LjUzMCIsInNlc3Npb25JZCI6IjQwZDY5OTc4LWVlNzUtNDIxNy04YmE5LTI3MWYwYjMwOGNiZCJ9.mM0HydVeBPC3CFuMR5fAtIKYUW7hmbbb937jPPoD3q5vBhLeFo9oIbWdYU5FMpOfEaJYAPCZzhrxw5Cgnp0VuuqU9hF8CQh5SMZLCVK7G4GXGsaU308r1kgvCjjrffLkvCYF5M3i4Hynv4YQGkCszBtVpyehfIu8oTl2VpQMMtINeJXp9CGFe5E5wA3TIF9j4sR5Wf1g8LbqP30OnXD0a1-SdDM_dLuV3HXLtp9EiYVE7ud2Xi3gVhJMxN5Mkjes3pNGOkNza_MaAzqdItzWsxKju3bjPYSWv59WEm7jUwmK0bNzVMrP8MOnP5T3B1OVtN1DoWHCHrEnf6A6_uyjFQ");
+
+
+        Call<StatusResponse> responseCall = apiService.deposit("v1_0",headerMap,RequestBody.create(new Gson().toJson(requestPay), mediaType));
+
+        try {
+            Response<StatusResponse> response=responseCall.execute();
+
+            if (response.isSuccessful()) {
+                StatusResponse statusResponse=response.body();
+                assertEquals("true",statusResponse.getStatus());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
