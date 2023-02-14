@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.momo.sdk.model.Transaction;
 import com.momo.sdk.model.collection.Payee;
 
+@SuppressWarnings("unused")
 public class DepositStatus extends Transaction {
 
 
@@ -15,6 +16,6 @@ public class DepositStatus extends Transaction {
     }
 
     public void setPayee(Payee payee) {
-        this.payer = payer;
+        this.payer = payee;
     }
 }

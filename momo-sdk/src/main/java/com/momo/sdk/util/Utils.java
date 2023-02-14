@@ -244,7 +244,7 @@ public class Utils {
         Response<AccessToken> response = tokenCall.execute();
         if (response.isSuccessful()) {
             AccessToken accessToken = response.body();
-            if (accessToken.getAccessToken() != null) {
+            if (Objects.requireNonNull(accessToken).getAccessToken() != null) {
                 PreferenceManager.getInstance().saveToken(accessToken.getAccessToken(), subscriptionType);
                 return accessToken.getAccessToken();
             } else {
@@ -257,10 +257,11 @@ public class Utils {
     }
 
 
+    @SuppressWarnings({"ConstantConditions", "DuplicateExpressions"})
     public static String setCallbackUrl(String callBackUrl, SubscriptionType subscriptionType) {
         String callBackURL = "";
         if (subscriptionType == SubscriptionType.COLLECTION) {
-            if (callBackUrl != null || !callBackUrl.isEmpty()) {
+            if (callBackUrl != null || !Objects.requireNonNull(callBackUrl).isEmpty()) {
                 callBackURL = callBackUrl;
             } else if (CollectionConfiguration.CollectionConfigurationBuilder.getCallBackUrl() != null ||
                     Objects.requireNonNull(CollectionConfiguration.CollectionConfigurationBuilder.getCallBackUrl()).isEmpty()) {
@@ -268,16 +269,16 @@ public class Utils {
             } else {
                 callBackURL = callBackUrl;
             }
-//        } else if (subscriptionType == SubscriptionType.DISBURSEMENT) {
-//
-//            if (callBackUrl != null || !callBackUrl.isEmpty()) {
-//                callBackURL = callBackUrl;
-//            } else if (DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl() != null ||
-//                    Objects.requireNonNull(DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl()).isEmpty()) {
-//                callBackURL = DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl();
-//            } else {
-//                callBackURL = callBackUrl;
-//            }
+        } else if (subscriptionType == SubscriptionType.DISBURSEMENT) {
+
+            if (callBackUrl != null || !Objects.requireNonNull(callBackUrl).isEmpty()) {
+                callBackURL = callBackUrl;
+            } else if (DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl() != null ||
+                    Objects.requireNonNull(DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl()).isEmpty()) {
+                callBackURL = DisbursementConfiguration.DisbursementConfigurationBuilder.getCallBackUrl();
+            } else {
+                callBackURL = callBackUrl;
+            }
 //
 //        } else if (subscriptionType == SubscriptionType.REMITTANCE) {
 //
@@ -296,6 +297,7 @@ public class Utils {
      return callBackURL;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static HashMap<String, String> getHeaders(String referenceId, SubscriptionType subscriptionType,
                                                      String callBakUrl, Boolean isAddCallBackUrl) {
         HashMap<String, String> headers = new HashMap<>();
@@ -308,7 +310,7 @@ public class Utils {
                 headers.put(APIConstants.CALLBACK_URL, Utils.setCallbackUrl(callBakUrl, subscriptionType));
             }
         }
-        if (referenceId != null || !referenceId.isEmpty()) {
+        if (referenceId != null || !Objects.requireNonNull(referenceId).isEmpty()) {
             headers.put(APIConstants.X_REFERENCE_ID, referenceId);
         }
 //        if (subscriptionType.name().equalsIgnoreCase("remittance")) {

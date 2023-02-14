@@ -3,6 +3,7 @@ package com.momo.sdk.model.disbursement;
 import com.google.gson.annotations.SerializedName;
 import com.momo.sdk.model.Transaction;
 
+@SuppressWarnings("unused")
 public class Refund extends Transaction {
 
     @SerializedName("referenceIdToRefund")

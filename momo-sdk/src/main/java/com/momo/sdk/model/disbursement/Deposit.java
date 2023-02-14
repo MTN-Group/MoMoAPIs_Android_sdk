@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.momo.sdk.model.Transaction;
 import com.momo.sdk.model.collection.Payee;
 
+@SuppressWarnings("unused")
 public class Deposit extends Transaction {
 
     @SerializedName("payee")

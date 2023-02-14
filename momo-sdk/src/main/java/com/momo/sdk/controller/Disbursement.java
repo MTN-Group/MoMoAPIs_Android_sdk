@@ -31,6 +31,7 @@ import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
+@SuppressWarnings("unused")
 public class Disbursement {
 
 
@@ -144,6 +145,7 @@ public class Disbursement {
      * @param callBackURl      server url for callback
      * @param requestInterface Listener for api callback
      */
+    @SuppressWarnings("ConstantConditions")
     public void depositV1(@NonNull Deposit deposit, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
@@ -177,6 +179,7 @@ public class Disbursement {
      * @param callBackURl      server url for callback
      * @param requestInterface Listener for api callback
      */
+    @SuppressWarnings("ConstantConditions")
     public void depositV2(@NonNull Deposit deposit, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
@@ -209,12 +212,14 @@ public class Disbursement {
      * @param callBackURl      server url for callback
      * @param requestInterface Listener for api callback
      */
+    @SuppressWarnings("ConstantConditions")
     public void refundV1(@NonNull Refund refund, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (refund == null) {
+        } else //noinspection ConstantConditions
+            if (refund == null) {
             ErrorResponse errorResponse = Utils.setError(2);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -242,12 +247,14 @@ public class Disbursement {
      */
 
 
+    @SuppressWarnings("ConstantConditions")
     public void refundV2(@NonNull Refund refund, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (refund == null) {
+        } else //noinspection ConstantConditions
+            if (refund == null) {
             ErrorResponse errorResponse = Utils.setError(2);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -343,12 +350,14 @@ public class Disbursement {
      * @param requestInterface Listener for api operation
      */
 
+    @SuppressWarnings("ConstantConditions")
     public void transfer(@NonNull Transfer transfer, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (transfer == null) {
+        } else //noinspection ConstantConditions
+            if (transfer == null) {
             ErrorResponse errorResponse = Utils.setError(2);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));

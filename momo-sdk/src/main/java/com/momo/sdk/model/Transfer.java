@@ -3,6 +3,7 @@ package com.momo.sdk.model;
 import com.google.gson.annotations.SerializedName;
 import com.momo.sdk.model.collection.Payee;
 
+@SuppressWarnings("unused")
 public class Transfer extends Transaction{
 
     @SerializedName("payee")

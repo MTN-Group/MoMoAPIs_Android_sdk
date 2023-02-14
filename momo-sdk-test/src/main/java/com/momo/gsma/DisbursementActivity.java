@@ -1,6 +1,5 @@
 package com.momo.gsma;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +30,6 @@ import com.momo.sdk.model.StatusResponse;
 import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.collection.AccountIdentifier;
 import com.momo.sdk.model.collection.Payee;
-import com.momo.sdk.model.collection.Payer;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.disbursement.Deposit;
 import com.momo.sdk.model.disbursement.DepositStatus;
@@ -43,6 +41,7 @@ import com.momo.sdk.util.SubscriptionType;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class DisbursementActivity extends  BaseActivity implements  CustomUseCaseAdapter.ItemClickListener {
 
     private static final String TAG = "DisbursementActivity";
@@ -56,7 +55,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
             "Validate Consumer Identity",
             "Get Consumer Information with Consent",
             "Transfer with Consent",
-            "Merchantpayment with Consent",
+            "Merchant payment with Consent",
             "Payment with Consent",
             "Bank Transfer with Consent",
 
@@ -112,11 +111,8 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                     public void onTokenInitializeSuccess(StatusResponse statusResponse) {
                         Log.d(TAG, "onTokenInitializeSuccess: ");
                         sbOutPut.append(new Gson().toJson(statusResponse));
-                        runOnUiThread(() -> {
-                            txtResponse.setText(sbOutPut.toString());
-                        });
+                        runOnUiThread(() -> txtResponse.setText(sbOutPut.toString()));
                         hideProgress();
-                        ;
                     }
 
                     @Override
@@ -125,9 +121,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                         sbOutPut = new StringBuilder();
                         sbOutPut.append(new Gson().toJson(mtnError));
                         hideProgress();
-                        runOnUiThread(() -> {
-                            showToast(mtnError.getErrorBody().getMessage());
-                        });
+                        runOnUiThread(() -> showToast(mtnError.getErrorBody().getMessage()));
 
                     }
                 }).

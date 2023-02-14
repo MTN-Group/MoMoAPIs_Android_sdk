@@ -19,22 +19,28 @@ import com.momo.sdk.util.Utils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+@SuppressWarnings({"unused", "AccessStaticViaInstance"})
 public class DisbursementConfiguration {
 
     private final String subscriptionKey;
+    @SuppressWarnings("FieldCanBeLocal")
     private final String callBackUrl;
+    @SuppressWarnings("FieldCanBeLocal")
     private final Environment environment;
     private final String userReferenceId;
     private final String apiKey;
+    @SuppressWarnings("FieldCanBeLocal")
     private final SubscriptionType subscriptionType;
     private final TokenInitializeInterface tokenInitializeInterface;
-    private Context context;
+    private final Context context;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final String xTargetEnvironment;
 
     public DisbursementConfiguration(DisbursementConfigurationBuilder disbursementConfigurationBuilder,Context context) {
@@ -111,7 +117,7 @@ public class DisbursementConfiguration {
                             AppConstants.BASE_URL = AppConstants.PRODUCTION_BASE_URL;
                         }
 
-                        if (accessToken.getAccessToken() != null) {
+                        if (Objects.requireNonNull(accessToken).getAccessToken() != null) {
                             PreferenceManager.getInstance().saveToken(accessToken.getAccessToken(),
                                     SubscriptionType.DISBURSEMENT);
                             AppConstants.DISBURSEMENT_TOKEN=accessToken.getAccessToken();
@@ -123,7 +129,7 @@ public class DisbursementConfiguration {
                         }
                     } else {
                         ResponseBody errorBody = response.errorBody();
-                        ErrorResponse errorResponse = Utils.parseError(errorBody.string());
+                        ErrorResponse errorResponse = Utils.parseError(Objects.requireNonNull(errorBody).string());
                         MtnError mtnError = new MtnError(response.code(), errorResponse,
                                 null);
                         this.tokenInitializeInterface.onTokenInitializeFailure(mtnError);
@@ -138,6 +144,7 @@ public class DisbursementConfiguration {
 
         }
     }
+    @SuppressWarnings("unused")
     public static class DisbursementConfigurationBuilder {
         private static String subscriptionKey;
         private static String callBackUrl;
@@ -149,6 +156,7 @@ public class DisbursementConfiguration {
 
         private static String xTargetEnvironment;
 
+        @SuppressWarnings("FieldCanBeLocal")
         private Context context;
 
 
