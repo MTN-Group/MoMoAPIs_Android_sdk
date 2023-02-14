@@ -225,13 +225,13 @@ public class Utils {
             headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic(CollectionConfiguration.CollectionConfigurationBuilder.getUserReferenceId(),
                     CollectionConfiguration.CollectionConfigurationBuilder.getApiKey()));
         }
-//        else if(subscriptionType.name().equalsIgnoreCase(SubscriptionType.DISBURSEMENT.name().toLowerCase())) {
-//            headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
-//                    DisbursementConfiguration.DisbursementConfigurationBuilder.getSubscriptionKey());
-//            headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic(DisbursementConfiguration.DisbursementConfigurationBuilder.
-//                            getUserReferenceId(),
-//                    DisbursementConfiguration.DisbursementConfigurationBuilder.getApiKey()));
-//        }
+        else if(subscriptionType.name().equalsIgnoreCase(SubscriptionType.DISBURSEMENT.name().toLowerCase())) {
+            headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
+                    DisbursementConfiguration.DisbursementConfigurationBuilder.getSubscriptionKey());
+            headerMap.put(APIConstants.AUTHORIZATION, Credentials.basic(DisbursementConfiguration.DisbursementConfigurationBuilder.
+                            getUserReferenceId(),
+                    DisbursementConfiguration.DisbursementConfigurationBuilder.getApiKey()));
+        }
 //        else if(subscriptionType.name().equalsIgnoreCase(SubscriptionType.REMITTANCE.name().toLowerCase())) {
 //            headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
 //                    RemittanceConfiguration.RemittanceConfigurationBuilder.getSubscriptionKey());

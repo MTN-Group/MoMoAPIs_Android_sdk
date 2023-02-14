@@ -33,10 +33,11 @@ public class DisbursementConfiguration {
     private final String apiKey;
     private final SubscriptionType subscriptionType;
     private final TokenInitializeInterface tokenInitializeInterface;
+    private Context context;
 
     private final String xTargetEnvironment;
 
-    public DisbursementConfiguration(DisbursementConfigurationBuilder disbursementConfigurationBuilder) {
+    public DisbursementConfiguration(DisbursementConfigurationBuilder disbursementConfigurationBuilder,Context context) {
         this.subscriptionKey = disbursementConfigurationBuilder.getSubscriptionKey();
         this.callBackUrl = disbursementConfigurationBuilder.getCallBackUrl();
         this.environment = disbursementConfigurationBuilder.getEnvironment();
@@ -45,6 +46,7 @@ public class DisbursementConfiguration {
         this.subscriptionType = disbursementConfigurationBuilder.getSubscriptionType();
         this.tokenInitializeInterface = disbursementConfigurationBuilder.tokenInitializeInterface;
         this.xTargetEnvironment = disbursementConfigurationBuilder.xTargetEnvironment;
+        this.context=context;
         callAccessTokenApi();
     }
 
@@ -84,7 +86,15 @@ public class DisbursementConfiguration {
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
         }
+        else if (DisbursementConfiguration.DisbursementConfigurationBuilder.getxTargetEnvironment() == null ||
+                DisbursementConfiguration.DisbursementConfigurationBuilder.getxTargetEnvironment().isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(5);
+            tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+
         else {
+            PreferenceManager.getInstance().init(context);
             new Thread(() -> {
                 Call<AccessToken> tokenCall = (RetrofitHelper.getApiHelper().
                         createAccessToken(APIConstants.DISBURSEMENT, headerMap));
@@ -138,6 +148,8 @@ public class DisbursementConfiguration {
         private static TokenInitializeInterface tokenInitializeInterface;
 
         private static String xTargetEnvironment;
+
+        private Context context;
 
 
         public static String getSubscriptionKey() {
@@ -210,8 +222,8 @@ public class DisbursementConfiguration {
 
         public DisbursementConfiguration build(Context context) {
             //initialize preference for sdk
-            PreferenceManager.getInstance().init(context);
-            return new DisbursementConfiguration(this);
+            this.context=context;
+            return new DisbursementConfiguration(this,context);
         }
     }
 

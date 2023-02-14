@@ -52,11 +52,11 @@ public class Disbursement {
             ErrorResponse errorResponse = Utils.setError(2);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderIdType() == null || accountIdentifier.getAccountHolderId().isEmpty()) {
+        } else if (accountIdentifier.getAccountHolderIdType() == null || accountIdentifier.getAccountHolderIdType().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(13);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderIdType() == null || accountIdentifier.getAccountHolderId().isEmpty()) {
+        } else if (accountIdentifier.getAccountHolderId() == null || accountIdentifier.getAccountHolderId().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(14);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -415,7 +415,21 @@ public class Disbursement {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else {
+        }
+        else if(deliveryNotification==null){
+            ErrorResponse errorResponse = Utils.setError(2);
+            requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+
+        }
+
+        else if (referenceId == null || referenceId.isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(3);
+            requestInterface.onRequestInterFaceFailure((new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null)));
+        }
+
+        else {
             MomoApi.getInstance().requestPayDeliveryNotification(referenceId, notificationMessage, language, SubscriptionType.DISBURSEMENT, deliveryNotification, new APIRequestCallback<StatusResponse>() {
                 @Override
                 public void onSuccess(int responseCode, StatusResponse serializedResponse) {

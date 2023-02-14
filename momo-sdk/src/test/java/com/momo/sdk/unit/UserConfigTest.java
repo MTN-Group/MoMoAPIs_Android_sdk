@@ -1,7 +1,8 @@
-package com.momo.sdk;
+package com.momo.sdk.unit;
 
 import static org.junit.Assert.assertEquals;
 
+import com.momo.sdk.SDKManager;
 import com.momo.sdk.config.UserConfiguration;
 import com.momo.sdk.interfaces.ApiKeyInterface;
 import com.momo.sdk.interfaces.RequestInterface;

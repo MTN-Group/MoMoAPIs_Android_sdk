@@ -1,4 +1,4 @@
-package com.momo.sdk;
+package com.momo.sdk.mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -9,6 +9,8 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.google.gson.Gson;
+import com.momo.sdk.FileReader;
+import com.momo.sdk.MomoApplication;
 import com.momo.sdk.model.AccessToken;
 import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.collection.Payer;

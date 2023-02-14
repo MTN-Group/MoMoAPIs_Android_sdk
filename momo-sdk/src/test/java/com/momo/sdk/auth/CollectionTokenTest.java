@@ -1,4 +1,4 @@
-package com.momo.sdk;
+package com.momo.sdk.auth;
 
 import static org.junit.Assert.assertEquals;
 
