@@ -1,6 +1,7 @@
 package com.momo.sdk.util;
 
 import com.momo.sdk.config.CollectionConfiguration;
+import com.momo.sdk.config.DisbursementConfiguration;
 import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.AccessToken;
 import com.momo.sdk.model.ErrorResponse;
@@ -316,14 +317,13 @@ public class Utils {
 //            headers.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
 //                    RemittanceConfiguration.RemittanceConfigurationBuilder.getSubscriptionKey());
 //
-//        } else if (subscriptionType.name().equalsIgnoreCase("disbursement")) {
-//            headers.put(APIConstants.X_TARGET_ENVIRONMENT,
-//                    DisbursementConfiguration.DisbursementConfigurationBuilder.getEnvironment().toString().toLowerCase());
-//            headers.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
-//                    DisbursementConfiguration.DisbursementConfigurationBuilder.getSubscriptionKey());
 //        } else
-//
-        if (subscriptionType.name().equalsIgnoreCase("collection")) {
+        if (subscriptionType.name().equalsIgnoreCase("disbursement")) {
+            headers.put(APIConstants.X_TARGET_ENVIRONMENT,
+                    DisbursementConfiguration.DisbursementConfigurationBuilder.getxTargetEnvironment());
+            headers.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,
+                    DisbursementConfiguration.DisbursementConfigurationBuilder.getSubscriptionKey());
+        } else if (subscriptionType.name().equalsIgnoreCase("collection")) {
             headers.put(APIConstants.X_TARGET_ENVIRONMENT,
                     CollectionConfiguration.CollectionConfigurationBuilder.getxTargetEnvironment());
             headers.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY,

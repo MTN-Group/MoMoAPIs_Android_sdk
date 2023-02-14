@@ -7,12 +7,17 @@ import com.momo.sdk.callbacks.APIRequestCallback;
 import com.momo.sdk.config.UserConfiguration;
 import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.DeliveryNotification;
+import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.collection.AccountIdentifier;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.Withdraw;
 import com.momo.sdk.model.collection.WithdrawStatus;
+import com.momo.sdk.model.disbursement.Deposit;
+import com.momo.sdk.model.disbursement.DepositStatus;
+import com.momo.sdk.model.disbursement.Refund;
+import com.momo.sdk.model.disbursement.RefundStatus;
 import com.momo.sdk.model.user.ApiKey;
 import com.momo.sdk.model.user.ApiUser;
 import com.momo.sdk.model.StatusResponse;
@@ -41,7 +46,6 @@ public class MomoApi {
         apiHelper = RetrofitHelper.getApiHelper();
         requestManager = new RequestManager();
         headers = new HashMap<>();
-
     }
 
     /**
@@ -260,6 +264,126 @@ public class MomoApi {
                 requestPayAPIRequestCallback));
 
     }
+
+
+
+    /**
+     *  Deposit
+     *
+     * @param deposit The Deposit object
+     * @param version The version
+     * @param callBakUrl server url for callback
+     * @param apiRequestCallback Listener for api operation
+     */
+
+    public void deposit(Deposit deposit, String version, String callBakUrl, APIRequestCallback<StatusResponse> apiRequestCallback) {
+        headers.clear();
+
+        HashMap<String ,String > headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),SubscriptionType.DISBURSEMENT,Utils.setCallbackUrl(callBakUrl,SubscriptionType.DISBURSEMENT),true);
+        headers.put(APIConstants.CONTENT_TYPE,"application/json");
+
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.deposit(version,
+                headers, RequestBody.create(new Gson().toJson(deposit), mediaType)), apiRequestCallback));
+
+    }
+
+
+
+    /**
+     *  Refund
+     *
+     * @param refund The Refund object
+     * @param version The version
+     * @param callBakUrl server url for callback
+     * @param apiRequestCallback Listener for api operation
+     */
+
+    public void refund(Refund refund, String version, String callBakUrl, APIRequestCallback<StatusResponse> apiRequestCallback) {
+        headers.clear();
+
+
+        HashMap<String ,String > headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),SubscriptionType.DISBURSEMENT,Utils.setCallbackUrl(callBakUrl,SubscriptionType.DISBURSEMENT),true);
+        headers.put(APIConstants.CONTENT_TYPE,"application/json");
+
+
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.refund(version,
+                headers, RequestBody.create(new Gson().toJson(refund), mediaType)), apiRequestCallback));
+
+    }
+
+    /**
+     * Request deposit status
+     *
+     * @param referenceId Reference id
+     * @param requestPayAPIRequestCallback Listener for api operation
+     */
+
+    public void depositStatus(String referenceId,APIRequestCallback<DepositStatus> requestPayAPIRequestCallback){
+        headers.clear();
+        HashMap<String ,String > headers;
+        headers=Utils.getHeaders(referenceId,SubscriptionType.DISBURSEMENT,"",false);
+
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.depositStatus(referenceId,headers),
+                requestPayAPIRequestCallback));
+
+
+    }
+
+    /**
+     * Request refund status
+     *
+     * @param referenceId Reference
+     * @param requestPayAPIRequestCallback Listener for api operation
+     */
+
+    public void refundStatus(String referenceId,APIRequestCallback<RefundStatus> requestPayAPIRequestCallback){
+        headers.clear();
+        HashMap<String ,String > headers;
+        headers=Utils.getHeaders(referenceId,SubscriptionType.DISBURSEMENT,"",false);
+
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.refundStatus(referenceId,headers),
+                requestPayAPIRequestCallback));
+
+    }
+    /**
+     * Request transaction status
+     *
+     * @param subscriptionType the SubscriptionType instance
+     * @param referenceId Reference id of request transaction
+     * @param requestPayAPIRequestCallback Listener for api operation
+     */
+
+    public void transferStatus(SubscriptionType subscriptionType,String referenceId,APIRequestCallback<Transfer> requestPayAPIRequestCallback){
+        HashMap<String ,String > headers;
+        headers=Utils.getHeaders(referenceId,subscriptionType,"",false);
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.transferStatus(subscriptionType.name().toLowerCase(),referenceId,headers),
+                requestPayAPIRequestCallback));
+
+    }
+
+
+    /**
+     *  Request to transfer
+     *
+     * @param subscriptionType The SubscriptionType object
+     * @param transfer The Transfer object
+     * @param callBakUrl server url for callback
+     * @param apiRequestCallback Listener for api operation
+     */
+
+
+    public void requestToTransfer(SubscriptionType subscriptionType, Transfer transfer,
+                                  String callBakUrl, APIRequestCallback<StatusResponse> apiRequestCallback){
+        HashMap<String,String> headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,callBakUrl,true);
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.requestToTransfer(subscriptionType.name().toLowerCase(),
+                headers, RequestBody.create(new Gson().toJson(transfer), mediaType)),apiRequestCallback ));
+    }
+
+
+
 
     private static class SingletonCreationAdmin {
         @SuppressLint("StaticFieldLeak")

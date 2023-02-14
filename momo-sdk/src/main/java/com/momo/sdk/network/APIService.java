@@ -2,9 +2,12 @@ package com.momo.sdk.network;
 
 import com.momo.sdk.model.AccessToken;
 import com.momo.sdk.model.AccountBalance;
+import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.WithdrawStatus;
+import com.momo.sdk.model.disbursement.DepositStatus;
+import com.momo.sdk.model.disbursement.RefundStatus;
 import com.momo.sdk.model.user.ApiKey;
 import com.momo.sdk.model.user.ApiUser;
 import com.momo.sdk.model.StatusResponse;
@@ -101,6 +104,45 @@ public interface APIService {
 
     @GET("collection/v1_0/requesttowithdraw/{referenceId}")
     Call<WithdrawStatus> requestToWithdrawTransactionStatus(@Path("referenceId") String referenceId, @HeaderMap Map<String, String> headers);
+
+
+    /*******************************Disbursement************************************************/
+
+    @POST("disbursement/{version}/deposit")
+    Call<StatusResponse> deposit(@Path("version") String version,
+                                 @HeaderMap Map<String, String> headers,
+                                 @Body RequestBody body);
+
+
+
+    @POST("disbursement/{version}/refund")
+    Call<StatusResponse> refund(@Path("version") String version,
+                                @HeaderMap Map<String, String> headers,
+                                @Body RequestBody body);
+
+
+
+    @GET("disbursement/v1_0/deposit/{referenceId}")
+    Call<DepositStatus> depositStatus(@Path("referenceId") String referenceId, @HeaderMap Map<String, String> headers);
+
+
+    @GET("disbursement/v1_0/refund/{referenceId}")
+    Call<RefundStatus> refundStatus(@Path("referenceId") String referenceId, @HeaderMap Map<String, String> headers);
+
+
+
+
+
+    @GET("{subscriptionType}/v1_0/transfer/{referenceId}")
+    Call<Transfer> transferStatus(@Path("subscriptionType") String subscriptionType,
+                                  @Path("referenceId") String referenceId, @HeaderMap Map<String, String> headers);
+
+
+
+
+    @POST("{subscriptionType}/v1_0/transfer")
+    Call<StatusResponse> requestToTransfer(@Path("subscriptionType") String subscription,
+                                           @HeaderMap Map<String, String> headers,@Body RequestBody body);
 
 
 
