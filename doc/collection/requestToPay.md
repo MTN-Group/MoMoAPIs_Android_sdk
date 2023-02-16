@@ -1,5 +1,5 @@
 
-# Create User
+# Request To Pay
 
 `Here, requestToPay() creates a POST request to collection/v1_0/requesttopay`
 
