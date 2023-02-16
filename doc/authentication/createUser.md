@@ -35,7 +35,6 @@ Construct a callback request model and set desired paramaters
 ### Example Output
 
 ```json
-201 
 {
   "status": "true"
 
