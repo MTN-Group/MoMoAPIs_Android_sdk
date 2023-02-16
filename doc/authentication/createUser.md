@@ -1,14 +1,19 @@
 
 # Create User
 
-`Here, createApiKey() creates a POST request to /apiuser`
+`Here, createUser() creates a POST request to /apiuser`
 
-> `This endpoint allows momo user to generate a api key in the API manager portal`
+> `This endpoint allows momo user to generate a user in the API manager portal`
 
 ### Usage/Examples
 
-Pass the reference id of created user to get the api key of a user
+Construct a callback request model and set desired paramaters
 
+```java
+        CallBackHost callBackHost = new CallBackHost();
+        callBackHost.setProviderCallbackHost("<place your callback host url>");
+
+```
 
 ```java
 
