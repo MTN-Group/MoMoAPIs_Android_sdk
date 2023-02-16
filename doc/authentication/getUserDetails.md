@@ -7,7 +7,7 @@
 
 ### Usage/Examples
 
-Pass the reference id obtained from the createUser() function into getUserDetails() to get the details of the user
+Passing the reference id obtained from the createUser() function into getUserDetails() to get the details of the user
 
 
 
