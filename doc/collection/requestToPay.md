@@ -11,20 +11,20 @@ Construct a request pay model and set desired parameters
 
 ```java
 
+   
         RequestPay requestPay = new RequestPay();
-        requestPay.setAmount("<Amount>"); //eg: 5.0 
-        requestPay.setCurrency("<CURRENCY>");//eg: USD,EUR..
-        requestPay.setExternalId("<External Id>"); 
-        requestPay.setPayerMessage("<Message>");
-        requestPay.setPayeeNote("<Note>");
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
 
         Payer payer = new Payer();
 
-        payer.setPartyId("<Party Id>");
-        payer.setPartyIdType("<partyId type>");//eg: MSISDN
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
 
         requestPay.setPayer(payer);
-
 ```
 
 ```java
