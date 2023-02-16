@@ -1,5 +1,5 @@
 
-# Request To Pay
+# Account Balance
 
 `Here, getAccountBalance() creates a GET request to v1_0/account/balance`
 
