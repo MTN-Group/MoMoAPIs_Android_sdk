@@ -31,3 +31,17 @@ Construct a callback request model and set desired paramaters
 
 
 ```
+### Example Output
+
+```json
+202
+{
+  "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b",
+  "status": "pending",
+  "notificationMethod": "callback",
+  "objectReference": "1056",
+  "pollLimit": 100
+}
+```
+
+
