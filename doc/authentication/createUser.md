@@ -7,7 +7,7 @@
 
 ### Usage/Examples
 
-Construct a callback request model and set desired paramaters
+Construct a callback request model and set desired parameters
 
 ```java
         CallBackHost callBackHost = new CallBackHost();
