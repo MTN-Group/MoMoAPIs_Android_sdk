@@ -7,41 +7,22 @@
 
 ### Usage/Examples
 
-Passing the reference id obtained from request pay function to into get the status  of the transaction
+Passing the reference id obtained of transaction into requestToPayTransactionStatus() to get the status of the transaction
+
 
 ```java
 
-   
-        RequestPay requestPay = new RequestPay();
-        requestPay.setAmount("5.0");
-        requestPay.setCurrency("EUR");
-        requestPay.setExternalId("6353636");
-        requestPay.setPayerMessage("Pay for product a");
-        requestPay.setPayeeNote("payer note");
-
-        Payer payer = new Payer();
-
-        payer.setPartyId("0248888736");
-        payer.setPartyIdType("MSISDN");
-
-        requestPay.setPayer(payer);
-```
-
-```java
-
-
-    SDKManager.collection.requestToPayTransactionStatus(requestPay, "<CallbackUrl>", new RequestInterface() {
+   SDKManager.collection.requestToPayTransactionStatus("<Reference id of transaction>", new RequestPayStatusInterface() {
             @Override
-            public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
-         
+            public void onRequestStatusSuccess(RequestPayStatus requestPayStatus) {
+              
             }
 
             @Override
-            public void onRequestInterFaceFailure(MtnError mtnError) {
-               }
+            public void onRequestStatusFailure(MtnError mtnError) {
 
-
-   });
+            }
+        });
 
 
 ```
