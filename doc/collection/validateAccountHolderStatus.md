@@ -12,9 +12,10 @@ Construct a account identifier object and set desired values
 
 ```java
 
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType("msisdn");
         identifier.setAccountHolderId("0248888736");
+
 
         SDKManager.collection.validateAccountHolderStatus(identifier, new ValidateAccountInterface() {
             @Override
