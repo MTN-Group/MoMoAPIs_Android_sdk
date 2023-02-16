@@ -21,7 +21,8 @@ Construct a callback request model and set desired paramaters
      SDKManager.authentication.createUser(callBackHost, new RequestInterface() {
             @Override
             public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
-         }
+            
+            }
             @Override
             public void onRequestInterFaceFailure(MtnError mtnError) {
       
@@ -34,13 +35,10 @@ Construct a callback request model and set desired paramaters
 ### Example Output
 
 ```json
-202
+201 
 {
-  "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "1056",
-  "pollLimit": 100
+  "status": "true"
+
 }
 ```
 
