@@ -7,7 +7,7 @@
 
 ### Usage/Examples
 
-Pass the reference id of created user into createApiKey() to get the api key
+Passing the reference id of created user into createApiKey() to get the api key
 
 ```java
 
