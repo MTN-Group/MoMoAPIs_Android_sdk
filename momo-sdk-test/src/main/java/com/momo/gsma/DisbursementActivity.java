@@ -28,7 +28,7 @@ import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
 import com.momo.sdk.model.Transfer;
-import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payee;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.disbursement.Deposit;
@@ -244,7 +244,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
 
     private void validateDisbursementAccountHolder(int position) {
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType("msisdn");
         identifier.setAccountHolderId("0248888736");
         SDKManager.disbursement.validateAccountHolder(identifier, new ValidateAccountInterface() {

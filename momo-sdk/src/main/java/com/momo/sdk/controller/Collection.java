@@ -23,7 +23,7 @@ import com.momo.sdk.model.MtnError;
 
 import com.momo.sdk.model.StatusResponse;
 
-import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.collection.Result;
@@ -125,24 +125,24 @@ public class Collection {
 
     /** Request to validate Account holder Status
      *
-     * @param accountIdentifier Account identifier
+     * @param accountHolder Account identifier
      * @param validateAccountInterface Listener
      */
-    public void validateAccountHolderStatus(AccountIdentifier accountIdentifier, ValidateAccountInterface validateAccountInterface) {
+    public void validateAccountHolderStatus(AccountHolder accountHolder, ValidateAccountInterface validateAccountInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.COLLECTION)) {
             ErrorResponse errorResponse = Utils.setError(16);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderIdType() == null || accountIdentifier.getAccountHolderIdType().isEmpty()) {
+        } else if (accountHolder.getAccountHolderIdType() == null || accountHolder.getAccountHolderIdType().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(13);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderId() == null || accountIdentifier.getAccountHolderId().isEmpty()) {
+        } else if (accountHolder.getAccountHolderId() == null || accountHolder.getAccountHolderId().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(14);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
         } else {
-            MomoApi.getInstance().validateAccountHolderStatus(accountIdentifier, SubscriptionType.COLLECTION, new APIRequestCallback<Result>() {
+            MomoApi.getInstance().validateAccountHolderStatus(accountHolder, SubscriptionType.COLLECTION, new APIRequestCallback<Result>() {
                 @Override
                 public void onSuccess(int responseCode, Result serializedResponse) {
                     validateAccountInterface.onValidateSuccess(serializedResponse);

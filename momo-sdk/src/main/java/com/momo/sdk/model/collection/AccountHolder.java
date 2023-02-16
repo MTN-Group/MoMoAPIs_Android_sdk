@@ -2,7 +2,7 @@ package com.momo.sdk.model.collection;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AccountIdentifier {
+public class AccountHolder {
 
     @SerializedName("accountHolderIdType")
     String accountHolderIdType;
