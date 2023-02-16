@@ -1,34 +1,26 @@
 
-# Create User
+# Create Api Key
 
-`Here, createUser() creates a POST request to /apiuser`
+`Here, createApiKey() creates a POST request to apiuser/{referenceId}/apikey`
 
-> `This endpoint allows momo user to generate a user in the API manager portal`
+> `This endpoint allows momo user to create a api key in API manager portal`
 
 ### Usage/Examples
 
-Construct a callback request model and set desired paramaters
-
-```java
-        CallBackHost callBackHost = new CallBackHost();
-        callBackHost.setProviderCallbackHost("<place your callback host url>");
-
-```
+Pass the reference id of created user into createApiKey() to get the api key
 
 ```java
 
-
-     SDKManager.authentication.createUser(callBackHost, new RequestInterface() {
+ SDKManager.authentication.createApiKey(userReferenceId, new ApiKeyInterface() {
             @Override
-            public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
-            
+            public void onApiKeyInterfaceSuccess(ApiKey apiKey) {
+             
             }
             @Override
-            public void onRequestInterFaceFailure(MtnError mtnError) {
-      
+            public void onApiKeyInterFaceFailure(MtnError mtnError) {
+             
             }
         });
-
 
 
 ```
@@ -36,8 +28,7 @@ Construct a callback request model and set desired paramaters
 
 ```json
 {
-  "status": "true"
-
+	"apiKey": "3c1f360a71474f2faea859a671a6caef"
 }
 ```
 
