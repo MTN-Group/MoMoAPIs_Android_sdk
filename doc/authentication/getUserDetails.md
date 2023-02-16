@@ -1,44 +1,41 @@
 
-# Create User
+# Get user details 
 
-`Here, createUser() creates a POST request to /apiuser`
+`Here, getUserDetails() creates a GET request to apiuser/{referenceId}`
 
-> `This endpoint allows momo user to generate a user in the API manager portal`
+> `This endpoint allows momo user to get the details of created user`
 
 ### Usage/Examples
 
-Construct a callback request model and set desired paramaters
-
-```java
-        CallBackHost callBackHost = new CallBackHost();
-        callBackHost.setProviderCallbackHost("<place your callback host url>");
+Pass the reference id obtained from the createUser() function into getUserDetails() to get the details of the user
 
 ```
 
 ```java
 
 
-     SDKManager.authentication.createUser(callBackHost, new RequestInterface() {
+  SDKManager.authentication.getUserDetails(userReferenceId, new UserDetailInterface() {
             @Override
-            public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
-            
+            public void onUserDetailInterfaceSuccess(ApiUser apiUser) {
+
             }
+
             @Override
-            public void onRequestInterFaceFailure(MtnError mtnError) {
-      
+            public void onUserDetailInterFaceFailure(MtnError mtnError) {
+               
             }
         });
-
 
 
 ```
 ### Example Output
 
 ```json
-{
-  "status": "true"
+ {
+ 	"providerCallbackHost": "webhook.site",
+ 	"targetEnvironment": "sandbox"
+ }
 
-}
 ```
 
 
