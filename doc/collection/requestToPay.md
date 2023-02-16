@@ -30,7 +30,7 @@ Construct a request pay model and set desired parameters
 ```java
 
 
-    SDKManager.collection.requestToPay(requestPay, "<CallbackURl>", new RequestInterface() {
+    SDKManager.collection.requestToPay(requestPay, "<CallbackUrl>", new RequestInterface() {
             @Override
             public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
          
