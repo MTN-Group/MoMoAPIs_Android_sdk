@@ -3,7 +3,7 @@
 
 `Here, requestToWithdrawV1() creates a POST request to collection/v1_0/requesttowithdraw`
 
-> `Get balance request is used to check the balance on the default account connected to the API User. The following is the sequence flow for get balance use case`
+> `This operation is used to request a withdrawal (cash-out) from a consumer (Payer). The payer will be asked to authorize the withdrawal. The transaction will be executed once the payer has authorized the withdrawal`
 
 ### Usage/Examples
 
@@ -49,11 +49,11 @@ Construct a withdraw model and set desired values
 ### Example Output
 
 ```json
-      {
-      	"availableBalance": "0",
-      	"currency": "EUR"
-      }
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
 
-```
+}
+``
 
 
