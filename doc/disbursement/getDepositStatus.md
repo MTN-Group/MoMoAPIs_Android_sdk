@@ -11,7 +11,7 @@
 
 ```java
 
-   SDKManager.disbursement.getDepositStatus(referenceId, new DepositStatusInterface() {
+   SDKManager.disbursement.getDepositStatus("<reference id>", new DepositStatusInterface() {
             @Override
             public void onDepositStatusInterfaceSuccess(DepositStatus deposit) {
             
