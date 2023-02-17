@@ -10,7 +10,7 @@
 
 ```java
 
-         SDKManager.disbursement.depositV1(deposit, "", new RequestInterface() {
+         SDKManager.disbursement.depositV2(deposit, "<callbackUrl>", new RequestInterface() {
             @Override
             public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
            
