@@ -1,9 +1,9 @@
 
-# Get Basic User info
+# Get Deposit Status
 
-`Here, getBasicUserInfo() creates a POST request to collection/v1_0/accountholder/msisdn/{accountHolderMSISDN}/basicuserinfo`
+`Here, getDepositStatus() creates a POST request to disbursement/v1_0/deposit/{referenceId}`
 
-> `This operation returns personal information of the account holder. The operation does not need any consent by the account holder`
+> `This operation is used to get the status of a deposit. X-Reference-Id that was passed in the post is used as reference to the request.
 
 
 ### Usage/Examples
@@ -11,16 +11,16 @@
 
 ```java
 
-    SDKManager.disbursement.getBasicUserInfo(accountIdentifier, new UserInfoInterface() {
+   SDKManager.disbursement.getDepositStatus(referenceId, new DepositStatusInterface() {
             @Override
-            public void onUserInfoSuccess(BasicUserInfo basicUserInfo) {
+            public void onDepositStatusInterfaceSuccess(DepositStatus deposit) {
             
             }
 
             @Override
-            public void onUserInfoFailure(MtnError mtnError) {
-            
-            }
+            public void onDepositStatusInterFaceFailure(MtnError mtnError) {
+
+}
         });
 ```
 
@@ -28,16 +28,20 @@
 ### Example Output
 
 ```json
-   {
-	"sub": "0",
-	"name": "Sand Box",
-	"given_name": "Sand",
-	"family_name": "Box",
-	"birthdate": "1976-08-13",
-	"locale": "sv_SE",
-	"gender": "MALE",
-	"updated_at": 1676609351
+ 
+ {
+	"externalId": "6353636",
+	"amount": "5",
+	"currency": "EUR",
+	"payee": {
+		"partyIdType": "MSISDN",
+		"partyId": "0248888736"
+	},
+	"payerMessage": "Pay for product a",
+	"payeeNote": "payer note",
+	"status": "SUCCESSFUL"
 }
+ 
 
 ```
 
