@@ -1,7 +1,7 @@
 
 # Delivery notification 
 
-`Here, requestToPayDeliveryNotification() creates a POST request to collection/v1_0/requesttopay/{referenceId}/deliverynotification`
+`Here, requestToPayDeliveryNotification() creates a POST request to disbursement/v1_0/requesttopay/{referenceId}/deliverynotification`
 
 > `This operation is used to send additional Notification to an End User.`
 
@@ -9,7 +9,7 @@
 
 ```java
 
-    SDKManager.collection.requestToPayTransactionStatus(requestReferenceId, new RequestPayStatusInterface() {
+    SDKManager.disbursement.requestToPayTransactionStatus(requestReferenceId, new RequestPayStatusInterface() {
             @Override
             public void onRequestStatusSuccess(RequestPayStatus requestPayStatus) {
             
