@@ -32,7 +32,6 @@ import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.StatusResponse;
 
 import com.momo.sdk.model.UserInfo;
-import com.momo.sdk.model.collection.AccountIdentifier;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;

@@ -13,7 +13,6 @@ import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.UserInfo;
-import com.momo.sdk.model.collection.AccountIdentifier;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
