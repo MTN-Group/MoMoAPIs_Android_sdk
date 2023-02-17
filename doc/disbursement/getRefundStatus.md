@@ -11,7 +11,7 @@
 
 ```java
 
-   SDKManager.disbursement.getRefundStatus(referenceId, new RefundStatusInterface() {
+   SDKManager.disbursement.getRefundStatus("<referenceId>", new RefundStatusInterface() {
             @Override
             public void onRefundStatusInterfaceSuccess(RefundStatus refundStatus) {
            
