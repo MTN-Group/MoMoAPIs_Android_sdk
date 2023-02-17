@@ -30,7 +30,7 @@ import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.StatusResponse;
-import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payer;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
@@ -243,7 +243,7 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
 
     public void validateAccountHolder(int position) {
 
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType("msisdn");
         identifier.setAccountHolderId("0248888736");
 

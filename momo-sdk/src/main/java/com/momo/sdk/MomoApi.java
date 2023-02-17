@@ -14,6 +14,7 @@ import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.collection.Result;
@@ -130,20 +131,20 @@ public class MomoApi {
 
     /** Request to validate Account holder Status
      *
-     * @param accountIdentifier Account identifier
+     * @param accountHolder Account identifier
      * @param subscriptionType The SubscriptionType object
      * @param requestPayAPIRequestCallback Listener
      */
 
-    public void validateAccountHolderStatus(AccountIdentifier accountIdentifier,
+    public void validateAccountHolderStatus(AccountHolder accountHolder,
                                             SubscriptionType subscriptionType,
                                             APIRequestCallback<Result> requestPayAPIRequestCallback
     ){
         HashMap<String ,String > headers;
         headers=Utils.getHeaders("",subscriptionType,"",false);
 
-        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.validateAccountHolderStatus(subscriptionType.name().toLowerCase(),accountIdentifier.getAccountHolderIdType(),
-                accountIdentifier.getAccountHolderId(),headers),requestPayAPIRequestCallback));
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.validateAccountHolderStatus(subscriptionType.name().toLowerCase(), accountHolder.getAccountHolderIdType(),
+                accountHolder.getAccountHolderId(),headers),requestPayAPIRequestCallback));
 
 
     }

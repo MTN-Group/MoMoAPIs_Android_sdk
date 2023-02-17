@@ -26,6 +26,7 @@ import com.momo.sdk.model.StatusResponse;
 import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.disbursement.Deposit;
 import com.momo.sdk.model.disbursement.DepositStatus;
@@ -45,29 +46,29 @@ public class Disbursement {
     /**
      * Request to validate Account holder Status
      *
-     * @param accountIdentifier        Account identifier
+     * @param accountHolder        Account identifier
      * @param validateAccountInterface Listener for api callback
      */
 
-    public void validateAccountHolder(AccountIdentifier accountIdentifier, ValidateAccountInterface validateAccountInterface) {
+    public void validateAccountHolder(AccountHolder accountHolder, ValidateAccountInterface validateAccountInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier == null) {
+        } else if (accountHolder == null) {
             ErrorResponse errorResponse = Utils.setError(2);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderIdType() == null || accountIdentifier.getAccountHolderIdType().isEmpty()) {
+        } else if (accountHolder.getAccountHolderIdType() == null || accountHolder.getAccountHolderIdType().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(13);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else if (accountIdentifier.getAccountHolderId() == null || accountIdentifier.getAccountHolderId().isEmpty()) {
+        } else if (accountHolder.getAccountHolderId() == null || accountHolder.getAccountHolderId().isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(14);
             validateAccountInterface.onValidateFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
         } else {
-            MomoApi.getInstance().validateAccountHolderStatus(accountIdentifier, SubscriptionType.DISBURSEMENT, new APIRequestCallback<Result>() {
+            MomoApi.getInstance().validateAccountHolderStatus(accountHolder, SubscriptionType.DISBURSEMENT, new APIRequestCallback<Result>() {
                 @Override
                 public void onSuccess(int responseCode, Result serializedResponse) {
                     validateAccountInterface.onValidateSuccess(serializedResponse);

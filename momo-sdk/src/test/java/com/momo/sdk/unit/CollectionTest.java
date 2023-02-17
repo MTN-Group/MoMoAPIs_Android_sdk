@@ -18,7 +18,7 @@ import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
-import com.momo.sdk.model.collection.AccountIdentifier;
+import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payer;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
@@ -542,7 +542,7 @@ public class CollectionTest {
     @Test
     public void validate_account_holder_when_key_and_value_empty() {
 
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType(null);
         identifier.setAccountHolderId(null);
 
@@ -564,7 +564,7 @@ public class CollectionTest {
     @Test
     public void validate_account_holder_when_has_key_value_empty() {
 
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType("msisdn");
         identifier.setAccountHolderId(null);
 
@@ -587,7 +587,7 @@ public class CollectionTest {
     public void validateAccountHolder_token_NotCreated() {
         AppConstants.COLLECTION_TOKEN = null;
 
-        AccountIdentifier identifier = new AccountIdentifier();
+        AccountHolder identifier = new AccountHolder();
         identifier.setAccountHolderIdType("msisdn");
         identifier.setAccountHolderId("45657676");
 
