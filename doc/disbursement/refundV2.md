@@ -1,5 +1,5 @@
 
-# Refund v1 
+# Refund v2 
 
 `Here, refundV2() creates a POST request to disbursement/v2_0/refund`
 
