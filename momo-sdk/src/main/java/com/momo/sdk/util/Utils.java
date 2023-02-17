@@ -23,6 +23,8 @@ public class Utils {
 
     private static final String UNABLE_TO_FETCH_ERROR_INFO = "Unable to fetch error information";
 
+    private static String OAUTH_TOKEN = "";
+
     public static String generateUUID() {
         return UUID.randomUUID().toString();
     }
@@ -340,7 +342,13 @@ public class Utils {
     }
 
 
+    public static void saveOauthToken(String token){
+        OAUTH_TOKEN = token;
+    }
 
+    public static String retrieveOauthToken(){
+        return OAUTH_TOKEN;
+    }
 
 
 

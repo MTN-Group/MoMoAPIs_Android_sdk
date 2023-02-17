@@ -2,11 +2,13 @@ package com.momo.sdk.config;
 
 
 import android.content.Context;
+import android.util.Log;
 
 
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;
 import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.AccessToken;
+import com.momo.sdk.model.BCAuthorize;
 import com.momo.sdk.model.ErrorResponse;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
@@ -113,6 +115,7 @@ public class CollectionConfiguration {
                                     SubscriptionType.COLLECTION);
                             AppConstants.COLLECTION_TOKEN = accessToken.getAccessToken();
                             this.tokenInitializeInterface.onTokenInitializeSuccess(statusResponse);
+
                         } else {
                             MtnError mtnError = new MtnError(response.code(),
                                     Utils.parseError(APIConstants.UNABLE_TO_FETCH_ERROR_INFO), null);
@@ -135,7 +138,6 @@ public class CollectionConfiguration {
         }
 
     }
-
 
     //Configuration for collection builder
     public static class CollectionConfigurationBuilder {

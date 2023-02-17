@@ -1,6 +1,7 @@
 package com.momo.sdk.config;
 
 import android.content.Context;
+import android.util.Log;
 
 
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;
@@ -122,6 +123,7 @@ public class DisbursementConfiguration {
                                     SubscriptionType.DISBURSEMENT);
                             AppConstants.DISBURSEMENT_TOKEN=accessToken.getAccessToken();
                             this.tokenInitializeInterface.onTokenInitializeSuccess(statusResponse);
+
                         } else {
                             MtnError mtnError = new MtnError(response.code(),
                                     Utils.parseError(APIConstants.UNABLE_TO_FETCH_ERROR_INFO), null);
@@ -144,6 +146,8 @@ public class DisbursementConfiguration {
 
         }
     }
+
+
     @SuppressWarnings("unused")
     public static class DisbursementConfigurationBuilder {
         private static String subscriptionKey;
