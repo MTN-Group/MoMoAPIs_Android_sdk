@@ -1,7 +1,7 @@
 
 # Get Refund Status
 
-`Here, getDepositStatus() creates a POST request to disbursement/v1_0/refund/{referenceId}`
+`Here, getRefundStatus() creates a POST request to disbursement/v1_0/refund/{referenceId}`
 
 > `This operation is used to get the status of a refund. X-Reference-Id that was passed in the post is used as reference to the request`
 
