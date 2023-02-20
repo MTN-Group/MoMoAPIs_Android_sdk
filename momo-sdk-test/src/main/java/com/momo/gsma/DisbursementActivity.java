@@ -229,7 +229,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                     customUseCaseAdapter.setStatus(1, position);
                     sbOutPut.append(new Gson().toJson(statusResponse));
                     txtResponse.setText(sbOutPut);
-                    //getTransferStatus(statusResponse.getXReferenceId(), position);
+                    getTransferStatus(statusResponse.getXReferenceId(), position);
 
                 }
             }
@@ -471,25 +471,25 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
     public void refundStatus(String referenceId, int position) {
         sbOutPut.append("\n\nRefund Status - Output \n\n");
-        SDKManager.disbursement.getRefundStatus(referenceId, new RefundStatusInterface() {
-            @Override
-            public void onRefundStatusInterfaceSuccess(RefundStatus refundStatus) {
-                hideProgress();
-                if (refundStatus == null) {
-                    onApiSuccessDataEmpty(position);
-                } else {
-                    showToast("success");
-                    customUseCaseAdapter.setStatus(1, position);
-                    sbOutPut.append(new Gson().toJson(refundStatus));
-                    txtResponse.setText(sbOutPut);
+            SDKManager.disbursement.getRefundStatus(referenceId, new RefundStatusInterface() {
+                @Override
+                public void onRefundStatusInterfaceSuccess(RefundStatus refundStatus) {
+                    hideProgress();
+                    if (refundStatus == null) {
+                        onApiSuccessDataEmpty(position);
+                    } else {
+                        showToast("success");
+                        customUseCaseAdapter.setStatus(1, position);
+                        sbOutPut.append(new Gson().toJson(refundStatus));
+                        txtResponse.setText(sbOutPut);
+                    }
                 }
-            }
 
-            @Override
-            public void onRefundStatusInterFaceFailure(MtnError mtnError) {
-                onApiFailure(position, mtnError);
-            }
-        });
+                @Override
+                public void onRefundStatusInterFaceFailure(MtnError mtnError) {
+                    onApiFailure(position, mtnError);
+                }
+            });
 
 
     }
