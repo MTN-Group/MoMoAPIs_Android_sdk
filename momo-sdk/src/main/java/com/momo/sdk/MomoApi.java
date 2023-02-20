@@ -389,6 +389,13 @@ public class MomoApi {
                 headers, RequestBody.create(new Gson().toJson(transfer), mediaType)),apiRequestCallback ));
     }
 
+    /**
+     *  Get user info with consent
+     *
+     * @param subscriptionType The SubscriptionType object
+     * @param apiRequestCallback Listener for api operation
+     *
+     */
     public void getUserInfoWithConsent(SubscriptionType subscriptionType, APIRequestCallback<UserInfo> apiRequestCallback){
         HashMap<String,String> headers;
         headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
@@ -401,6 +408,15 @@ public class MomoApi {
 
 
 
+    /**
+     *  Bc authorize
+     *
+     * @param subscriptionType The SubscriptionType object
+     * @param accountHolder Account holder object
+     * @param accessType Access type for Oauth2
+     * @param apiRequestCallback Listener for api operation
+     *
+     */
     public void bcAuthorize(SubscriptionType subscriptionType,
                             AccountHolder accountHolder,
                             String scope,
@@ -409,7 +425,6 @@ public class MomoApi {
         HashMap<String,String> headers;
         headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
         headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
-//        String loginHint = "ID:0248888736/MSISDN";
         String loginHint="ID:"+accountHolder.getAccountHolderId()+"/"+accountHolder.getAccountHolderIdType();
 
         requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.
@@ -417,6 +432,15 @@ public class MomoApi {
                         accessType.name(),headers),apiRequestCallback ));
     }
 
+    /**
+     *  Create Oauth2 token
+     *
+     * @param authReqId Authorization request id
+     * @param subscriptionType The SubscriptionType object
+     * @param accessType Access type for Oauth2
+     * @param apiRequestCallback Listener for api operation
+     *
+     */
     public void createOauth2Token(String authReqId,SubscriptionType subscriptionType,APIRequestCallback<Oauth2> apiRequestCallback){
         HashMap<String,String> headers;
         headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);

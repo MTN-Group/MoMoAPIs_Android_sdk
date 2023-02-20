@@ -45,7 +45,7 @@ public class Disbursement {
     /**
      * Request to validate Account holder Status
      *
-     * @param accountHolder        Account identifier
+     * @param accountHolder            Account identifier
      * @param validateAccountInterface Listener for api callback
      */
 
@@ -225,22 +225,22 @@ public class Disbursement {
                     errorResponse, null));
         } else //noinspection ConstantConditions
             if (refund == null) {
-            ErrorResponse errorResponse = Utils.setError(2);
-            requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
-                    errorResponse, null));
-        } else {
-            MomoApi.getInstance().refund(refund, "v1_0", callBackURl, new APIRequestCallback<StatusResponse>() {
-                @Override
-                public void onSuccess(int responseCode, StatusResponse serializedResponse) {
-                    requestInterface.onRequestInterfaceSuccess(serializedResponse);
-                }
+                ErrorResponse errorResponse = Utils.setError(2);
+                requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                        errorResponse, null));
+            } else {
+                MomoApi.getInstance().refund(refund, "v1_0", callBackURl, new APIRequestCallback<StatusResponse>() {
+                    @Override
+                    public void onSuccess(int responseCode, StatusResponse serializedResponse) {
+                        requestInterface.onRequestInterfaceSuccess(serializedResponse);
+                    }
 
-                @Override
-                public void onFailure(MtnError errorDetails) {
-                    requestInterface.onRequestInterFaceFailure(errorDetails);
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(MtnError errorDetails) {
+                        requestInterface.onRequestInterFaceFailure(errorDetails);
+                    }
+                });
+            }
     }
 
     /**
@@ -260,22 +260,22 @@ public class Disbursement {
                     errorResponse, null));
         } else //noinspection ConstantConditions
             if (refund == null) {
-            ErrorResponse errorResponse = Utils.setError(2);
-            requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
-                    errorResponse, null));
-        } else {
-            MomoApi.getInstance().refund(refund, "v2_0", callBackURl, new APIRequestCallback<StatusResponse>() {
-                @Override
-                public void onSuccess(int responseCode, StatusResponse serializedResponse) {
-                    requestInterface.onRequestInterfaceSuccess(serializedResponse);
-                }
+                ErrorResponse errorResponse = Utils.setError(2);
+                requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                        errorResponse, null));
+            } else {
+                MomoApi.getInstance().refund(refund, "v2_0", callBackURl, new APIRequestCallback<StatusResponse>() {
+                    @Override
+                    public void onSuccess(int responseCode, StatusResponse serializedResponse) {
+                        requestInterface.onRequestInterfaceSuccess(serializedResponse);
+                    }
 
-                @Override
-                public void onFailure(MtnError errorDetails) {
-                    requestInterface.onRequestInterFaceFailure(errorDetails);
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(MtnError errorDetails) {
+                        requestInterface.onRequestInterFaceFailure(errorDetails);
+                    }
+                });
+            }
     }
 
     //get deposit detail status
@@ -363,22 +363,22 @@ public class Disbursement {
                     errorResponse, null));
         } else //noinspection ConstantConditions
             if (transfer == null) {
-            ErrorResponse errorResponse = Utils.setError(2);
-            requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
-                    errorResponse, null));
-        } else {
-            MomoApi.getInstance().requestToTransfer(SubscriptionType.DISBURSEMENT, transfer, callBackURl, new APIRequestCallback<StatusResponse>() {
-                @Override
-                public void onSuccess(int responseCode, StatusResponse serializedResponse) {
-                    requestInterface.onRequestInterfaceSuccess(serializedResponse);
-                }
+                ErrorResponse errorResponse = Utils.setError(2);
+                requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                        errorResponse, null));
+            } else {
+                MomoApi.getInstance().requestToTransfer(SubscriptionType.DISBURSEMENT, transfer, callBackURl, new APIRequestCallback<StatusResponse>() {
+                    @Override
+                    public void onSuccess(int responseCode, StatusResponse serializedResponse) {
+                        requestInterface.onRequestInterfaceSuccess(serializedResponse);
+                    }
 
-                @Override
-                public void onFailure(MtnError errorDetails) {
-                    requestInterface.onRequestInterFaceFailure(errorDetails);
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(MtnError errorDetails) {
+                        requestInterface.onRequestInterFaceFailure(errorDetails);
+                    }
+                });
+            }
     }
 
     /**
@@ -429,21 +429,16 @@ public class Disbursement {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-        else if(deliveryNotification==null){
+        } else if (deliveryNotification == null) {
             ErrorResponse errorResponse = Utils.setError(2);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
 
-        }
-
-        else if (referenceId == null || referenceId.isEmpty()) {
+        } else if (referenceId == null || referenceId.isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(3);
             requestInterface.onRequestInterFaceFailure((new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null)));
-        }
-
-        else {
+        } else {
             MomoApi.getInstance().requestPayDeliveryNotification(referenceId, notificationMessage, language, SubscriptionType.DISBURSEMENT, deliveryNotification, new APIRequestCallback<StatusResponse>() {
                 @Override
                 public void onSuccess(int responseCode, StatusResponse serializedResponse) {
@@ -461,9 +456,10 @@ public class Disbursement {
 
     /**
      * Create Oauth2 token
-     * @param  authReqId request if for Oauth 2.0
-     * @param  subscriptionType {@link SubscriptionType}
-     * @param  userConsentInterface Interfaces of user consent callback
+     *
+     * @param authReqId            request if for Oauth 2.0
+     * @param subscriptionType     {@link SubscriptionType}
+     * @param userConsentInterface Interfaces of user consent callback
      */
 
     public void createOauth2Token(String authReqId, SubscriptionType subscriptionType, UserConsentInterface userConsentInterface) {
@@ -485,12 +481,11 @@ public class Disbursement {
     }
 
 
-
     /**
      * Get user detail with consent
      *
-     * @param  subscriptionType {@link SubscriptionType}
-     * @param  userConsentInterface Interfaces of user consent api  callback
+     * @param subscriptionType     {@link SubscriptionType}
+     * @param userConsentInterface Interfaces of user consent api  callback
      */
 
     public void getUserInfo(SubscriptionType subscriptionType, UserConsentInterface userConsentInterface) {
@@ -514,33 +509,49 @@ public class Disbursement {
     /**
      * Get user info with consent
      *
-     * @param  accountHolder Account identifier
-     * @param  accessType The access type for
-     * @param  scope scope
-     * @param  userConsentInterface Interfaces of user consent api  callback
-     *
+     * @param accountHolder        Account identifier
+     * @param accessType           The access type for
+     * @param scope                scope
+     * @param userConsentInterface Interfaces of user consent api  callback
      */
 
     public void getUserInfoWithConsent(AccountHolder accountHolder, AccessType accessType,
                                        String scope,
                                        UserConsentInterface userConsentInterface
-                                        ) {
-        MomoApi.getInstance().bcAuthorize(SubscriptionType.DISBURSEMENT, accountHolder, scope, accessType,
-                new APIRequestCallback<BCAuthorize>() {
-                    @Override
-                    public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
-                        createOauth2Token(serializedResponse.getAuthReqId(),
-                                SubscriptionType.COLLECTION, userConsentInterface);
-                    }
+    ) {
+        if (!Utils.checkForInitialization(SubscriptionType.COLLECTION)) {
+            ErrorResponse errorResponse = Utils.setError(16);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        } else if (accountHolder == null) {
+            ErrorResponse errorResponse = Utils.setError(2);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        } else if (accessType == null) {
+            ErrorResponse errorResponse = Utils.setError(17);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        } else if (scope == null || scope.isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(18);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        } else {
 
-                    @Override
-                    public void onFailure(MtnError errorDetails) {
-                        userConsentInterface.onUserInfoFailure(errorDetails);
+            MomoApi.getInstance().bcAuthorize(SubscriptionType.DISBURSEMENT, accountHolder, scope, accessType,
+                    new APIRequestCallback<BCAuthorize>() {
+                        @Override
+                        public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
+                            createOauth2Token(serializedResponse.getAuthReqId(),
+                                    SubscriptionType.COLLECTION, userConsentInterface);
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(MtnError errorDetails) {
+                            userConsentInterface.onUserInfoFailure(errorDetails);
+
+                        }
+                    });
+        }
     }
-
-
 
 }

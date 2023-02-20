@@ -6,8 +6,10 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.google.gson.Gson;
 import com.momo.sdk.SDKManager;
 import com.momo.sdk.interfaces.RequestInterface;
+import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
 import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
@@ -18,6 +20,7 @@ import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
+import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payer;
 import com.momo.sdk.model.collection.RequestPay;
@@ -26,10 +29,13 @@ import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.Withdraw;
 import com.momo.sdk.model.collection.WithdrawStatus;
 import com.momo.sdk.model.user.BasicUserInfo;
+import com.momo.sdk.util.AccessType;
 import com.momo.sdk.util.AppConstants;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.inject.Scope;
 
 
 public class CollectionTest {
@@ -929,7 +935,7 @@ public class CollectionTest {
     @Test
     public void deliveryNotification_null_token() {
 
-        AppConstants.COLLECTION_TOKEN=null;
+        AppConstants.COLLECTION_TOKEN = null;
 
         DeliveryNotification deliveryNotification = new DeliveryNotification();
         deliveryNotification.setNotificationMessage("message");
@@ -976,6 +982,112 @@ public class CollectionTest {
                 }
         );
 
+    }
+
+
+    @Test
+    public void getUserInfoWithConsentNullAccountHolder() {
+        SDKManager.collection.getUserInfoWithConsent(null, AccessType.offline, "profile", new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid request body", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+
+    @Test
+    public void getUserInfoWithConsentNullToken() {
+
+        AppConstants.COLLECTION_TOKEN = null;
+
+
+        AccountHolder accountHolder=new AccountHolder();
+        accountHolder.setAccountHolderId("0248888736");
+        accountHolder.setAccountHolderIdType("MSISDN");
+        SDKManager.collection.getUserInfoWithConsent(accountHolder, AccessType.offline, "profile", new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                assertEquals("INITIALIZATION_ERROR", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid token", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+
+    @Test
+    public void getUserInfoWithConsentNullAccessType() {
+
+
+
+        AccountHolder accountHolder=new AccountHolder();
+        accountHolder.setAccountHolderId("0248888736");
+        accountHolder.setAccountHolderIdType("MSISDN");
+        SDKManager.collection.getUserInfoWithConsent(accountHolder, null, "profile", new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Access type value cannot be null", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+    @Test
+    public void getUserInfoWithConsentNullScope() {
+
+
+
+        AccountHolder accountHolder=new AccountHolder();
+        accountHolder.setAccountHolderId("0248888736");
+        accountHolder.setAccountHolderIdType("MSISDN");
+        SDKManager.collection.getUserInfoWithConsent(accountHolder, AccessType.offline, null, new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid scope", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+    @Test
+    public void getUserInfoWithConsentEmptyScope() {
+
+
+
+        AccountHolder accountHolder=new AccountHolder();
+        accountHolder.setAccountHolderId("0248888736");
+        accountHolder.setAccountHolderIdType("MSISDN");
+        SDKManager.collection.getUserInfoWithConsent(accountHolder, AccessType.offline, "", new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid scope", mtnError.getErrorBody().getMessage());
+            }
+        });
     }
 
 

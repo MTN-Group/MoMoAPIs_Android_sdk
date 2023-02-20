@@ -481,7 +481,7 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
     }
 
     public void getUserInfoWithConsent(int position) {
-        sbOutPut.append("\n\nGet consumer information with consent- Output\n\n");
+        sbOutPut.append("Get consumer information with consent- Output\n\n");
         AccountHolder accountHolder=new AccountHolder();
         accountHolder.setAccountHolderId("0248888736");
         accountHolder.setAccountHolderIdType("MSISDN");

@@ -181,6 +181,16 @@ public class Utils {
                 break;
 
 
+            case 17:
+                errorObject.setCode("REQUIRED_PARAMETER");
+                errorObject.setMessage("Access type value cannot be null");
+                break;
+
+            case 18:
+                errorObject.setCode("REQUIRED_PARAMETER");
+                errorObject.setMessage("Invalid scope");
+                break;
+
             default:
                 errorObject.setCode("GenericError");
                 errorObject.setMessage("");

@@ -428,20 +428,42 @@ public class Collection {
                                        String scope,
                                        UserConsentInterface userConsentInterface
                                         ) {
-        MomoApi.getInstance().bcAuthorize(SubscriptionType.COLLECTION, accountHolder, scope, accessType,
-                new APIRequestCallback<BCAuthorize>() {
-                    @Override
-                    public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
-                        createOauth2Token(serializedResponse.getAuthReqId(),
-                                SubscriptionType.COLLECTION, userConsentInterface);
-                    }
+        if (!Utils.checkForInitialization(SubscriptionType.COLLECTION)) {
+            ErrorResponse errorResponse = Utils.setError(16);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        } else if (accountHolder == null) {
+            ErrorResponse errorResponse = Utils.setError(2);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else if(accessType==null){
+            ErrorResponse errorResponse = Utils.setError(17);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else if(scope==null||scope.isEmpty()){
+            ErrorResponse errorResponse = Utils.setError(18);
+            userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
 
-                    @Override
-                    public void onFailure(MtnError errorDetails) {
-                        userConsentInterface.onUserInfoFailure(errorDetails);
+        else {
+            MomoApi.getInstance().bcAuthorize(SubscriptionType.COLLECTION, accountHolder, scope, accessType,
+                    new APIRequestCallback<BCAuthorize>() {
+                        @Override
+                        public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
+                            createOauth2Token(serializedResponse.getAuthReqId(),
+                                    SubscriptionType.COLLECTION, userConsentInterface);
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(MtnError errorDetails) {
+                            userConsentInterface.onUserInfoFailure(errorDetails);
+
+                        }
+                    });
+        }
     }
 
 }
