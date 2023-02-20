@@ -1,5 +1,7 @@
 package com.momo.sdk.controller;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 
@@ -7,6 +9,9 @@ import com.momo.sdk.MomoApi;
 
 import com.momo.sdk.callbacks.APIRequestCallback;
 
+import com.momo.sdk.config.CollectionConfiguration;
+import com.momo.sdk.interfaces.BCAuthorizeInterface;
+import com.momo.sdk.interfaces.OAuthInterface;
 import com.momo.sdk.interfaces.RequestInterface;
 
 import com.momo.sdk.interfaces.UserInfoInterface;
@@ -15,14 +20,18 @@ import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
 import com.momo.sdk.interfaces.collection.requestpay.RequestPayStatusInterface;
 import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawInterface;
 import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawStatusInterface;
+import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.AccountBalance;
 
+import com.momo.sdk.model.BCAuthorize;
 import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.ErrorResponse;
 import com.momo.sdk.model.MtnError;
 
+import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.StatusResponse;
 
+import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
@@ -33,6 +42,11 @@ import com.momo.sdk.model.user.BasicUserInfo;
 import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
+
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 @SuppressWarnings("ALL")
 public class Collection {
@@ -350,6 +364,56 @@ public class Collection {
         }
 
     }
+
+
+    public void bcAuthorize(BCAuthorizeInterface bcAuthorizeInterface){
+        MomoApi.getInstance().bcAuthorize(SubscriptionType.COLLECTION, new APIRequestCallback<BCAuthorize>() {
+                    @Override
+                    public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
+                        bcAuthorizeInterface.onBCAuthorizeInterfaceSuccess(serializedResponse);
+                    }
+
+                    @Override
+                    public void onFailure(MtnError errorDetails) {
+                        bcAuthorizeInterface.onBCAuthorizeInterfaceFailure(errorDetails);
+                    }
+                });
+    }
+
+
+    public void createOauth2Token(String authReqId, OAuthInterface oAuthInterface){
+        MomoApi.getInstance().createOauth2Token(authReqId,SubscriptionType.COLLECTION, new APIRequestCallback<Oauth2>() {
+
+            @Override
+            public void onSuccess(int responseCode, Oauth2 serializedResponse) {
+                Utils.saveOauthToken(serializedResponse.getAccessToken());
+                getUserInfoWithConsent();
+            }
+
+            @Override
+            public void onFailure(MtnError errorDetails) {
+
+            }
+        });
+
+    }
+
+
+    public void  getUserInfoWithConsent(){
+        MomoApi.getInstance().getUserInfoWithConsent(SubscriptionType.COLLECTION, new APIRequestCallback<UserInfo>() {
+
+            @Override
+            public void onSuccess(int responseCode, UserInfo serializedResponse) {
+
+            }
+
+            @Override
+            public void onFailure(MtnError errorDetails) {
+
+            }
+        });
+    }
+
 
 }
 

@@ -4,10 +4,15 @@ import android.annotation.SuppressLint;
 
 import com.google.gson.Gson;
 import com.momo.sdk.callbacks.APIRequestCallback;
+import com.momo.sdk.config.CollectionConfiguration;
+import com.momo.sdk.config.DisbursementConfiguration;
 import com.momo.sdk.config.UserConfiguration;
 import com.momo.sdk.model.AccountBalance;
+import com.momo.sdk.model.BCAuthorize;
 import com.momo.sdk.model.DeliveryNotification;
+import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.Transfer;
+import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.RequestPayStatus;
@@ -27,6 +32,7 @@ import com.momo.sdk.network.APIService;
 import com.momo.sdk.network.RetrofitHelper;
 import com.momo.sdk.util.APIConstants;
 import com.momo.sdk.util.AppConstants;
+import com.momo.sdk.util.Credentials;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
@@ -382,7 +388,42 @@ public class MomoApi {
                 headers, RequestBody.create(new Gson().toJson(transfer), mediaType)),apiRequestCallback ));
     }
 
+    public void getUserInfoWithConsent(SubscriptionType subscriptionType, APIRequestCallback<UserInfo> apiRequestCallback){
+        HashMap<String,String> headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
+        headers.put(APIConstants.AUTHORIZATION, APIConstants.AUTH_TOKEN_BEARER + Utils.retrieveOauthToken());
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.getUserInfoWithConsent(subscriptionType.name().toLowerCase(),
+                headers),apiRequestCallback ));
+    }
 
+    public void bcAuthorize(SubscriptionType subscriptionType, APIRequestCallback<BCAuthorize> apiRequestCallback){
+        HashMap<String,String> headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
+        headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
+        String loginHint = "ID:0248888736/MSISDN";
+        String accessType = "offline";
+        String scope = "profile";
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.bcAuthorize(subscriptionType.name().toLowerCase(),loginHint,scope,accessType,headers),apiRequestCallback ));
+    }
+
+    public void createOauth2Token(String authReqId,SubscriptionType subscriptionType,APIRequestCallback<Oauth2> apiRequestCallback){
+        HashMap<String,String> headers;
+        headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
+
+        if (subscriptionType.name().equalsIgnoreCase("disbursement")) {
+            headers.put(APIConstants.AUTHORIZATION, Credentials.basic(DisbursementConfiguration.DisbursementConfigurationBuilder.getUserReferenceId(),
+                    DisbursementConfiguration.DisbursementConfigurationBuilder.getApiKey()));
+        } else if (subscriptionType.name().equalsIgnoreCase("collection")) {
+            headers.put(APIConstants.AUTHORIZATION, Credentials.basic(CollectionConfiguration.CollectionConfigurationBuilder.getUserReferenceId(),
+                    CollectionConfiguration.CollectionConfigurationBuilder.getApiKey()));
+        }
+
+        headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
+        String grant_type = "urn:openid:params:grant-type:ciba";
+        String auth_req_id =  authReqId;
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.createOauth2token(subscriptionType.name().toLowerCase(),grant_type,auth_req_id,headers),apiRequestCallback ));
+
+    }
 
 
     private static class SingletonCreationAdmin {

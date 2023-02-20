@@ -2,7 +2,10 @@ package com.momo.sdk.network;
 
 import com.momo.sdk.model.AccessToken;
 import com.momo.sdk.model.AccountBalance;
+import com.momo.sdk.model.BCAuthorize;
+import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.Transfer;
+import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.RequestPayStatus;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.WithdrawStatus;
@@ -18,6 +21,8 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
@@ -145,6 +150,18 @@ public interface APIService {
                                            @HeaderMap Map<String, String> headers,@Body RequestBody body);
 
 
+    @FormUrlEncoded
+    @POST("/{type}/v1_0/bc-authorize")
+    Call<BCAuthorize> bcAuthorize(@Path("type") String path, @Field("login_hint") String loginHint, @Field("scope") String scope, @Field("access_type") String accessType,
+                                  @HeaderMap Map<String, String> headers);
 
+    @FormUrlEncoded
+    @POST("/{type}/oauth2/token/")
+    Call<Oauth2> createOauth2token(@Path("type") String path, @Field("grant_type") String grantType, @Field("auth_req_id") String authReqId,
+                                   @HeaderMap Map<String, String> headers);
+
+
+    @GET("{subscriptionType}/oauth2/v1_0/userinfo")
+    Call<UserInfo> getUserInfoWithConsent(@Path("subscriptionType") String subscriptionType,@HeaderMap Map<String, String> headers);
 
 }
