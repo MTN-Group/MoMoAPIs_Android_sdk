@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.momo.sdk.SDKManager;
 import com.momo.sdk.config.CollectionConfiguration;
-import com.momo.sdk.interfaces.BCAuthorizeInterface;
-import com.momo.sdk.interfaces.OAuthInterface;
 import com.momo.sdk.interfaces.RequestInterface;
 import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
@@ -26,10 +24,8 @@ import com.momo.sdk.interfaces.collection.requestpay.RequestPayStatusInterface;
 import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawInterface;
 import com.momo.sdk.interfaces.collection.withdraw.RequestToWithdrawStatusInterface;
 import com.momo.sdk.model.AccountBalance;
-import com.momo.sdk.model.BCAuthorize;
 import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
-import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.StatusResponse;
 import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
@@ -485,7 +481,7 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
     }
 
     public void getUserInfoWithConsent(int position) {
-        sbOutPut.append("\n\nGe- Output\n\n");
+        sbOutPut.append("\n\nGet consumer information with consent- Output\n\n");
         AccountHolder accountHolder=new AccountHolder();
         accountHolder.setAccountHolderId("0248888736");
         accountHolder.setAccountHolderIdType("MSISDN");
