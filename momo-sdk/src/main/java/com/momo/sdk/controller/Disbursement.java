@@ -8,6 +8,7 @@ import com.momo.sdk.callbacks.APIRequestCallback;
 import com.momo.sdk.interfaces.BCAuthorizeInterface;
 import com.momo.sdk.interfaces.OAuthInterface;
 import com.momo.sdk.interfaces.RequestInterface;
+import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
 import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
@@ -17,6 +18,7 @@ import com.momo.sdk.interfaces.disbursement.TransferStatusInterface;
 import com.momo.sdk.model.AccountBalance;
 
 import com.momo.sdk.model.BCAuthorize;
+import com.momo.sdk.model.Common;
 import com.momo.sdk.model.DeliveryNotification;
 
 import com.momo.sdk.model.ErrorResponse;
@@ -32,12 +34,13 @@ import com.momo.sdk.model.disbursement.DepositStatus;
 import com.momo.sdk.model.disbursement.Refund;
 import com.momo.sdk.model.disbursement.RefundStatus;
 import com.momo.sdk.model.user.BasicUserInfo;
+import com.momo.sdk.util.AccessType;
 import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
 @SuppressWarnings("unused")
-public class Disbursement {
+public class Disbursement extends Common {
 
 
     //validate account holder
@@ -459,54 +462,23 @@ public class Disbursement {
 
     }
 
+    /**
+     * Get user info with consent
+     *
+     * @param  accountHolder Account identifier
+     * @param  accessType The access type for
+     * @param  scope scope
+     * @param  userConsentInterface Interfaces of user consent api  callback
+     * @param  subscriptionType {@link SubscriptionType}
+     */
 
-    public void bcAuthorize(BCAuthorizeInterface bcAuthorizeInterface){
-        MomoApi.getInstance().bcAuthorize(SubscriptionType.DISBURSEMENT, new APIRequestCallback<BCAuthorize>() {
-            @Override
-            public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
-                bcAuthorizeInterface.onBCAuthorizeInterfaceSuccess(serializedResponse);
-            }
-
-            @Override
-            public void onFailure(MtnError errorDetails) {
-                bcAuthorizeInterface.onBCAuthorizeInterfaceFailure(errorDetails);
-            }
-        });
+    public void getUserInfoWithConsent(AccountHolder accountHolder, AccessType accessType,
+                                       String scope,
+                                       UserConsentInterface userConsentInterface
+    ) {
+        super.getUserInfoWithConsents(accountHolder,accessType,scope,userConsentInterface,SubscriptionType.DISBURSEMENT);
     }
 
-
-    public void createOauth2Token(String authReqId, OAuthInterface oAuthInterface){
-        MomoApi.getInstance().createOauth2Token(authReqId,SubscriptionType.DISBURSEMENT, new APIRequestCallback<Oauth2>() {
-
-            @Override
-            public void onSuccess(int responseCode, Oauth2 serializedResponse) {
-                Utils.saveOauthToken(serializedResponse.getAccessToken());
-                getUserInfoWithConsent();
-            }
-
-            @Override
-            public void onFailure(MtnError errorDetails) {
-
-            }
-        });
-
-    }
-
-
-    public void  getUserInfoWithConsent(){
-        MomoApi.getInstance().getUserInfoWithConsent(SubscriptionType.DISBURSEMENT, new APIRequestCallback<UserInfo>() {
-
-            @Override
-            public void onSuccess(int responseCode, UserInfo serializedResponse) {
-
-            }
-
-            @Override
-            public void onFailure(MtnError errorDetails) {
-
-            }
-        });
-    }
 
 
 }

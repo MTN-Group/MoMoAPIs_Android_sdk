@@ -33,6 +33,7 @@ import com.momo.sdk.network.RetrofitHelper;
 import com.momo.sdk.util.APIConstants;
 import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.Credentials;
+import com.momo.sdk.util.AccessType;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
@@ -392,18 +393,28 @@ public class MomoApi {
         HashMap<String,String> headers;
         headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
         headers.put(APIConstants.AUTHORIZATION, APIConstants.AUTH_TOKEN_BEARER + Utils.retrieveOauthToken());
-        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.getUserInfoWithConsent(subscriptionType.name().toLowerCase(),
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.
+                getUserInfoWithConsent(subscriptionType.name().toLowerCase(),
                 headers),apiRequestCallback ));
     }
 
-    public void bcAuthorize(SubscriptionType subscriptionType, APIRequestCallback<BCAuthorize> apiRequestCallback){
+
+
+
+    public void bcAuthorize(SubscriptionType subscriptionType,
+                            AccountHolder accountHolder,
+                            String scope,
+                            AccessType accessType,
+                            APIRequestCallback<BCAuthorize> apiRequestCallback){
         HashMap<String,String> headers;
         headers=Utils.getHeaders(Utils.generateUUID(),subscriptionType,"",false);
         headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
-        String loginHint = "ID:0248888736/MSISDN";
-        String accessType = "offline";
-        String scope = "profile";
-        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.bcAuthorize(subscriptionType.name().toLowerCase(),loginHint,scope,accessType,headers),apiRequestCallback ));
+//        String loginHint = "ID:0248888736/MSISDN";
+        String loginHint="ID:"+accountHolder.getAccountHolderId()+"/"+accountHolder.getAccountHolderIdType();
+
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.
+                bcAuthorize(subscriptionType.name().toLowerCase(),loginHint,scope,
+                        accessType.name(),headers),apiRequestCallback ));
     }
 
     public void createOauth2Token(String authReqId,SubscriptionType subscriptionType,APIRequestCallback<Oauth2> apiRequestCallback){

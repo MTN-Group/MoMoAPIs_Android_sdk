@@ -14,6 +14,7 @@ import com.momo.sdk.interfaces.BCAuthorizeInterface;
 import com.momo.sdk.interfaces.OAuthInterface;
 import com.momo.sdk.interfaces.RequestInterface;
 
+import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
 import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
@@ -24,6 +25,7 @@ import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.AccountBalance;
 
 import com.momo.sdk.model.BCAuthorize;
+import com.momo.sdk.model.Common;
 import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.ErrorResponse;
 import com.momo.sdk.model.MtnError;
@@ -39,6 +41,7 @@ import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.Withdraw;
 import com.momo.sdk.model.collection.WithdrawStatus;
 import com.momo.sdk.model.user.BasicUserInfo;
+import com.momo.sdk.util.AccessType;
 import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
@@ -49,15 +52,17 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 @SuppressWarnings("ALL")
-public class Collection {
+public class Collection extends Common {
 
 
-    /** Request pay
+    /**
+     * Request pay
      *
-     * @param requestPay The payment object
-     * @param callBakUrl server url for callback
+     * @param requestPay       The payment object
+     * @param callBakUrl       server url for callback
      * @param requestInterface Listener for api operation callback
      */
+    private static final String TAG = "Collection";
 
     //Request pay
     public void requestToPay(@NonNull RequestPay requestPay, String callBackURl, RequestInterface requestInterface) {
@@ -107,9 +112,10 @@ public class Collection {
 
     }
 
-    /** Request Pay transaction status
+    /**
+     * Request Pay transaction status
      *
-     * @param referenceId Reference id
+     * @param referenceId              Reference id
      * @param requestPayStateInterface Listener for api operation callback
      */
     public void requestToPayTransactionStatus(String referenceId, RequestPayStatusInterface requestPayStateInterface) {
@@ -137,9 +143,10 @@ public class Collection {
 
     }
 
-    /** Request to validate Account holder Status
+    /**
+     * Request to validate Account holder Status
      *
-     * @param accountHolder Account identifier
+     * @param accountHolder            Account identifier
      * @param validateAccountInterface Listener
      */
     public void validateAccountHolderStatus(AccountHolder accountHolder, ValidateAccountInterface validateAccountInterface) {
@@ -171,9 +178,10 @@ public class Collection {
     }
 
 
-    /**  Request to get Basic User Info
+    /**
+     * Request to get Basic User Info
      *
-     * @param accountBasicUserInfo Msisdn of account
+     * @param accountBasicUserInfo         Msisdn of account
      * @param requestPayAPIRequestCallback Listener
      */
 
@@ -203,7 +211,9 @@ public class Collection {
 
         }
     }
-    /**  Request account balance
+
+    /**
+     * Request account balance
      *
      * @param requestBalanceInterface Listenerfor api callback
      */
@@ -227,10 +237,11 @@ public class Collection {
         }
     }
 
-    /**  Request withdraw V1
+    /**
+     * Request withdraw V1
      *
-     * @param withdraw The Withdraw object
-     * @param callBakUrl server url for callback
+     * @param withdraw           The Withdraw object
+     * @param callBakUrl         server url for callback
      * @param apiRequestCallback Listener for api operation
      */
 
@@ -261,8 +272,8 @@ public class Collection {
     /**
      * Request withdraw V2
      *
-     * @param withdraw The payment object
-     * @param callBakUrl server url for callback
+     * @param withdraw           The payment object
+     * @param callBakUrl         server url for callback
      * @param apiRequestCallback Listener for api operation
      */
 
@@ -293,7 +304,7 @@ public class Collection {
     /**
      * Request withdraw transaction status
      *
-     * @param referenceId Reference id
+     * @param referenceId              Reference id
      * @param requestPayStateInterface Listener for api callback
      */
 
@@ -302,8 +313,7 @@ public class Collection {
             ErrorResponse errorResponse = Utils.setError(16);
             requestPayStateInterface.onRequestToWithdrawStatusFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-        else if (referenceId == null || referenceId.isEmpty()) {
+        } else if (referenceId == null || referenceId.isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(3);
             requestPayStateInterface.onRequestToWithdrawStatusFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -322,12 +332,13 @@ public class Collection {
         }
     }
 
-    /** Request to pay delivery Notification
+    /**
+     * Request to pay delivery Notification
      *
-     * @param referenceId Reference Id of user
-     * @param notificationMessage Notification message string
-     * @param deliveryNotification DeliveryNotification object
-     * @param language language String
+     * @param referenceId                  Reference Id of user
+     * @param notificationMessage          Notification message string
+     * @param deliveryNotification         DeliveryNotification object
+     * @param language                     language String
      * @param requestPayAPIRequestCallback Listener
      */
 
@@ -339,8 +350,7 @@ public class Collection {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        }
-        else if (referenceId == null || referenceId.isEmpty()) {
+        } else if (referenceId == null || referenceId.isEmpty()) {
             ErrorResponse errorResponse = Utils.setError(3);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -365,55 +375,26 @@ public class Collection {
 
     }
 
+    /**
+     * Get user info with consent
+     *
+     * @param  accountHolder Account identifier
+     * @param  accessType The access type for
+     * @param  scope scope
+     * @param  userConsentInterface Interfaces of user consent api  callback
+     * @param  subscriptionType {@link SubscriptionType}
+     */
 
-    public void bcAuthorize(BCAuthorizeInterface bcAuthorizeInterface){
-        MomoApi.getInstance().bcAuthorize(SubscriptionType.COLLECTION, new APIRequestCallback<BCAuthorize>() {
-                    @Override
-                    public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
-                        bcAuthorizeInterface.onBCAuthorizeInterfaceSuccess(serializedResponse);
-                    }
-
-                    @Override
-                    public void onFailure(MtnError errorDetails) {
-                        bcAuthorizeInterface.onBCAuthorizeInterfaceFailure(errorDetails);
-                    }
-                });
-    }
-
-
-    public void createOauth2Token(String authReqId, OAuthInterface oAuthInterface){
-        MomoApi.getInstance().createOauth2Token(authReqId,SubscriptionType.COLLECTION, new APIRequestCallback<Oauth2>() {
-
-            @Override
-            public void onSuccess(int responseCode, Oauth2 serializedResponse) {
-                Utils.saveOauthToken(serializedResponse.getAccessToken());
-                getUserInfoWithConsent();
-            }
-
-            @Override
-            public void onFailure(MtnError errorDetails) {
-
-            }
-        });
-
-    }
-
-
-    public void  getUserInfoWithConsent(){
-        MomoApi.getInstance().getUserInfoWithConsent(SubscriptionType.COLLECTION, new APIRequestCallback<UserInfo>() {
-
-            @Override
-            public void onSuccess(int responseCode, UserInfo serializedResponse) {
-
-            }
-
-            @Override
-            public void onFailure(MtnError errorDetails) {
-
-            }
-        });
+    public void getUserInfoWithConsent(AccountHolder accountHolder, AccessType accessType,
+                                       String scope,
+                                       UserConsentInterface userConsentInterface
+                                       ) {
+        super.getUserInfoWithConsents(accountHolder,accessType,scope,userConsentInterface,SubscriptionType.COLLECTION);
     }
 
 
 }
+
+
+
 

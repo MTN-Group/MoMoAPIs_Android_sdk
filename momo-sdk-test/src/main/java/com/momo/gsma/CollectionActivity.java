@@ -17,6 +17,7 @@ import com.momo.sdk.config.CollectionConfiguration;
 import com.momo.sdk.interfaces.BCAuthorizeInterface;
 import com.momo.sdk.interfaces.OAuthInterface;
 import com.momo.sdk.interfaces.RequestInterface;
+import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
 import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;
@@ -30,6 +31,7 @@ import com.momo.sdk.model.DeliveryNotification;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.Oauth2;
 import com.momo.sdk.model.StatusResponse;
+import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payer;
 import com.momo.sdk.model.collection.RequestPay;
@@ -38,6 +40,7 @@ import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.collection.Withdraw;
 import com.momo.sdk.model.collection.WithdrawStatus;
 import com.momo.sdk.model.user.BasicUserInfo;
+import com.momo.sdk.util.AccessType;
 import com.momo.sdk.util.Environment;
 import com.momo.sdk.util.SubscriptionType;
 
@@ -189,8 +192,9 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
             case 6:
                 //"Get Consumer Information with Consent"
                 sbOutPut = new StringBuilder();
-                sbOutPut.append("Get Consumer Information with Consent- Output \n\n");
-                bcAuthorize(6);
+                getUserInfoWithConsent(6);
+             //   sbOutPut.append("Get Consumer Information with Consent- Output \n\n");
+           //     bcAuthorize(6);
 
             default:
                 break;
@@ -480,64 +484,31 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
 
     }
 
-    public void bcAuthorize(int position) {
-        sbOutPut.append("\n\nbcAuthorize- Output\n\n");
-
-        SDKManager.collection.bcAuthorize(new BCAuthorizeInterface() {
-            @Override
-            public void onBCAuthorizeInterfaceSuccess(BCAuthorize bcAuthorize) {
-                hideProgress();
-                if (bcAuthorize == null) {
-                    onApiSuccessDataEmpty(position);
-                } else {
-                    showToast("success");
-                    customUseCaseAdapter.setStatus(1, position);
-                    sbOutPut.append(new Gson().toJson(bcAuthorize));
-                    txtResponse.setText(sbOutPut);
-                    createOauth2Token(bcAuthorize.getAuthReqId(), 6);
-                }
-            }
-
-            @Override
-            public void onBCAuthorizeInterfaceFailure(MtnError mtnError) {
-                onApiFailure(position, mtnError);
-            }
-        });
-
-    }
-
-
-    public void createOauth2Token(String authreqId, int position) {
-        sbOutPut.append("\n\nbcAuthorize- Output\n\n");
-
-        SDKManager.collection.createOauth2Token(authreqId,new OAuthInterface() {
-
-            @Override
-            public void onOAuthInterfaceSuccess(Oauth2 oauth2) {
-                hideProgress();
-                if (oauth2 == null) {
-                    onApiSuccessDataEmpty(position);
-                } else {
-                    showToast("success");
-                    customUseCaseAdapter.setStatus(1, position);
-                    sbOutPut.append(new Gson().toJson(oauth2));
-                    txtResponse.setText(sbOutPut);
-                    getUserInfoWithConsent(6);
-                }
-            }
-
-            @Override
-            public void onOAuthInterfaceFailure(MtnError mtnError) {
-                onApiFailure(position, mtnError);
-            }
-        });
-
-    }
-
-
     public void getUserInfoWithConsent(int position) {
-        sbOutPut.append("\n\nbcAuthorize- Output\n\n");
-        SDKManager.collection.getUserInfoWithConsent();
+        sbOutPut.append("\n\nGe- Output\n\n");
+        AccountHolder accountHolder=new AccountHolder();
+        accountHolder.setAccountHolderId("0248888736");
+        accountHolder.setAccountHolderIdType("MSISDN");
+        SDKManager.collection.getUserInfoWithConsent(accountHolder,AccessType.offline, "profile", new UserConsentInterface() {
+            @Override
+            public void onUserInfoSuccess(UserInfo userInfo) {
+                hideProgress();
+                if (userInfo == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(userInfo));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+
+            @Override
+            public void onUserInfoFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+
+            }
+        });
     }
 
     public void onApiSuccessDataEmpty(int position){
