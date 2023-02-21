@@ -1,9 +1,9 @@
 
-# Account Balance
+# Account Balance in specific currency
 
-`Here, getAccountBalance() creates a GET request to collection/v1_0/account/balance`
+`Here, getAccountBalanceInSpecificCurrency () creates a GET request to collection/v1_0/account/balance/{currency}`
 
-> `Get balance request is used to check the balance on the default account connected to the API User. The following is the sequence flow for get balance use case`
+> `Get the balance of the account. Currency parameter passed in GET`
 
 ### Usage/Examples
 
