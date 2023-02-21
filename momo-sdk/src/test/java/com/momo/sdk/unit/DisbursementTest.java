@@ -6,10 +6,12 @@ import com.momo.sdk.SDKManager;
 import com.momo.sdk.interfaces.RequestInterface;
 import com.momo.sdk.interfaces.UserConsentInterface;
 import com.momo.sdk.interfaces.UserInfoInterface;
+import com.momo.sdk.interfaces.account.RequestBalanceInterface;
 import com.momo.sdk.interfaces.collection.ValidateAccountInterface;
 import com.momo.sdk.interfaces.disbursement.DepositStatusInterface;
 import com.momo.sdk.interfaces.disbursement.RefundStatusInterface;
 import com.momo.sdk.interfaces.disbursement.TransferStatusInterface;
+import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.DeliveryNotification;
 
 import com.momo.sdk.model.MtnError;
@@ -704,7 +706,7 @@ public class DisbursementTest {
     @Test
     public void getUserInfoWithConsentNullToken() {
 
-        AppConstants.COLLECTION_TOKEN = null;
+        AppConstants.DISBURSEMENT_TOKEN = null;
 
 
         AccountHolder accountHolder=new AccountHolder();
@@ -785,6 +787,61 @@ public class DisbursementTest {
             public void onUserInfoFailure(MtnError mtnError) {
                 assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
                 assertEquals("Invalid scope", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+    @Test
+    public void getBalanceSpecificCurrencyNullToken() {
+
+        AppConstants.DISBURSEMENT_TOKEN = null;
+        SDKManager.disbursement.getAccountBalanceInSpecificCurrency("USD",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("INITIALIZATION_ERROR", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid token", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+    @Test
+    public void getBalanceSpecificCurrencyNullCurrency() {
+
+        SDKManager.disbursement.getAccountBalanceInSpecificCurrency(null,new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Currency cannot be empty or null", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+    @Test
+    public void getBalanceSpecificCurrencyEmptyCurrency() {
+
+        SDKManager.disbursement.getAccountBalanceInSpecificCurrency("",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Currency cannot be empty or null", mtnError.getErrorBody().getMessage());
             }
         });
     }

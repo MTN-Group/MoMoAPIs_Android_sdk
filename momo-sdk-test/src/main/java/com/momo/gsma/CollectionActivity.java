@@ -167,7 +167,7 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
                 //Get Account Balance in specific currency
                 sbOutPut = new StringBuilder();
                 sbOutPut.append("Get Balance in specific currency - Output \n\n");
-
+                getAccountBalanceSpecificCurrency(3);
                 break;
             case 4:
                 //Request to withdraw V1
@@ -292,6 +292,33 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
         });
 
     }
+
+
+
+    public void getAccountBalanceSpecificCurrency(int position) {
+
+        SDKManager.collection.getAccountBalanceInSpecificCurrency("USD",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+                hideProgress();
+                if (accountBalance == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(accountBalance));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+
+    }
+
 
     public void requestToWithdrawV1(int position) {
 

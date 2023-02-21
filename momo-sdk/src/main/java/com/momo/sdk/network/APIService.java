@@ -63,6 +63,12 @@ public interface APIService {
     Call<AccountBalance> getBalance(@Path("subscriptionType") String subscription, @HeaderMap Map<String, String> headers);
 
 
+
+    @GET("{subscriptionType}/v1_0/account/balance/{currency}")
+    Call<AccountBalance> getAccountBalanceInSpecificCurrency(@Path("subscriptionType") String subscription,@Path("currency") String currency,
+             @HeaderMap Map<String, String> headers);
+
+
     @GET("{subscriptionType}/v1_0/accountholder/{msisdn}/{value}/active")
     Call<Result> validateAccountHolderStatus(@Path("subscriptionType") String subscriptionType,
                                              @Path("msisdn") String msisdn, @Path("value") String value,

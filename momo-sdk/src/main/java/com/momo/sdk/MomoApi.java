@@ -128,6 +128,21 @@ public class MomoApi {
 
     }
 
+     /** Account balance
+     *
+     *  @param  subscriptionType The SubscriptionType object
+      * @param  currency currency
+     *  @param  getBalanceAPIRequestCallback Listener for api operation*
+     */
+
+    public void getAccountBalanceInSpecificCurrency(SubscriptionType subscriptionType,String currency,
+                                  APIRequestCallback<AccountBalance> getBalanceAPIRequestCallback){
+        HashMap<String,String> headers;
+        headers=Utils.getHeaders("",subscriptionType,"",false);
+        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.getAccountBalanceInSpecificCurrency(
+                subscriptionType.name().toLowerCase(),currency,headers),
+                getBalanceAPIRequestCallback));
+    }
 
     /** Request to validate Account holder Status
      *
@@ -437,7 +452,6 @@ public class MomoApi {
      *
      * @param authReqId Authorization request id
      * @param subscriptionType The SubscriptionType object
-     * @param accessType Access type for Oauth2
      * @param apiRequestCallback Listener for api operation
      *
      */

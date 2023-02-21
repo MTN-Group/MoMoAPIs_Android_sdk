@@ -1091,6 +1091,61 @@ public class CollectionTest {
     }
 
 
+    @Test
+    public void getBalanceSpecificCurrencyNullToken() {
+
+        AppConstants.COLLECTION_TOKEN = null;
+        SDKManager.collection.getAccountBalanceInSpecificCurrency("USD",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("INITIALIZATION_ERROR", mtnError.getErrorBody().getCode());
+                assertEquals("Invalid token", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+    @Test
+    public void getBalanceSpecificCurrencyNullCurrency() {
+
+        SDKManager.collection.getAccountBalanceInSpecificCurrency(null,new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Currency cannot be empty or null", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
+    @Test
+    public void getBalanceSpecificCurrencyEmptyCurrency() {
+
+        SDKManager.collection.getAccountBalanceInSpecificCurrency("",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+
+
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                assertEquals("REQUIRED_PARAMETER", mtnError.getErrorBody().getCode());
+                assertEquals("Currency cannot be empty or null", mtnError.getErrorBody().getMessage());
+            }
+        });
+    }
+
     public Context getAppContext() {
         return InstrumentationRegistry.getInstrumentation().getTargetContext();
     }

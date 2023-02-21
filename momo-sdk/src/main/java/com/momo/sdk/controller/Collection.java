@@ -225,6 +225,41 @@ public class Collection {
         }
     }
 
+
+    /**
+     * Request account balance
+     * @param currency Currency
+     * @param requestBalanceInterface Listener for api callback
+     */
+    public void getAccountBalanceInSpecificCurrency(String currency,
+                                                    RequestBalanceInterface requestBalanceInterface) {
+        if (!Utils.checkForInitialization(SubscriptionType.COLLECTION)) {
+            ErrorResponse errorResponse = Utils.setError(16);
+            requestBalanceInterface.onRequestBalanceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else if(currency==null||currency.isEmpty()){
+            ErrorResponse errorResponse = Utils.setError(8);
+            requestBalanceInterface.onRequestBalanceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else {
+            MomoApi.getInstance().getAccountBalanceInSpecificCurrency(SubscriptionType.COLLECTION,currency, new APIRequestCallback<AccountBalance>() {
+                @Override
+                public void onSuccess(int responseCode, AccountBalance serializedResponse) {
+                    requestBalanceInterface.onRequestBalanceSuccess(serializedResponse);
+                }
+
+                @Override
+                public void onFailure(MtnError errorDetails) {
+                    requestBalanceInterface.onRequestBalanceFailure(errorDetails);
+                }
+            });
+        }
+    }
+
+
+
     /**
      * Request withdraw V1
      *

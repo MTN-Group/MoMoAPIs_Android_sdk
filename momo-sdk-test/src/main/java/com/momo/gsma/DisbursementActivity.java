@@ -162,6 +162,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                 //Get Balance in Specific country
                 sbOutPut = new StringBuilder();
                 sbOutPut.append("Get Balance in Specific country - Output \n\n");
+                getAccountBalanceSpecificCurrency(3);
                 // validateDisbursementAccountHolder(1);
                 break;
             case 4:
@@ -233,6 +234,30 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
             }
         });
+    }
+
+    public void getAccountBalanceSpecificCurrency(int position) {
+
+        SDKManager.disbursement.getAccountBalanceInSpecificCurrency("USD",new RequestBalanceInterface() {
+            @Override
+            public void onRequestBalanceSuccess(AccountBalance accountBalance) {
+                hideProgress();
+                if (accountBalance == null) {
+                    onApiSuccessDataEmpty(position);
+                } else {
+                    showToast("success");
+                    customUseCaseAdapter.setStatus(1, position);
+                    sbOutPut.append(new Gson().toJson(accountBalance));
+                    txtResponse.setText(sbOutPut);
+                }
+            }
+
+            @Override
+            public void onRequestBalanceFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+            }
+        });
+
     }
 
     public void requestToTransfer(int position) {

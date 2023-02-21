@@ -519,7 +519,7 @@ public class Disbursement {
                                        String scope,
                                        UserConsentInterface userConsentInterface
     ) {
-        if (!Utils.checkForInitialization(SubscriptionType.COLLECTION)) {
+        if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);
             userConsentInterface.onUserInfoFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
@@ -553,5 +553,40 @@ public class Disbursement {
                     });
         }
     }
+
+
+
+    /**
+     * Request account balance
+     * @param currency Currency
+     * @param requestBalanceInterface Listener for api callback
+     */
+    public void getAccountBalanceInSpecificCurrency(String currency,
+                                                    RequestBalanceInterface requestBalanceInterface) {
+        if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
+            ErrorResponse errorResponse = Utils.setError(16);
+            requestBalanceInterface.onRequestBalanceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else if(currency==null||currency.isEmpty()){
+            ErrorResponse errorResponse = Utils.setError(8);
+            requestBalanceInterface.onRequestBalanceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else {
+            MomoApi.getInstance().getAccountBalanceInSpecificCurrency(SubscriptionType.DISBURSEMENT,currency, new APIRequestCallback<AccountBalance>() {
+                @Override
+                public void onSuccess(int responseCode, AccountBalance serializedResponse) {
+                    requestBalanceInterface.onRequestBalanceSuccess(serializedResponse);
+                }
+
+                @Override
+                public void onFailure(MtnError errorDetails) {
+                    requestBalanceInterface.onRequestBalanceFailure(errorDetails);
+                }
+            });
+        }
+    }
+
 
 }
