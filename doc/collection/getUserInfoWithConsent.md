@@ -36,16 +36,16 @@ Construct a account holder and set desired values
 ### Example Output
 
 ```json
-   {
-	"sub": "0",
-	"name": "Sand Box",
-	"given_name": "Sand",
-	"family_name": "Box",
-	"birthdate": "1976-08-13",
-	"locale": "sv_SE",
-	"gender": "MALE",
-	"updated_at": 1676609351
-}
+ {
+ 	"sub": "0",
+ 	"name": "Sand Box",
+ 	"given_name": "Sand",
+ 	"family_name": "Box",
+ 	"birthdate": "1976-08-13",
+ 	"locale": "sv_SE",
+ 	"gender": "MALE",
+ 	"updated_at": 1676961048
+ }
 
 ```
 
