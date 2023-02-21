@@ -8,7 +8,7 @@
 
 ### Usage/Examples
 
-Construct a account holder and set desired values
+Construct a account holder object and set desired values
 
 ```java
         AccountHolder accountHolder=new AccountHolder();
