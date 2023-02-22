@@ -469,8 +469,7 @@ public class MomoApi {
 
         headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
         String grant_type = "urn:openid:params:grant-type:ciba";
-        String auth_req_id =  authReqId;
-        requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.createOauth2token(subscriptionType.name().toLowerCase(),grant_type,auth_req_id,headers),apiRequestCallback ));
+   requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.createOauth2token(subscriptionType.name().toLowerCase(),grant_type,authReqId,headers),apiRequestCallback ));
 
     }
 

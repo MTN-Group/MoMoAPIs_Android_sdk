@@ -189,8 +189,6 @@ public class CollectionActivity extends BaseActivity implements CustomUseCaseAda
                 //"Get Consumer Information with Consent"
                 sbOutPut = new StringBuilder();
                 getUserInfoWithConsent(6);
-             //   sbOutPut.append("Get Consumer Information with Consent- Output \n\n");
-           //     bcAuthorize(6);
 
             default:
                 break;

@@ -2,6 +2,7 @@ package com.momo.sdk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class BCAuthorize extends BaseResponse {
 
     @SerializedName("auth_req_id")

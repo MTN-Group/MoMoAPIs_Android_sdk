@@ -1,7 +1,6 @@
 package com.momo.sdk.config;
 
 import android.content.Context;
-import android.util.Log;
 
 
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;

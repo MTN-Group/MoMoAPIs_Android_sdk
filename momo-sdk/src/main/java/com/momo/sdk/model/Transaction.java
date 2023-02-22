@@ -16,6 +16,18 @@ public class Transaction extends BaseResponse {
     @SerializedName("payerMessage")
     private String payerMessage;
 
+    @SerializedName("financialTransactionId")
+    private String financialTransactionId;
+
+
+    public String getFinancialTransactionId() {
+        return financialTransactionId;
+    }
+
+    public void setFinancialTransactionId(String financialTransactionId) {
+        this.financialTransactionId = financialTransactionId;
+    }
+
     public String getAmount() {
         return amount;
     }

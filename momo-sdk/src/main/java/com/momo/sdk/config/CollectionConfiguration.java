@@ -2,13 +2,11 @@ package com.momo.sdk.config;
 
 
 import android.content.Context;
-import android.util.Log;
 
 
 import com.momo.sdk.interfaces.collection.TokenInitializeInterface;
 import com.momo.sdk.manager.PreferenceManager;
 import com.momo.sdk.model.AccessToken;
-import com.momo.sdk.model.BCAuthorize;
 import com.momo.sdk.model.ErrorResponse;
 import com.momo.sdk.model.MtnError;
 import com.momo.sdk.model.StatusResponse;
