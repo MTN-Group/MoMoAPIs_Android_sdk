@@ -194,17 +194,7 @@ This table below describe the details required for collection functions
     <td>requestToPayr</td>
     <td>RequestPay requestPay ,RequestStateInterface requestStateInterface</td>
   </tr>
-  <tr>
-    <td><a href=docs/collection/requestToPayTransactionStatus.md>Request pay transaction status</a></td>
-    <td>requestToPayTransactionStatus</td>
-    <td>String userReferenceId,RequestPayStatusInterface requestPayStatusInterface</td>
-  </tr>
-   <tr>
-     <td><a href=docs/collection/requestToPayDeliveryNotification.md>Delivery notification </a></td>
-    <td>requestToPayDeliveryNotification</td>
-    <td>String userReferenceId,RequestStateInterface requestStateInterface</td>
-  </tr>
-  </tr>
+
   
 </tbody>
 </table>
