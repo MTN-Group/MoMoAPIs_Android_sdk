@@ -112,6 +112,34 @@ The collection configuration object is being initialized with a builder pattern,
 
   * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
 
+```java
+
+        CollectionConfiguration collectionConfiguration = new CollectionConfiguration.
+                CollectionConfigurationBuilder().
+                setSubscriptionKey("<subsriptionkey>").
+                setSubscriptionType(SubscriptionType.COLLECTION).
+                setCallBackUrl("<callbackURL>").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey("<apikey>").
+                setUserReferenceId("<referenceId>").
+                setxTargetEnvironment("<target environment>")
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+      
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+               
+
+                    }
+                }).
+                build(this);
+
+```
+
+
 
 
 
