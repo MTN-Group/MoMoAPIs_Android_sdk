@@ -57,14 +57,16 @@ Add the below line in dependencies of your `build.gradle` file in your applicati
 ```groovy
 implementation files('libs/Momo-SDK-v1.0.0.aar')
 ```
-<a name="#authentication"></a>
+
 
 # Use cases
      
-     *  Authentication
-     *  Collection
-     *  Disbursement
-     *  Remittance
+*  Authentication
+*  Collection
+*  Disbursement
+*  Remittance
+     
+<a name="#authentication"></a>
 
 ## Authentication
 
