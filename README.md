@@ -84,7 +84,7 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
     <td>String userReferenceId,UserDetailInterface userDetailInterface</td>
   </tr>
    <tr>
-    <td><a href=docs/authentication/createApiKey.md">Create Api Key</a></td>
+    <td><a href=docs/authentication/createApiKey.md>Create Api Key</a></td>
     <td>createApiKey</td>
     <td>String userReferenceId,ApiKeyInterface apiKeyInterface</td>
   </tr>
