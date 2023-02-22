@@ -64,7 +64,7 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 <tbody>
   <tr>
     <td rowspan="3">User creation</td>
-    <td><a href="/docs/authentication/docs/authentication/createApiKey.md">Create User</a></td>
+    <td><a href="docs/authentication/createApiKey.md">Create User</a></td>
     <td>Create user</td>
     <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>
   </tr>
