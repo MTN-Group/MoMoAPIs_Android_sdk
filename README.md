@@ -208,7 +208,7 @@ This table below describe the details required for collection functions
     <td>Validate account holder</td>
     <td><a href=docs/collection/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
     <td>validateAccountHolderStatus</td>
-    <td>AccountHolder acconuntHolder,ValidateAccountInterface validateAccountInterface</td>
+    <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
   </tr>
    <td>Get Balance</td>
     <td><a href=docs/collection/getAccountBalance.md>Account Balance</a></td>
@@ -241,6 +241,12 @@ This table below describe the details required for collection functions
     <td><a href=docs/collection/getBasicUserInfo.md>Validate Consumer Identity</a></td>
     <td>getBasicUserInfo</td>
      <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
+  </tr>
+    <tr>
+    <td>Get Consumer Information with Consent</td>
+    <td><a href=docs/collection/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
+    <td>getUserInfoWithConsent</td>
+     <td>AccountHolder accountHolder,Enum Accesstype,String scope,UserConsentInterface userConsentInterface</td> 
   </tr>
 </tbody>
 </table>
