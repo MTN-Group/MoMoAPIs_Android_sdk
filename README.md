@@ -50,6 +50,42 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 <a name="#authentication"></a>
 
 
+### Authentication
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">User creation<</td>
+    <td>Create user</td>
+    <td><a href="/docs/authentication/docs/authentication/createApiKey.md">Create User</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>d>
+  </tr>
+  <tr>
+    <td><a href="/docs/authentication/docs/authentication/createApiKey.md">Create User</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>d>
+
+  </tr>
+  
+   <tr>
+    td><a href="/docs/authentication/docs/authentication/createApiKey.md">Create User</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>d>
+
+  </tr>
+</tbody>
+</table>
+
+
 
 
 
