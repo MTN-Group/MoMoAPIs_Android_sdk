@@ -23,7 +23,7 @@ This document contains the following sections:
 
 -  [Requirements](#requirements)
 -  [Getting Started](#getting-started)
-     -  [How to include GSMA SDK in your android application](#Setup)
+     -  [How to include Momo SDK in your android application](#Setup)
 -  [Use Cases](#use-cases)
      -  [Authentication](#authentication)
      -  [Collection](#collection)
@@ -47,7 +47,7 @@ Optimum requirements to use this SDK are -
 # Getting Started
 
 
-# How to include GSMA SDK in your android application
+# How to include Momo SDK in your android application
 
 Copy the Momo-SDK-v1.0.0.aar [Download](/aar/Momo-SDK-v1.0.0.aar)
  file, available in the latest version in aar folder in the project directory, into libs folder under your project directory.
