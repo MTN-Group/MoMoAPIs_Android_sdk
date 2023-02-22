@@ -74,15 +74,21 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 <tbody>
   <tr>
     <td rowspan="3">User creation</td>
-    <td><a href="docs/authentication/createApiKey.md">Create User</a></td>
+    <td><a href="docs/authentication/createUser.md">Create User</a></td>
     <td>Create user</td>
     <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>
   </tr>
   <tr>
-    <td><a href="docs/authentication/createApiKey.md">Get user details</a></td>
+    <td><a href=docs/authentication/getUserDetails.md">Get user details</a></td>
     <td>getUserDetails</td>
     <td>String userReferenceId,UserDetailInterface userDetailInterface</td>
   </tr>
+   <tr>
+    <td><a href=docs/authentication/createApiKey.md">Create Api Key</a></td>
+    <td>createApiKey</td>
+    <td>String userReferenceId,ApiKeyInterface apiKeyInterface</td>
+  </tr>
+  
 </tbody>
 </table>
 
