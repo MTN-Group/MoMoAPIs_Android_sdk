@@ -111,6 +111,8 @@ The collection configuration object is being initialized with a builder pattern,
   * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
 
   * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
+  
+###Example
 
 ```java
 
