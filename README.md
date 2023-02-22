@@ -100,7 +100,7 @@ The collection configuration object is being initialized with a builder pattern,
 
   * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
   
-  * <b>subscriptionType</b: The type of subscription (in this case, a collection).
+  * <b>subscriptionType</b>: The type of subscription (in this case, a collection).
      
   * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
 
