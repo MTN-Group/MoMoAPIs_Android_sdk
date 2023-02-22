@@ -59,8 +59,11 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 ```
 <a name="#authentication"></a>
 
+# Use cases
 
-### Authentication
+
+
+## Authentication
 
 <table>
 <thead>
