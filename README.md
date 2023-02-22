@@ -190,9 +190,9 @@ This table below describe the details required for collection functions
 <tbody>
   <tr>
     <td>Request Pay</td>
-    <td><a href="docs/collection/requestToPay.md>Request pay</a></td>
-    <td>requestToPayr</td>
-    <td>RequestPay requestPay ,RequestStateInterface requestStateInterface</td>
+    <td><a href=docs/collection/requestToPay.md>Request pay</a></td>
+    <td>requestToPay</td>
+     <td>RequestPay requestPay ,RequestStateInterface requestStateInterface</td> 
   </tr>
 
   
