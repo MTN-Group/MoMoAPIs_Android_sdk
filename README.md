@@ -92,6 +92,15 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 </tbody>
 </table>
 
+<a name="#collections"></a>
+
+# Configure
+
+The collection configuration object is being initialized with a builder pattern,The paramater being set include
+
+  * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+
+
 
 
 
