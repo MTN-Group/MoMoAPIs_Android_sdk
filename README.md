@@ -79,7 +79,7 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
     <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>
   </tr>
   <tr>
-    <td><a href=docs/authentication/getUserDetails.md">Get user details</a></td>
+    <td><a href=docs/authentication/getUserDetails.md>Get user details</a></td>
     <td>getUserDetails</td>
     <td>String userReferenceId,UserDetailInterface userDetailInterface</td>
   </tr>
