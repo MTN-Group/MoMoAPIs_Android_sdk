@@ -112,7 +112,7 @@ The collection configuration object is being initialized with a builder pattern,
 
   * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
   
-###Example
+### Example
 
 ```java
 
