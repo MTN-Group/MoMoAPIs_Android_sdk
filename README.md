@@ -99,14 +99,18 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 The collection configuration object is being initialized with a builder pattern,The paramater being set include
 
   * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+  
+  * <b>subscriptionType</b: The type of subscription (in this case, a collection).
+     
+  * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
 
+  * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
 
+  * <b>apikey<b>: An api key for accessing the momo api services
+  
+  * <b>userReferenceId<b>: A reference ID for the user initiating the collection request   
 
-
-
-
-
-
+  * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
 
 
 
