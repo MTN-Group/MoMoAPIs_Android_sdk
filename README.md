@@ -70,6 +70,15 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 
 ## Authentication
 
+The API user and API key are provisioned differently in the sandbox and production environment.In the Sandbox a provisioning API is used to create the API User and API Key, whereas in the production environment the provisioning is done through the User Portal.The sections below describe the different steps required in creating API User and API key in Sandbox and Production Environments.
+
+## Configure
+
+The UserConfiguration object is created using the UserConfigurationBuilder which provides a fluent interface for setting the configuration parameters. The following parameter is set:
+
+* <b>subscriptionKey</b>: A string value representing the subscription key associated with the user configuration. It is set to "fbf949df1f964e869437ef6651e74371" in this case.This configuration object can be used to provide necessary details for making API calls on behalf of a specific user.
+
+
 <table>
 <thead>
   <tr>
@@ -99,6 +108,8 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
   
 </tbody>
 </table>
+
+## Collection
 
 <a name="#collections"></a>
 
