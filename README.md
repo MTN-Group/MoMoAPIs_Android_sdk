@@ -9,6 +9,15 @@ Android SDK to use MOMO API.
 [![SDK Version](https://img.shields.io/badge/targetSdkVersion-33-informational.svg)](https://developer.android.com/sdk/api_diff/31/changes)
 
 
+A library that fully covers payment process inside your Android application
+
+This SDK provides for an easy way to connect to [Momo API](https://momodeveloper.mtn.com/api-documentation).
+Please refer to the following documentation for installation instructions and usage information.
+
+-   [API Documentation](https://momodeveloper.mtn.com/api-documentation)
+-   [How to use the test Application](GSMATest/README.md)
+
+# Index 
 
 This document contains the following sections:
 
@@ -16,6 +25,7 @@ This document contains the following sections:
 -  [Getting Started](#getting-started)
      -  [How to include GSMA SDK in your android application](#Setup)
 -  [Use Cases](#use-cases)
+     -  [Authentication](#authentication)
      -  [Collection](#collection)
      -  [Disbursement](#disbursement)
      -  [Remittance](#remittance)
