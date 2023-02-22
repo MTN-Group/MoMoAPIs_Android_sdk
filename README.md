@@ -205,7 +205,10 @@ This table below describe the details required for collection functions
     <td>String userReferenceId,RequestStateInterface requestStateInterface</td>
   </tr>
   </tr>
-  
+    <td><a href=docs/collection/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
+    <td>validateAccountHolderStatus</td>
+    <td>AccountHolder acconuntHolder,ValidateAccountInterface validateAccountInterface</td>
+  </tr>
 </tbody>
 </table>
 
