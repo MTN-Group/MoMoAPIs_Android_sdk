@@ -106,9 +106,9 @@ The collection configuration object is being initialized with a builder pattern,
 
   * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
 
-  * <b>apikey<b>: An api key for accessing the momo api services
+  * <b>apikey</b>: An api key for accessing the momo api services
   
-  * <b>userReferenceId<b>: A reference ID for the user initiating the collection request   
+  * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
 
   * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
 
