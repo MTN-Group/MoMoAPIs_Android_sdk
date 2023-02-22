@@ -236,7 +236,12 @@ This table below describe the details required for collection functions
     <td>requestToWithdrawTransactionStatus</td>
      <td>String requestReferenceId,RequestToWithdrawInterface RequestToWithdrawStatusInterface</td> 
   </tr>
-
+  <tr>
+     <td>Validate Consumer Identity</td>
+    <td><a href=docs/collection/validateAccountHolderStatus.md>Request to withdraw transaction status</a></td>
+    <td>requestToWithdrawTransactionStatus</td>
+     <td>String requestReferenceId,RequestToWithdrawInterface RequestToWithdrawStatusInterface</td> 
+  </tr>
 </tbody>
 </table>
 
