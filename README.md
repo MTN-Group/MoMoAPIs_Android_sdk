@@ -195,8 +195,7 @@ This table below describe the details required for collection functions
      <td>RequestPay requestPay ,RequestStateInterface requestStateInterface</td> 
   </tr>
   <tr>
-       
-    <td><a href=docs/collection/requestToPayTransactionStatus.md>Request pay transaction status</a></td>
+   <td><a href=docs/collection/requestToPayTransactionStatus.md>Request pay transaction status</a></td>
     <td>requestToPayTransactionStatus</td>
     <td>String userReferenceId,RequestPayStatusInterface requestPayStatusInterface</td>
   </tr>
