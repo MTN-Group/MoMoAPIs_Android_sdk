@@ -90,7 +90,7 @@ The UserConfiguration object is created using the UserConfigurationBuilder which
 
 ```
 
-Theis table below describe the different steps required in creating API User and API key in Sandbox and Production Environments.
+This table below describe the different steps required in creating API User and API key in Sandbox and Production Environments.
 
 
 <table>
