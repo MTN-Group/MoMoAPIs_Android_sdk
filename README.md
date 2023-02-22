@@ -76,7 +76,18 @@ The API user and API key are provisioned differently in the sandbox and producti
 
 The UserConfiguration object is created using the UserConfigurationBuilder which provides a fluent interface for setting the configuration parameters. The following parameter is set:
 
-* <b>subscriptionKey</b>: A string value representing the subscription key associated with the user configuration. It is set to "fbf949df1f964e869437ef6651e74371" in this case.This configuration object can be used to provide necessary details for making API calls on behalf of a specific user.
+* <b>subscriptionKey</b>: A string value representing the subscription key associated with the user configuration,This configuration object can be used to provide necessary details for making API calls on behalf of a specific user.
+
+### Example
+
+```java
+        UserConfiguration userConfiguration = new UserConfiguration.UserConfigurationBuilder().
+                setSubscriptionKey("<subscriptionKey>").
+                build();
+
+
+```
+
 
 
 <table>
