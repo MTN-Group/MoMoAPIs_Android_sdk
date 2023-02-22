@@ -80,7 +80,6 @@ The UserConfiguration object is created using the UserConfigurationBuilder which
 
 ### Example
 
-Theis table below describe the different steps required in creating API User and API key in Sandbox and Production Environments.
 
 
 ```java
@@ -90,6 +89,9 @@ Theis table below describe the different steps required in creating API User and
 
 
 ```
+
+Theis table below describe the different steps required in creating API User and API key in Sandbox and Production Environments.
+
 
 <table>
 <thead>
@@ -122,6 +124,8 @@ Theis table below describe the different steps required in creating API User and
 </table>
 
 ## Collection
+
+Collections is a service that enables Mobile Money partners to receive payments for goods and services using MTN Mobile Money. The services can be face-to-face like MomoPay or can be done remotely for both offline and online. Payments can be customer-initiated on USSD/App/Web or Merchant-initiated where a customer is sent a debit request for approval.
 
 <a name="#collections"></a>
 
