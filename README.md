@@ -221,7 +221,7 @@ This table below describe the details required for collection functions
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
     <tr>
-     <td rowspan="3">Request to withdraw/td>
+     <td rowspan="3">Request to withdraw</td>
     <td><a href=docs/collection/requestToWithdrawV1.md>Request to withdraw V1<</a></td>
     <td>requestToWithdrawV1</td>
      <td>Withdraw withdraw,RequestToWithdrawInterface requestToWithdrawInterface</td> 
