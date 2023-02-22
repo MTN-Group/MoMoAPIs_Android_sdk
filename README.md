@@ -67,7 +67,7 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
     <td>Create user</td>
     <td><a href="/docs/authentication/docs/authentication/createApiKey.md">Create User</a></td>
     <td>createMerchantTransaction</td>
-    <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>d>
+    <td>Callbackhost callbackhost,RequestStateInterface requestStateInterface</td>
   </tr>
 
 </tbody>
