@@ -197,12 +197,12 @@ This table below describe the details required for collection functions
   <tr>
    <td><a href=docs/collection/requestToPayTransactionStatus.md>Request pay transaction status</a></td>
     <td>requestToPayTransactionStatus</td>
-    <td>String userReferenceId,RequestPayStatusInterface requestPayStatusInterface</td>
+    <td>String referenceId,RequestPayStatusInterface requestPayStatusInterface</td>
   </tr>
    <tr>
      <td><a href=docs/collection/requestToPayDeliveryNotification.md>Delivery notification </a></td>
     <td>requestToPayDeliveryNotification</td>
-    <td>String userReferenceId,RequestStateInterface requestStateInterface</td>
+    <td>String referenceId,RequestStateInterface requestStateInterface</td>
   </tr>
   </tr>
     <td>Validate account holder</td>
@@ -210,6 +210,17 @@ This table below describe the details required for collection functions
     <td>validateAccountHolderStatus</td>
     <td>AccountHolder acconuntHolder,ValidateAccountInterface validateAccountInterface</td>
   </tr>
+   <td>Get Balance</td>
+    <td><a href=docs/collection/getAccountBalance.md>Account Balance</a></td>
+    <td>getAccountBalance</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+  <td>Get Balance in specific currency</td>
+    <td><a href=docs/collection/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
+    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+  
 </tbody>
 </table>
 
