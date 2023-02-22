@@ -94,7 +94,7 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 
 <a name="#collections"></a>
 
-# Configure
+### Configure
 
 The collection configuration object is being initialized with a builder pattern,The paramater being set include
 
