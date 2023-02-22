@@ -61,11 +61,10 @@ implementation files('libs/Momo-SDK-v1.0.0.aar')
 
 # Use cases
      
-     *  [Authentication](#authentication)
-     *  [Collection](#collection)
-     *  [Disbursement](#disbursement)
-     *  [Remittance](#remittance)
-
+     *  Authentication
+     *  Collection
+     *  Disbursement
+     *  Remittance
 
 ## Authentication
 
