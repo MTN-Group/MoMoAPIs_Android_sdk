@@ -222,7 +222,7 @@ This table below describe the details required for collection functions
   </tr>
     <tr>
      <td rowspan="3">Request to withdraw</td>
-    <td><a href=docs/collection/requestToWithdrawV1.md>Request to withdraw V1<</a></td>
+    <td><a href=docs/collection/requestToWithdrawV1.md>Request to withdraw V1</a></td>
     <td>requestToWithdrawV1/td>
      <td>Withdraw withdraw,RequestToWithdrawInterface requestToWithdrawInterface</td> 
     </tr>
@@ -232,7 +232,7 @@ This table below describe the details required for collection functions
      <td>Withdraw withdraw,RequestToWithdrawInterface requestToWithdrawInterface</td> 
   </tr>
   <tr>
-    <td><a href=docs/collection/requestToWithdrawTransactionStatus.md>Request to withdraw transaction status<</a></td>
+    <td><a href=docs/collection/requestToWithdrawTransactionStatus.md>Request to withdraw transaction status</a></td>
     <td>requestToWithdrawTransactionStatus</td>
      <td>String requestReferenceId,RequestToWithdrawInterface RequestToWithdrawStatusInterface</td> 
   </tr>
