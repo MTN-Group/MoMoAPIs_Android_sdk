@@ -223,7 +223,7 @@ This table below describe the details required for collection functions
     <tr>
      <td rowspan="3">Request to withdraw</td>
     <td><a href=docs/collection/requestToWithdrawV1.md>Request to withdraw V1</a></td>
-    <td>requestToWithdrawV1/td>
+    <td>requestToWithdrawV1</td>
      <td>Withdraw withdraw,RequestToWithdrawInterface requestToWithdrawInterface</td> 
     </tr>
    <tr>
