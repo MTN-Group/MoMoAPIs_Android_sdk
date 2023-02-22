@@ -238,9 +238,9 @@ This table below describe the details required for collection functions
   </tr>
   <tr>
      <td>Validate Consumer Identity</td>
-    <td><a href=docs/collection/validateAccountHolderStatus.md>Request to withdraw transaction status</a></td>
-    <td>requestToWithdrawTransactionStatus</td>
-     <td>String requestReferenceId,RequestToWithdrawInterface RequestToWithdrawStatusInterface</td> 
+    <td><a href=docs/collection/getBasicUserInfo.md>Validate Consumer Identity</a></td>
+    <td>getBasicUserInfo</td>
+     <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
   </tr>
 </tbody>
 </table>
