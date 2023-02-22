@@ -176,8 +176,38 @@ The collection configuration object is being initialized with a builder pattern,
 
 ```
 
+This table below describe the details required for collection functions
 
-
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">Request Pay</td>
+    <td><a href="docs/collection/requestToPay.md>Request pay</a></td>
+    <td>requestToPayr</td>
+    <td>RequestPay requestPay ,RequestStateInterface requestStateInterface</td>
+  </tr>
+  <tr>
+    <td><a href=docs/collection/requestToPayTransactionStatus.md>Request pay transaction status</a></td>
+    <td>requestToPayTransactionStatus</td>
+    <td>String userReferenceId,RequestPayStatusInterface requestPayStatusInterface</td>
+  </tr>
+   <tr>
+     <td><a href=docs/collection/requestToPayDeliveryNotification.md>Delivery notification </a></td>
+    <td>requestToPayDeliveryNotification</td>
+    <td>String userReferenceId,RequestStateInterface requestStateInterface</td>
+  </tr>
+  </tr>
+  
+</tbody>
+</table>
 
 
 
