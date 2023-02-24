@@ -163,7 +163,13 @@ public class Remittance {
     }
 
 
-    //get basic user info
+    /**
+     * Request to get Basic User Info
+     *
+     * @param accountBasicUserInfo Msisdn of account
+     * @param userInfoInterface Listener for api callback
+     */
+
     public void getBasicUserInfo(String accountBasicUserInfo, UserInfoInterface userInfoInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.REMITTANCE)) {
             ErrorResponse errorResponse = Utils.setError(16);
@@ -189,6 +195,16 @@ public class Remittance {
                     });
         }
     }
+
+    /**
+     * Request to pay delivery Notification
+     *
+     * @param referenceId                  Reference Id of user
+     * @param notificationMessage          Notification message string
+     * @param deliveryNotification         DeliveryNotification object
+     * @param language                     language String
+     * @param requestPayAPIRequestCallback Listener
+     */
 
     public void requestPayDeliveryNotification(
             String referenceId, String notificationMessage, DeliveryNotification deliveryNotification, String language,
