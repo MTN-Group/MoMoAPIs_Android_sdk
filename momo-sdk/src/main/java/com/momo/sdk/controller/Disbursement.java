@@ -542,7 +542,7 @@ public class Disbursement {
                         @Override
                         public void onSuccess(int responseCode, BCAuthorize serializedResponse) {
                             createOauth2Token(serializedResponse.getAuthReqId(),
-                                    SubscriptionType.COLLECTION, userConsentInterface);
+                                    SubscriptionType.DISBURSEMENT, userConsentInterface);
                         }
 
                         @Override
