@@ -203,7 +203,7 @@ public class Remittance {
      * @param notificationMessage          Notification message string
      * @param deliveryNotification         DeliveryNotification object
      * @param language                     language String
-     * @param requestPayAPIRequestCallback Listener
+     * @param requestInterface             Listener
      */
 
     public void requestPayDeliveryNotification(
