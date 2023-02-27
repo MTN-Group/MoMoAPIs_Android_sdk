@@ -380,8 +380,7 @@ This table below describe the details required for disbursement functions
      <td>String requestReferenceId,DepositStatusInterface depositStatusInterfacee</td> 
   </tr>
   <tr>  
-     
-     <td>Validate Consumer Identity</td>
+    <td>Validate Consumer Identity</td>
     <td><a href=docs/disbursement/getBasicUserInfo.md>Validate Consumer Identity</a></td>
     <td>getBasicUserInfo</td>
      <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
