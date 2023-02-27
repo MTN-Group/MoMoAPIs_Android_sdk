@@ -330,6 +330,7 @@ This table below describe the details required for disbursement functions
     <td>String referenceId,RequestStateInterface requestStateInterface</td>
   </tr>
   </tr>
+  <tr>
     <td>Validate account holder</td>
     <td><a href=docs/disbursement/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
     <td>validateAccountHolderStatus</td>
