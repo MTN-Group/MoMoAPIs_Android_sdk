@@ -315,7 +315,7 @@ This table below describe the details required for disbursement functions
 <tbody>
   <tr>
      <td rowspan="3">Transfer</td>
-    <td><a href=docs/disbursement/transfer.md>Request pay</a></td>
+    <td><a href=docs/disbursement/transfer.md>Transfer</a></td>
     <td>transfer</td>
      <td>Transfer transfer,RequestStateInterface requestStateInterface</td> 
   </tr>
