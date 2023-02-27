@@ -251,6 +251,58 @@ This table below describe the details required for collection functions
 </tbody>
 </table>
 
+# Disbursement
+
+Disbursements is a service that enables Mobile Money partners to send money in bulk to different recipients with just one click. This setup can be manually executed (logging into the system, uploading recipient's list and trigger payments) or automated (requires a one-time setup of the recipients' lists and commands to effect payment).
+
+
+The disbursement configuration object is being initialized with a builder pattern,The paramater being set include
+
+  * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+  
+  * <b>subscriptionType</b>: The type of subscription (in this case, a collection).
+     
+  * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
+
+  * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
+
+  * <b>apikey</b>: An api key for accessing the momo api services
+  
+  * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
+
+  * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
+  
+### Example
+
+```java
+
+  DisbursementConfiguration disbursementConfiguration = new DisbursementConfiguration.
+                DisbursementConfigurationBuilder().
+                setSubscriptionKey("<subsriptionkey>").
+                setSubscriptionType(SubscriptionType.COLLECTION).
+                setCallBackUrl("<callbackURL>").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey("<apikey>").
+                setUserReferenceId("<referenceId>").
+                setxTargetEnvironment("<target environment>")
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+      
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+               
+
+                    }
+                }).
+                build(this);
+
+```
+
+
+
 
 
 
