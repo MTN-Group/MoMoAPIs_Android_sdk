@@ -84,7 +84,14 @@ public class RemittanceConfiguration {
             ErrorResponse errorResponse = Utils.setError(3);
             tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
-        } else {
+        }
+        else if (RemittanceConfiguration.RemittanceConfigurationBuilder.getxTargetEnvironment() == null ||
+                RemittanceConfiguration.RemittanceConfigurationBuilder.getxTargetEnvironment().isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(5);
+            tokenInitializeInterface.onTokenInitializeFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+        }
+        else {
             PreferenceManager.getInstance().init(context);
             new Thread(() -> {
                 Call<AccessToken> tokenCall = (RetrofitHelper.getApiHelper().

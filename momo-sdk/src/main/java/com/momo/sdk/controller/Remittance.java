@@ -214,6 +214,15 @@ public class Remittance {
             ErrorResponse errorResponse = Utils.setError(16);
             requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
                     errorResponse, null));
+        } else if (deliveryNotification == null) {
+            ErrorResponse errorResponse = Utils.setError(2);
+            requestInterface.onRequestInterFaceFailure(new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null));
+
+        } else if (referenceId == null || referenceId.isEmpty()) {
+            ErrorResponse errorResponse = Utils.setError(3);
+            requestInterface.onRequestInterFaceFailure((new MtnError(AppConstants.VALIDATION_ERROR_CODE,
+                    errorResponse, null)));
         }
         else {
             MomoApi.getInstance().requestPayDeliveryNotification(referenceId, notificationMessage, language, SubscriptionType.DISBURSEMENT, deliveryNotification, new APIRequestCallback<StatusResponse>() {
