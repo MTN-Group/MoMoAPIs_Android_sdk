@@ -251,6 +251,262 @@ This table below describe the details required for collection functions
 </tbody>
 </table>
 
+# Disbursement
+
+Disbursements is a service that enables Mobile Money partners to send money in bulk to different recipients with just one click. This setup can be manually executed (logging into the system, uploading recipient's list and trigger payments) or automated (requires a one-time setup of the recipients' lists and commands to effect payment).
+
+
+The disbursement configuration object is being initialized with a builder pattern,The paramater being set include
+
+  * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+  
+  * <b>subscriptionType</b>: The type of subscription (in this case, a collection).
+     
+  * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
+
+  * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
+
+  * <b>apikey</b>: An api key for accessing the momo api services
+  
+  * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
+
+  * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
+  
+### Example
+
+```java
+
+  DisbursementConfiguration disbursementConfiguration = new DisbursementConfiguration.
+                DisbursementConfigurationBuilder().
+                setSubscriptionKey("<subsriptionkey>").
+                setSubscriptionType(SubscriptionType.DISBURSEMENT).
+                setCallBackUrl("<callbackURL>").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey("<apikey>").
+                setUserReferenceId("<referenceId>").
+                setxTargetEnvironment("<target environment>")
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+      
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+               
+
+                    }
+                }).
+                build(this);
+
+```
+
+This table below describe the details required for disbursement functions
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+     <td rowspan="3">Transfer</td>
+    <td><a href=docs/disbursement/transfer.md>Transfer</a></td>
+    <td>transfer</td>
+     <td>Transfer transfer,String callbackUrl,RequestStateInterface requestStateInterface</td> 
+  </tr>
+  <tr>
+   <td><a href=docs/disbursement/getTransferStatus.md>Transfer status</a></td>
+    <td>getTransferStatus</td>
+    <td>String referenceId,TransferStatusInterface transferStatusInterface</td>
+  </tr>
+   <tr>
+     <td><a href=docs/disbursement/requestToPayDeliveryNotification.md>Delivery notification </a></td>
+    <td>requestToPayDeliveryNotification</td>
+    <td>String referenceId,RequestStateInterface requestStateInterface</td>
+  </tr>
+  </tr>
+  <tr>
+    <td>Validate account holder</td>
+    <td><a href=docs/disbursement/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
+    <td>validateAccountHolderStatus</td>
+    <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
+  </tr>
+   <td>Get Balance</td>
+    <td><a href=docs/disbursement/getAccountBalance.md>Account Balance</a></td>
+    <td>getAccountBalance</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+  <td>Get Balance in specific currency</td>
+    <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
+    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+    <tr>
+     <td rowspan="3">Deposit</td>
+    <td><a href=docs/disbursement/depostV1.md>Deposit V1</a></td>
+    <td>depositV1</td>
+     <td>Deposit deposit,RequestInterface requestInterface</td> 
+    </tr>
+   <tr>
+    <td><a href=docs/disbursement/depostV2.md>Deposit V2</a></td>
+    <td>depositV2</td>
+     <td>Deposit deposit,RequestInterface requestInterface</td>
+  </tr>
+  <tr>
+    <td><a href=docs/disbursement/getDepositStatus.md>Deposit status</a></td>
+    <td>getDepositStatus</td>
+     <td>String requestReferenceId,DepositStatusInterface depositStatusInterfacee</td> 
+  </tr>
+  <tr>
+    <tr>
+     <td rowspan="3">Refund</td>
+    <td><a href=docs/disbursement/refundV1.md>Refund V1</a></td>
+    <td>refundV1</td>
+     <td>Refund refund,RequestInterface requestInterface</td> 
+    </tr>
+   <tr>
+    <td><a href=docs/disbursement/refundV2.md>Refund V2</a></td>
+    <td>depositV2</td>
+     <td>Refund refund,RequestInterface requestInterface</td>
+  </tr>
+  <tr>
+    <td><a href=docs/disbursement/getRefundStatus.md>Deposit status</a></td>
+    <td>getDepositStatus</td>
+     <td>String requestReferenceId,DepositStatusInterface depositStatusInterfacee</td> 
+  </tr>
+  <tr>  
+    <td>Validate Consumer Identity</td>
+    <td><a href=docs/disbursement/getBasicUserInfo.md>Validate Consumer Identity</a></td>
+    <td>getBasicUserInfo</td>
+     <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
+  </tr>
+    <tr>
+    <td>Get Consumer Information with Consent</td>
+    <td><a href=docs/disbursement/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
+    <td>getUserInfoWithConsent</td>
+     <td>AccountHolder accountHolder,Enum Accesstype,String scope,UserConsentInterface userConsentInterface</td> 
+  </tr>
+</tbody>
+</table>
+
+
+# Remittance
+
+Remittances is a solution that enables a customer to transfer or receive funds from the diaspora to Mobile Money recipient's account in local currency. This is an automated solution where the money is transferred in real-time when the request hits the system (works in a similar way as the automated Disbursements solution).
+
+
+The remittance configuration object is being initialized with a builder pattern,The paramater being set include
+
+  * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+  
+  * <b>subscriptionType</b>: The type of subscription (in this case, a collection).
+     
+  * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
+
+  * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
+
+  * <b>apikey</b>: An api key for accessing the momo api services
+  
+  * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
+
+  * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
+
+
+### Example
+
+```java
+
+  RemittanceConfiguration remittanceConfiguration = new RemittanceConfiguration.
+                RemittanceConfigurationBuilder().
+                setSubscriptionKey("<subsriptionkey>").
+                setSubscriptionType(SubscriptionType.REMITTANCE).
+                setCallBackUrl("<callbackURL>").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey("<apikey>").
+                setUserReferenceId("<referenceId>").
+                setxTargetEnvironment("<target environment>")
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+      
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+               
+
+                    }
+                }).
+                build(this);
+
+```
+
+
+This table below describe the details required for remittance functions
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+     <td rowspan="3">Transfer</td>
+    <td><a href=docs/remittance/transfer.md>Transfer</a></td>
+    <td>transfer</td>
+     <td>Transfer transfer,String callbackUrl,RequestStateInterface requestStateInterface</td> 
+  </tr>
+  <tr>
+   <td><a href=docs/remittance/getTransferStatus.md>Transfer status</a></td>
+    <td>getTransferStatus</td>
+    <td>String referenceId,TransferStatusInterface transferStatusInterface</td>
+  </tr>
+   <tr>
+     <td><a href=docs/remittance/requestToPayDeliveryNotification.md>Delivery notification </a></td>
+    <td>requestToPayDeliveryNotification</td>
+    <td>String referenceId,RequestStateInterface requestStateInterface</td>
+  </tr>
+  </tr>
+  <tr>
+    <td>Validate account holder</td>
+    <td><a href=docs/remittance/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
+    <td>validateAccountHolderStatus</td>
+    <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
+  </tr>
+   <td>Get Balance</td>
+    <td><a href=docs/remittance/getAccountBalance.md>Account Balance</a></td>
+    <td>getAccountBalance</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+  <td>Get Balance in specific currency</td>
+    <td><a href=docs/remittance/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
+    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+     <tr>
+    <td>Validate Consumer Identity</td>
+    <td><a href=docs/remittance/getBasicUserInfo.md>Validate Consumer Identity</a></td>
+    <td>getBasicUserInfo</td>
+     <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
+  </tr>
+    <tr>
+    <td>Get Consumer Information with Consent</td>
+    <td><a href=docs/remittance/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
+    <td>getUserInfoWithConsent</td>
+     <td>AccountHolder accountHolder,Enum Accesstype,String scope,UserConsentInterface userConsentInterface</td> 
+  </tr>
+</tbody>
+</table>
+
 
 
 
