@@ -2,7 +2,7 @@
 # Transfer  
 
 > `Here, Transfer operation is used to transfer an amount from the own account to a payee account.Status of the transaction can validated by using the  
-disbursement/v1_0/transfer`
+remittance/v1_0/transfer`
 
 
 Construct a transfer model and set desire values
@@ -34,7 +34,7 @@ Construct a transfer model and set desire values
 ```java
 
    
-        SDKManager.disbursement.transfer(transfer, "<callbackurl>", new RequestInterface() {
+        SDKManager.remittance.transfer(transfer, "<callbackurl>", new RequestInterface() {
             @Override
             public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
              
