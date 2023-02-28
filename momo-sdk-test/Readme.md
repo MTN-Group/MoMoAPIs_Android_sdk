@@ -213,8 +213,53 @@ Expected output of this function is given below
 
 ```
 
+# Request to withdraw
+
+In this scenario user can initiate the request pay by clicking the "request to withdraw" item in the list,
+
+Expected output of this function is given below
+
+##  Request to withdraw V1 - output
+
+```json
+
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+
+}
+
+```
 
 
+##  Request to withdraw V2 - output
+
+```json
+
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+
+}
+
+```
+##  Request to withdraw transaction status - output
+
+```java
+{
+ 	"financialTransactionId": "1680501894",
+ 	"externalId": "6353636",
+ 	"amount": "5",
+ 	"currency": "EUR",
+ 	"payer": {
+ 		"partyIdType": "MSISDN",
+ 		"partyId": "0248888736"
+ 	},
+ 	"payerMessage": "Pay for product a",
+ 	"payeeNote": "payer note",
+ 	"status": "SUCCESSFUL"
+ }
+```
 
 
 
