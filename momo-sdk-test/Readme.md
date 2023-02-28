@@ -246,7 +246,7 @@ Expected output of this function is given below
 ```
 ##  Request to withdraw transaction status - output
 
-```java
+```json
 {
  	"financialTransactionId": "1680501894",
  	"externalId": "6353636",
