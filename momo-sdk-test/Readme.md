@@ -184,13 +184,14 @@ Expected output of this function is given below
 
 ##  Account Balance - output
 
-
+```json
 
  {
       	"availableBalance": "0",
       	"currency": "EUR"
       }
 
+```
 <a name="Collection-Get-Balance-in-specific-currency"></a>
 
 # Account Balance in specific currency
