@@ -82,23 +82,23 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 # Collection
 
 * [Request Pay](#Collection-Request-Pay)
-* [ValidateAccount Account holder](#Collection ValidateAccount Account holder)
-* [Get Balance](#Collection Get Balance)
-* [Get Balance in specific currency](#Collection Get Balance in specific currency)
-* [Request to withdraw](#Collection Request to withdraw)
-* [Validate Consumer Identity](#Collection Validate Consumer Identity)
-* [Get Consumer Information with Consent](#Get Consumer Information with Consent)	
+* [ValidateAccount Account holder](#Collection-ValidateAccount-Account-holder)
+* [Get Balance](#Collection-Get-Balance)
+* [Get Balance in specific currency](#Collection-Get-Balance-in-specific-currency)
+* [Request to withdraw](#Collection-Request-to-withdraw)
+* [Validate Consumer Identity](#Collection-Validate-Consumer-Identity)
+* [Get Consumer Information with Consent](#Get-Consumer-Information-with-Consent)	
 
 # Disbursement
 
-* [Transfer](#Disbursement Transfer)
-* [ValidateAccount Account holder](#Disbursement ValidateAccount Account holder)
+* [Transfer](#Disbursement-Transfer)
+* [ValidateAccount Account holder](#Disbursement-ValidateAccount-Account-holder)
 * [Get Balance](#Disbursement Get Balance)
-* [Get Balance in specific currency](#Disbursement Get Balance in specific currency)
-* [Deposit](#Disbursement Deposit)
-* [Refund](#Disbursement Refund)
-* [Validate Consumer Identity](#Disbursement Validate Consumer Identity)
-* [Get Consumer Information with Consent](#Disbursement Get Consumer Information with Consent)	
+* [Get Balance in specific currency](#Disbursement-Get-Balance-in-specific-currency)
+* [Deposit](#Disbursement-Deposit)
+* [Refund](#Disbursement-Refund)
+* [Validate Consumer Identity](#Disbursement-Validate-Consumer-Identity)
+* [Get Consumer Information with Consent](#Disbursement-Get-Consumer-Information-with-Consent)	
 
 
 # Remittance
