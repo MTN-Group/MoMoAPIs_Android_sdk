@@ -93,7 +93,7 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 * [Transfer](#Disbursement-Transfer)
 * [ValidateAccount Account holder](#Disbursement-ValidateAccount-Account-holder)
-* [Get Balance](#Disbursement Get Balance)
+* [Get Balance](#Disbursement-Get-Balance)
 * [Get Balance in specific currency](#Disbursement-Get-Balance-in-specific-currency)
 * [Deposit](#Disbursement-Deposit)
 * [Refund](#Disbursement-Refund)
@@ -103,12 +103,12 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 # Remittance
 
-* [Transfer](#Remittance Transfer)
-* [ValidateAccount Account holder](#Remittance Validate Account holder)
-* [Get Balance](#Remittance Get Balance)
-* [Get Balance in specific currency](#Remittance Get Balance in specific currency)
-* [Validate Consumer Identity](#Remittance Validate Consumer Identity)
-* [Get Consumer Information with Consent](#Remittance Get Consumer Information with Consent)	
+* [Transfer](#Remittance-Transfer)
+* [ValidateAccount Account holder](#Remittance-Validate-Account holder)
+* [Get Balance](#Remittance-Get-Balance)
+* [Get Balance in specific currency](#Remittance-Get-Balance-in-specific-currency)
+* [Validate Consumer Identity](#Remittance-Validate-Consumer-Identity)
+* [Get Consumer Information with Consent](#Remittance-Get-Consumer-Information-with-Consent)	
 
 <a href="Collection-Request-Pay"></a>
 
