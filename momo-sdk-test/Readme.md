@@ -112,9 +112,40 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 <a href="Collection-Request-Pay"></a>
 
+# Request pay
 
+In this scenario user can initiate the request pay by clicking the "request pay" item in the list,
 
+Expected output of this function is given below
 
+## Request pay - output
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+
+}
+```
+
+## Request pay status - output 
+
+```json
+{
+ 	"financialTransactionId": "529186712",
+ 	"externalId": "6353636",
+ 	"amount": "5",
+ 	"currency": "EUR",
+ 	"payer": {
+ 		"partyIdType": "MSISDN",
+ 		"partyId": "0248888736"
+ 	},
+ 	"payerMessage": "Pay for product a",
+ 	"payeeNote": "payer note",
+ 	"status": "SUCCESSFUL"
+ }
+
+```
 
 
 
