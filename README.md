@@ -488,19 +488,19 @@ This table below describe the details required for remittance functions
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
   <td>Get Balance in specific currency</td>
-    <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
+    <td><a href=docs/remittance/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
     <td>getAccountBalanceInSpecificCurrency.md</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
      <tr>
     <td>Validate Consumer Identity</td>
-    <td><a href=docs/disbursement/getBasicUserInfo.md>Validate Consumer Identity</a></td>
+    <td><a href=docs/remittance/getBasicUserInfo.md>Validate Consumer Identity</a></td>
     <td>getBasicUserInfo</td>
      <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
   </tr>
     <tr>
     <td>Get Consumer Information with Consent</td>
-    <td><a href=docs/disbursement/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
+    <td><a href=docs/remittance/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
     <td>getUserInfoWithConsent</td>
      <td>AccountHolder accountHolder,Enum Accesstype,String scope,UserConsentInterface userConsentInterface</td> 
   </tr>
