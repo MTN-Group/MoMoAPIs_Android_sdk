@@ -110,7 +110,7 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 * [Validate Consumer Identity](#Remittance-Validate-Consumer-Identity)
 * [Get Consumer Information with Consent](#Remittance-Get-Consumer-Information-with-Consent)	
 
-<a href="Collection-Request-Pay"></a>
+<a name="Collection-Request-Pay"></a>
 
 # Request pay
 
