@@ -128,7 +128,7 @@ Expected output of this function is given below
 }
 ```
 
-## Request pay status - output 
+## Get Request to pay transaction status - output
 
 ```json
 {
