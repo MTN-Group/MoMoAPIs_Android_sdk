@@ -317,7 +317,7 @@ This table below describe the details required for disbursement functions
      <td rowspan="3">Transfer</td>
     <td><a href=docs/disbursement/transfer.md>Transfer</a></td>
     <td>transfer</td>
-     <td>Transfer transfer,RequestStateInterface requestStateInterface</td> 
+     <td>Transfer transfer,String callbackUrl,RequestStateInterface requestStateInterface</td> 
   </tr>
   <tr>
    <td><a href=docs/disbursement/getTransferStatus.md>Transfer status</a></td>
@@ -445,6 +445,69 @@ The remittance configuration object is being initialized with a builder pattern,
                 build(this);
 
 ```
+
+
+This table below describe the details required for remittance functions
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+     <td rowspan="3">Transfer</td>
+    <td><a href=docs/remittance/transfer.md>Transfer</a></td>
+    <td>transfer</td>
+     <td>Transfer transfer,String callbackUrl,RequestStateInterface requestStateInterface</td> 
+  </tr>
+  <tr>
+   <td><a href=docs/remittance/getTransferStatus.md>Transfer status</a></td>
+    <td>getTransferStatus</td>
+    <td>String referenceId,TransferStatusInterface transferStatusInterface</td>
+  </tr>
+   <tr>
+     <td><a href=docs/remittance/requestToPayDeliveryNotification.md>Delivery notification </a></td>
+    <td>requestToPayDeliveryNotification</td>
+    <td>String referenceId,RequestStateInterface requestStateInterface</td>
+  </tr>
+  </tr>
+  <tr>
+    <td>Validate account holder</td>
+    <td><a href=docs/remittance/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
+    <td>validateAccountHolderStatus</td>
+    <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
+  </tr>
+   <td>Get Balance</td>
+    <td><a href=docs/remittance/getAccountBalance.md>Account Balance</a></td>
+    <td>getAccountBalance</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+  <td>Get Balance in specific currency</td>
+    <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
+    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>RequestBalanceInterface requestBalanceInterface</td>
+  </tr>
+     <tr>
+    <td>Validate Consumer Identity</td>
+    <td><a href=docs/disbursement/getBasicUserInfo.md>Validate Consumer Identity</a></td>
+    <td>getBasicUserInfo</td>
+     <td>String msisdnId,UserInfoInterface userInfoInterface</td> 
+  </tr>
+    <tr>
+    <td>Get Consumer Information with Consent</td>
+    <td><a href=docs/disbursement/getUserInfoWithConsent.md>Get Consumer Information with Consent</a></td>
+    <td>getUserInfoWithConsent</td>
+     <td>AccountHolder accountHolder,Enum Accesstype,String scope,UserConsentInterface userConsentInterface</td> 
+  </tr>
+</tbody>
+</table>
+
+
 
 
 
