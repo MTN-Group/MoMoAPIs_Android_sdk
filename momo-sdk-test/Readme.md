@@ -158,7 +158,7 @@ Expected output of this function is given below
 <a name="Collection-ValidateAccount-Account-holder"></a>
 
 
-## Validate account holder
+# Validate account holder
 
 In this scenario we can validate the user by clicking the "Validate account holder" item in the list,
 
@@ -171,10 +171,46 @@ Expected output of this function is given below
 	"result": true
 }
 ```
+<a name="Collection-Get-Balance"></a>
+
+
+# Account Balance 
+
+In this scenario user can view the balance of an account by clicking "balance" item in list
+
+
+Expected output of this function is given below
+
+
+##  Account Balance - output
 
 
 
+ {
+      	"availableBalance": "0",
+      	"currency": "EUR"
+      }
 
+<a name="Collection-Get-Balance-in-specific-currency"></a>
+
+# Account Balance in specific currency
+
+In this scenario user can view the balance of an account by clicking "balance" item in list
+
+
+Expected output of this function is given below
+
+
+##  Account Balance in specific currency - output
+
+```json
+
+ {
+      	"availableBalance": "0",
+      	"currency": "EUR"
+      }
+
+```
 
 
 
