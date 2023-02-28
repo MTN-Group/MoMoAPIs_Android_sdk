@@ -155,11 +155,22 @@ Expected output of this function is given below
 
 }
 ```
+<a name="Collection-ValidateAccount-Account-holder"></a>
 
 
+## Validate account holder
 
+In this scenario we can validate the user by clicking the "Validate account holder" item in the list,
 
+Expected output of this function is given below
 
+## Validate account holder status - Output
+
+```json
+{
+	"result": true
+}
+```
 
 
 
