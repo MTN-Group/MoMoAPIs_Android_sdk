@@ -81,8 +81,8 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 # Collection
 
-* [Request Pay](# Collection Request Pay)
-* [ValidateAccount Account holder](# Collection ValidateAccount Account holder)
+* [Request Pay](#Collection Request Pay)
+* [ValidateAccount Account holder](#Collection ValidateAccount Account holder)
 * [Get Balance](#Collection Get Balance)
 * [Get Balance in specific currency](#Collection Get Balance in specific currency)
 * [Request to withdraw](#Collection Request to withdraw)
