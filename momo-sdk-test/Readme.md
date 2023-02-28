@@ -268,7 +268,7 @@ Expected output of this function is given below
 
 in this scenario the user can validate the identify of a user by clicking the "validate consumer identity" item
 													  
-# Validate consumer identity - output
+## Validate consumer identity - output
 													  
 ```json
 	
@@ -282,9 +282,7 @@ in this scenario the user can validate the identify of a user by clicking the "v
 	"gender": "MALE",
 	"updated_at": 1676609351
 }													  
-													  
-													  
-```													  `
+```																									  `
 													  
 													  
 													  
