@@ -81,7 +81,7 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 # Collection
 
-* [Request Pay](#Collection Request Pay)
+* [Request Pay](#Collection-Request-Pay)
 * [ValidateAccount Account holder](#Collection ValidateAccount Account holder)
 * [Get Balance](#Collection Get Balance)
 * [Get Balance in specific currency](#Collection Get Balance in specific currency)
@@ -109,6 +109,8 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 * [Get Balance in specific currency](#Remittance Get Balance in specific currency)
 * [Validate Consumer Identity](#Remittance Validate Consumer Identity)
 * [Get Consumer Information with Consent](#Remittance Get Consumer Information with Consent)	
+
+<a href="Collection-Request-Pay"></a>
 
 
 
