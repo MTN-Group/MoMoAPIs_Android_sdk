@@ -1,7 +1,7 @@
 
 # Get Transfer Status
 
-`Here, getTransferStatus() creates a POST request to disbursement/v1_0/transfer/{referenceId}`
+`Here, getTransferStatus() creates a POST request to remittance/v1_0/transfer/{referenceId}`
 
 > `This operation is used to get the status of a transfer. X-Reference-Id that was passed in the post is used as reference to the request.`
 
@@ -11,7 +11,7 @@
 
 ```java
 
-      SDKManager.disbursement.getTransferStatus("<referenceId>", new TransferStatusInterface() {
+      SDKManager.remittance.getTransferStatus("<referenceId>", new TransferStatusInterface() {
             @Override
             public void onTransferInterfaceSuccess(Transfer transfer) {
           
