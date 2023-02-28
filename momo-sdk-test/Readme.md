@@ -104,7 +104,7 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 # Remittance
 
 * [Transfer](#Remittance-Transfer)
-* [ValidateAccount Account holder](#Remittance-Validate-Account holder)
+* [ValidateAccount Account holder](#Remittance-Validate-Account-holder)
 * [Get Balance](#Remittance-Get-Balance)
 * [Get Balance in specific currency](#Remittance-Get-Balance-in-specific-currency)
 * [Validate Consumer Identity](#Remittance-Validate-Consumer-Identity)
