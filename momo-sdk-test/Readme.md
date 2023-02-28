@@ -148,12 +148,13 @@ Expected output of this function is given below
 ```
 ## Delivery notification - output
 
+```json
 {
   "status": "true",
   "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
 
 }
-
+```
 
 
 
