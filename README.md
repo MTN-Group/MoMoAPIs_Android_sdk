@@ -395,6 +395,56 @@ This table below describe the details required for disbursement functions
 </table>
 
 
+# Remittance
+
+Remittances is a solution that enables a customer to transfer or receive funds from the diaspora to Mobile Money recipient's account in local currency. This is an automated solution where the money is transferred in real-time when the request hits the system (works in a similar way as the automated Disbursements solution).
+
+
+The remittance configuration object is being initialized with a builder pattern,The paramater being set include
+
+  * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
+  
+  * <b>subscriptionType</b>: The type of subscription (in this case, a collection).
+     
+  * <b>callBackUrl</b>:The URL where the payment gateway or mobile money service should send notifications or callbacks
+
+  * <b>environment</b>:The environment (sandbox or production) in which the momo api service is being used.
+
+  * <b>apikey</b>: An api key for accessing the momo api services
+  
+  * <b>userReferenceId</b>: A reference ID for the user initiating the collection request   
+
+  * <b>xTargetEnvironment</b>: The identifier of the EWP system where the transaction shall be processed. This parameter is used to route the request to the EWP system that will initiate the transaction.
+
+
+### Example
+
+```java
+
+  RemittanceConfiguration remittanceConfiguration = new RemittanceConfiguration.
+                RemittanceConfigurationBuilder().
+                setSubscriptionKey("<subsriptionkey>").
+                setSubscriptionType(SubscriptionType.REMITTANCE).
+                setCallBackUrl("<callbackURL>").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey("<apikey>").
+                setUserReferenceId("<referenceId>").
+                setxTargetEnvironment("<target environment>")
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+      
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+               
+
+                    }
+                }).
+                build(this);
+
+```
 
 
 
