@@ -31,6 +31,7 @@ import com.momo.sdk.util.AppConstants;
 import com.momo.sdk.util.SubscriptionType;
 import com.momo.sdk.util.Utils;
 
+@SuppressWarnings("unused")
 public class Remittance {
 
     /**
@@ -40,6 +41,7 @@ public class Remittance {
      * @param callBackURl server url for callback
      * @param requestInterface Listener for api operation
      */
+    @SuppressWarnings("ConstantConditions")
     public void transfer(@NonNull Transfer transfer, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.REMITTANCE)) {
             ErrorResponse errorResponse = Utils.setError(16);

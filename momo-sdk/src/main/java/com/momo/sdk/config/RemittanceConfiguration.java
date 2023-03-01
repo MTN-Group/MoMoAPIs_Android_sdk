@@ -24,6 +24,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class RemittanceConfiguration {
 
     private final String subscriptionKey;
@@ -40,13 +41,21 @@ public class RemittanceConfiguration {
     private final String xTargetEnvironment;
 
     public RemittanceConfiguration(RemittanceConfigurationBuilder remittanceConfigurationBuilder, Context context) {
+        //noinspection AccessStaticViaInstance
         this.subscriptionKey = remittanceConfigurationBuilder.getSubscriptionKey();
+        //noinspection AccessStaticViaInstance
         this.callBackUrl = remittanceConfigurationBuilder.getCallBackUrl();
+        //noinspection AccessStaticViaInstance
         this.environment = remittanceConfigurationBuilder.getEnvironment();
+        //noinspection AccessStaticViaInstance
         this.userReferenceId = remittanceConfigurationBuilder.getUserReferenceId();
+        //noinspection AccessStaticViaInstance
         this.apiKey = remittanceConfigurationBuilder.getApiKey();
+        //noinspection AccessStaticViaInstance
         this.subscriptionType = remittanceConfigurationBuilder.getSubscriptionType();
+        //noinspection AccessStaticViaInstance
         this.tokenInitializeInterface = remittanceConfigurationBuilder.tokenInitializeInterface;
+        //noinspection AccessStaticViaInstance
         this.xTargetEnvironment = remittanceConfigurationBuilder.getxTargetEnvironment();
         this.context = context;
         callAccessTokenApi();
@@ -54,6 +63,7 @@ public class RemittanceConfiguration {
 
 
     //call token api synchronously
+    @SuppressWarnings("ConstantConditions")
     public void callAccessTokenApi() {
         HashMap<String, String> headerMap = new HashMap<>();
         headerMap.put(APIConstants.OCP_APIM_SUBSCRIPTION_KEY, this.subscriptionKey);
@@ -142,6 +152,7 @@ public class RemittanceConfiguration {
 
 
     //Configuration for collection builder
+    @SuppressWarnings("unused")
     public static class RemittanceConfigurationBuilder {
         private static String subscriptionKey;
         private static String callBackUrl;

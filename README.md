@@ -131,7 +131,7 @@ Collections is a service that enables Mobile Money partners to receive payments 
 
 ### Configure
 
-The collection configuration object is being initialized with a builder pattern,The paramater being set include
+The collection configuration object is being initialized with a builder pattern,The parameter being set include
 
   * <b>subscriptionKey</b>:The subscription key is used to give access to APIs in the API Manager portal. A user is assigned a subscription Key as and when the user subscribes to products in the API Manager Portal.
   
@@ -204,17 +204,19 @@ This table below describe the details required for collection functions
     <td>requestToPayDeliveryNotification</td>
     <td>String referenceId,RequestStateInterface requestStateInterface</td>
   </tr>
-  </tr>
+  <tr>
     <td>Validate account holder</td>
     <td><a href=docs/collection/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
     <td>validateAccountHolderStatus</td>
     <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
   </tr>
+  <tr>
    <td>Get Balance</td>
     <td><a href=docs/collection/getAccountBalance.md>Account Balance</a></td>
     <td>getAccountBalance</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
+<tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/collection/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
     <td>getAccountBalanceInSpecificCurrency.md</td>
@@ -329,18 +331,20 @@ This table below describe the details required for disbursement functions
     <td>requestToPayDeliveryNotification</td>
     <td>String referenceId,RequestStateInterface requestStateInterface</td>
   </tr>
-  </tr>
+  
   <tr>
     <td>Validate account holder</td>
     <td><a href=docs/disbursement/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
     <td>validateAccountHolderStatus</td>
     <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
   </tr>
+<tr>
    <td>Get Balance</td>
     <td><a href=docs/disbursement/getAccountBalance.md>Account Balance</a></td>
     <td>getAccountBalance</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
+<tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
     <td>getAccountBalanceInSpecificCurrency.md</td>
@@ -475,18 +479,20 @@ This table below describe the details required for remittance functions
     <td>requestToPayDeliveryNotification</td>
     <td>String referenceId,RequestStateInterface requestStateInterface</td>
   </tr>
-  </tr>
+  
   <tr>
     <td>Validate account holder</td>
     <td><a href=docs/remittance/validateAccountHolderStatus.md>ValidateAccount Account holder</a></td>
     <td>validateAccountHolderStatus</td>
     <td>AccountHolder accountHolder,ValidateAccountInterface validateAccountInterface</td>
   </tr>
+<tr>
    <td>Get Balance</td>
     <td><a href=docs/remittance/getAccountBalance.md>Account Balance</a></td>
     <td>getAccountBalance</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
+  <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/remittance/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
     <td>getAccountBalanceInSpecificCurrency.md</td>

@@ -1,6 +1,5 @@
 package com.momo.gsma;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +37,7 @@ import com.momo.sdk.util.SubscriptionType;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class RemittanceActivity extends BaseActivity implements CustomUseCaseAdapter.ItemClickListener {
 
 
@@ -104,9 +104,7 @@ public class RemittanceActivity extends BaseActivity implements CustomUseCaseAda
                     public void onTokenInitializeSuccess(StatusResponse statusResponse) {
                         Log.d(TAG, "onTokenInitializeSuccess: ");
                         sbOutPut.append(new Gson().toJson(statusResponse));
-                        runOnUiThread(() -> {
-                            txtResponse.setText(sbOutPut.toString());
-                        });
+                        runOnUiThread(() -> txtResponse.setText(sbOutPut.toString()));
                         hideProgress();
                     }
 
@@ -116,9 +114,7 @@ public class RemittanceActivity extends BaseActivity implements CustomUseCaseAda
                         sbOutPut = new StringBuilder();
                         sbOutPut.append(new Gson().toJson(mtnError));
                         hideProgress();
-                        runOnUiThread(() -> {
-                            showToast(mtnError.getErrorBody().getMessage());
-                        });
+                        runOnUiThread(() -> showToast(mtnError.getErrorBody().getMessage()));
 
                     }
                 }).
