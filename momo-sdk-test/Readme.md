@@ -81,36 +81,36 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 # Collection
 
-* [Request Pay](#Collection-Request-Pay)
-* [ValidateAccount Account holder](#Collection-ValidateAccount-Account-holder)
-* [Get Balance](#Collection-Get-Balance)
-* [Get Balance in specific currency](#Collection-Get-Balance-in-specific-currency)
-* [Request to withdraw](#Collection-Request-to-withdraw)
-* [Validate Consumer Identity](#Collection-Validate-Consumer-Identity)
+* [Request Pay](#Request-Pay)
+* [ValidateAccount Account holder](#ValidateAccount-Account-holder)
+* [Get Balance](#Get-Balance)
+* [Get Balance in specific currency](#Get-Balance-in-specific-currency)
+* [Request to withdraw](#Request-to-withdraw)
+* [Validate Consumer Identity](#Validate-Consumer-Identity)
 * [Get Consumer Information with Consent](#Get-Consumer-Information-with-Consent)	
 
 # Disbursement
 
 * [Transfer](#Transfer)
-* [ValidateAccount Account holder](#Disbursement-ValidateAccount-Account-holder)
-* [Get Balance](#Disbursement-Get-Balance)
-* [Get Balance in specific currency](#Disbursement-Get-Balance-in-specific-currency)
-* [Deposit](#Disbursement-Deposit)
-* [Refund](#Disbursement-Refund)
-* [Validate Consumer Identity](#Disbursement-Validate-Consumer-Identity)
-* [Get Consumer Information with Consent](#Disbursement-Get-Consumer-Information-with-Consent)	
+* [ValidateAccount Account holder](#ValidateAccount-Account-holder)
+* [Get Balance](#Get-Balance)
+* [Get Balance in specific currency](#Get-Balance-in-specific-currency)
+* [Deposit](#Deposit)
+* [Refund](#Refund)
+* [Validate Consumer Identity](#Validate-Consumer-Identity)
+* [Get Consumer Information with Consent](#Get-Consumer-Information-with-Consent)	
 
 
 # Remittance
 
-* [Transfer](#Remittance-Transfer)
-* [ValidateAccount Account holder](#Remittance-Validate-Account-holder)
-* [Get Balance](#Remittance-Get-Balance)
-* [Get Balance in specific currency](#Remittance-Get-Balance-in-specific-currency)
-* [Validate Consumer Identity](#Remittance-Validate-Consumer-Identity)
-* [Get Consumer Information with Consent](#Remittance-Get-Consumer-Information-with-Consent)	
+* [Transfer](#Transfer)
+* [ValidateAccount Account holder](#Validate-Account-holder)
+* [Get Balance](#Get-Balance)
+* [Get Balance in specific currency](#Get-Balance-in-specific-currency)
+* [Validate Consumer Identity](#Validate-Consumer-Identity)
+* [Get Consumer Information with Consent](#Get-Consumer-Information-with-Consent)	
 
-<a name="Collection-Request-Pay"></a>
+<a name="Request-Pay"></a>
 
 # Request pay
 
@@ -155,7 +155,7 @@ Expected output of this function is given below
 
 }
 ```
-<a name="Collection-ValidateAccount-Account-holder"></a>
+<a name="ValidateAccount-Account-holder"></a>
 
 
 # Validate account holder
@@ -171,7 +171,7 @@ Expected output of this function is given below
 	"result": true
 }
 ```
-<a name="Collection-Get-Balance"></a>
+<a name="Get-Balance"></a>
 
 
 # Account Balance 
@@ -193,7 +193,7 @@ Expected output of this function is given below
 
 ```
 
-<a name="Collection-Get-Balance-in-specific-currency"></a>
+<a name="Get-Balance-in-specific-currency"></a>
 
 # Account Balance in specific currency
 
@@ -211,7 +211,7 @@ Expected output of this function is given below
      "currency": "EUR"
  }
 ```
-<a name="Collection-Request-to-withdraw"></a>													  
+<a name="Request-to-withdraw"></a>													  
 													  
 # Request to withdraw
 
@@ -301,7 +301,7 @@ Expected output of this function is given below
  }
 ```
 
-<a name="Disbursement-Transfer"></a>
+<a name="Transfer"></a>
 
 # Transfer
 Transfer is used for transferring money from the provider account to a customer.
