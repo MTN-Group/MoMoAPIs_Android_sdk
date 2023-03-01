@@ -43,7 +43,7 @@ public class RemittanceActivity extends BaseActivity implements CustomUseCaseAda
 
     private final String[] remittanceArray = {
             "Transfer",
-            "ValidateAccount Account holder",
+            "Validate Account Account holder",
             "Get Balance",
             "Get Balance in specific currency",
             "ValidateAccount Consumer identity",
@@ -98,6 +98,7 @@ public class RemittanceActivity extends BaseActivity implements CustomUseCaseAda
                 setEnvironment(Environment.SANDBOX).
                 setAPiKey("627e2d5e5f9543bb8b36dfe81f636f3b").
                 setUserReferenceId("7e1b6cb0-c9d5-4f5d-b445-0cb8505858a9").
+                setxTargetEnvironment("sandbox").
                 setOnInitializationResponse(new TokenInitializeInterface() {
                     @Override
                     public void onTokenInitializeSuccess(StatusResponse statusResponse) {
