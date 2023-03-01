@@ -91,7 +91,7 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 # Disbursement
 
-* [Transfer](#Disbursement-Transfer)
+* [Transfer](#Transfer)
 * [ValidateAccount Account holder](#Disbursement-ValidateAccount-Account-holder)
 * [Get Balance](#Disbursement-Get-Balance)
 * [Get Balance in specific currency](#Disbursement-Get-Balance-in-specific-currency)
@@ -300,3 +300,52 @@ Expected output of this function is given below
  	"updated_at": 1676961048
  }
 ```
+
+<a name="Disbursement-Transfer"></a>
+
+# Transfer
+Transfer is used for transferring money from the provider account to a customer.
+
+## Transfer - output
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+}
+
+```
+
+## Get Transfer Status - Output
+
+```json
+ {
+ 	"amount": "5",
+ 	"currency": "EUR",
+ 	"financialTransactionId": "1194704496",
+ 	"externalId": "6353636",
+ 	"payee": {
+ 		"partyIdType": "MSISDN",
+ 		"partyId": "0248888736"
+ 	},
+ 	"payerMessage": "Pay for product a",
+ 	"payeeNote": "payer note",
+ 	"status": "SUCCESSFUL"
+ }
+
+```
+
+## Delivery Notification
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+}
+```
+
+
+
+
+
+
