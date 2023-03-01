@@ -15,7 +15,7 @@ This SDK provides for an easy way to connect to [Momo API](https://momodeveloper
 Please refer to the following documentation for installation instructions and usage information.
 
 -   [API Documentation](https://momodeveloper.mtn.com/api-documentation)
--   [How to use the test Application](GSMATest/README.md)
+-   [How to use the test Application](momo-sdk-test/Readme.md)
 
 # Index 
 
