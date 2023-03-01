@@ -61,7 +61,9 @@ public class LandingActivity extends AppCompatActivity implements CustomUseCaseA
 
                 break;
             case 2:
-                //International Transfers
+                //Remittance
+                startActivity(new Intent(LandingActivity.this, RemittanceActivity.class));
+
                 break;
 
             default:
