@@ -344,8 +344,91 @@ Transfer is used for transferring money from the provider account to a customer.
 }
 ```
 
+<a name="Deposit"></a>
 
 
+# Deposit
 
+Deposit operation is used to deposit an amount from the owner’s account to a payee account.
+
+## Deposit V1 - output 
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+
+}
+```
+
+## Deposit V2 - output 
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+
+}
+```
+
+## Deposit Status -output
+
+```json
+ {
+	"externalId": "6353636",
+	"amount": "5",
+	"currency": "EUR",
+	"payee": {
+		"partyIdType": "MSISDN",
+		"partyId": "0248888736"
+	},
+	"payerMessage": "Pay for product a",
+	"payeeNote": "payer note",
+	"status": "SUCCESSFUL"
+}
+```
+<a name="Refund"></a>
+
+# Refund
+
+refund operation is used to refund an amount from the owner’s account to a payee account.
+
+## Refund V1 - output
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+}
+
+```
+
+
+## Refund V2 - output
+
+```json
+{
+  "status": "true",
+  "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
+}
+
+```
+## Refund Status - output
+
+```json
+{
+	"financialTransactionId": "117184837",
+	"externalId": "6353636",
+	"amount": "5",
+	"currency": "EUR",
+	"payee": {
+		"partyIdType": "MSISDN",
+		"partyId": "0248888736"
+	},
+	"payerMessage": "Pay for product a",
+	"payeeNote": "payer note",
+	"status": "SUCCESSFUL"
+}
+ ```
 
 
