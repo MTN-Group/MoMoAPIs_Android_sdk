@@ -264,3 +264,17 @@ Expected output of this function is given below
 in this scenario the user can validate the identify of a user by clicking the "validate consumer identity" item
 													  
 ## Validate consumer identity - output
+
+```json
+ {
+	"sub": "0",
+	"name": "Sand Box",
+	"given_name": "Sand",
+	"family_name": "Box",
+	"birthdate": "1976-08-13",
+	"locale": "sv_SE",
+	"gender": "MALE",
+	"updated_at": 1676609351
+}
+
+```
