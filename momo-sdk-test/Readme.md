@@ -210,7 +210,6 @@ Expected output of this function is given below
       	"availableBalance": "0",
       	"currency": "EUR"
       }
-
 ```
 <a name="Collection-Request-to-withdraw></a>
 
