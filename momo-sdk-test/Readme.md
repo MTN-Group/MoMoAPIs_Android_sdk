@@ -203,14 +203,7 @@ Expected output of this function is given below
 
 
 ##  Account Balance in specific currency - output
-
-```json
-{
-      	"availableBalance": "0",
-      	"currency": "EUR"
-      }
-```
-							  
+					  
 			  `
 													  
 													  
