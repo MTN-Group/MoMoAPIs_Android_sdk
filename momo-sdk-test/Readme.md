@@ -1,8 +1,8 @@
 
 
-# MMAPI-Sample App for Android SDK
+# MOMOAPI-Sample App for Android SDK
 
-This is a sample app provided to demonstrate the working of MMAPI SDK in android
+This is a sample app provided to demonstrate the working of MOMOAPI SDK in android
 
 ## Getting started
 
@@ -262,6 +262,8 @@ Expected output of this function is given below
 # Validate consumer identity
 
 in this scenario the user can validate the identify of a user by clicking the "validate consumer identity" item
+
+Expected output of this function is given below
 													  
 ## Validate consumer identity - output
 
@@ -277,4 +279,24 @@ in this scenario the user can validate the identify of a user by clicking the "v
 	"updated_at": 1676609351
 }
 
+```
+<a name="Get-Consumer-Information-with-Consent"></a>
+
+# Get Consumer Information with Consent
+
+The Validate Consumer Identity use case (KYC as a service) enables a partner to retrieve (limited) customer KYC information with their consent,
+
+Expected output of this function is given below
+
+```json
+ {
+ 	"sub": "0",
+ 	"name": "Sand Box",
+ 	"given_name": "Sand",
+ 	"family_name": "Box",
+ 	"birthdate": "1976-08-13",
+ 	"locale": "sv_SE",
+ 	"gender": "MALE",
+ 	"updated_at": 1676961048
+ }
 ```
