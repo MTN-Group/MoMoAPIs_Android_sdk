@@ -257,6 +257,10 @@ Expected output of this function is given below
  	"status": "SUCCESSFUL"
  }
 ```
+<a name="Collection-Validate-Consumer-Identity"></a>													  
+
+# Validate consumer identity
+
+in this scenario the user can validate the identify of a user by clicking the "validate consumer identity" item
 													  
-
-
+## Validate consumer identity - output
