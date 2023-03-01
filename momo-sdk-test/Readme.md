@@ -211,7 +211,7 @@ Expected output of this function is given below
       	"currency": "EUR"
       }
 ```
-<a name="Collection-Request-to-withdraw></a>
+<a name="Collection-Request-to-withdraw"></a>
 
 # Request to withdraw
 
