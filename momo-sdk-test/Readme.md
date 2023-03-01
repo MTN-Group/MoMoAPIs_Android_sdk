@@ -184,7 +184,7 @@ Expected output of this function is given below
 
 ##  Account Balance - output
 
-```json
+```java
 
  {
       	"availableBalance": "0",
@@ -192,6 +192,7 @@ Expected output of this function is given below
       }
 
 ```
+
 <a name="Collection-Get-Balance-in-specific-currency"></a>
 
 # Account Balance in specific currency
@@ -203,9 +204,14 @@ Expected output of this function is given below
 
 
 ##  Account Balance in specific currency - output
-					  
-			  `
-													  
+
+```json
+
+ {
+      	"availableBalance": "0",
+      	"currency": "EUR"
+      }
+```
 													  
 													  
 													  
