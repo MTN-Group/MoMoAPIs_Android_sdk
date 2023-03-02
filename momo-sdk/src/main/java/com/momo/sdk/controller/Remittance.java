@@ -122,7 +122,6 @@ public class Remittance {
         }
     }
 
-    //validate account holder
 
     /**
      * Request to validate Account holder Status

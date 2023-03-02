@@ -25,7 +25,6 @@ import org.robolectric.annotation.Config;
 @Config(sdk = 28)
 public class CollectionTokenTest {
 
-
     @Before
     public void setUp() {
         CollectionConfiguration collectionConfiguration = new CollectionConfiguration.CollectionConfigurationBuilder().

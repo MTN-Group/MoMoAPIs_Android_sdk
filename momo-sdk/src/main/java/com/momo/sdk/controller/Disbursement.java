@@ -40,8 +40,6 @@ import com.momo.sdk.util.Utils;
 public class Disbursement {
 
 
-    //validate account holder
-
     /**
      * Request to validate Account holder Status
      *
@@ -174,8 +172,6 @@ public class Disbursement {
             });
         }
     }
-
-    //Deposit V2
 
     /**
      * Deposit
@@ -311,7 +307,6 @@ public class Disbursement {
         }
     }
 
-    //refund status
 
     /**
      * Request refund status
@@ -345,7 +340,6 @@ public class Disbursement {
         }
     }
 
-    //request to Transfer
 
     /**
      * Request to transfer
