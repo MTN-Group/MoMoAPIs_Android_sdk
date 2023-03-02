@@ -3,9 +3,8 @@ package com.momo.sdk.model;
 import com.google.gson.annotations.SerializedName;
 
 public class StatusResponse extends BaseResponse {
-
-   @SerializedName("status")
-   private String status;
+    @SerializedName("status")
+    private String status;
 
     public String getStatus() {
         return status;
