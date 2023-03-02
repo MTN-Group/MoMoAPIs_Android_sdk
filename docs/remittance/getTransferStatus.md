@@ -19,8 +19,8 @@
 
             @Override
             public void onTransferInterFaceFailure(MtnError mtnError) {
-                onApiFailure(position, mtnError);
-            }
+
+}
 
         });
 ```
