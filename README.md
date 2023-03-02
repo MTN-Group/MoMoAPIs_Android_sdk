@@ -375,7 +375,7 @@ This table below describe the details required for disbursement functions
     </tr>
    <tr>
     <td><a href=docs/disbursement/refundV2.md>Refund V2</a></td>
-    <td>depositV2</td>
+    <td>refundV2</td>
      <td>Refund refund,RequestInterface requestInterface</td>
   </tr>
   <tr>
