@@ -164,7 +164,7 @@ In this scenario we can validate the user by clicking the "Validate account hold
 
 Expected output of this function is given below
 
-## Validate account holder status - Output
+## Validate account holder status - output
 
 ```json
 {
@@ -316,7 +316,7 @@ Transfer is used for transferring money from the provider account to a customer.
 
 ```
 
-## Get Transfer Status - Output
+## Get Transfer Status - output
 
 ```json
  {
@@ -335,7 +335,7 @@ Transfer is used for transferring money from the provider account to a customer.
 
 ```
 
-## Delivery Notification
+## Delivery Notification - output
 
 ```json
 {
@@ -371,7 +371,7 @@ Deposit operation is used to deposit an amount from the owner’s account to a p
 }
 ```
 
-## Deposit Status -output
+## Deposit Status - output
 
 ```json
  {
