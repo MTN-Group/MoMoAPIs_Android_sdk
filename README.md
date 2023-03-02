@@ -379,9 +379,9 @@ This table below describe the details required for disbursement functions
      <td>Refund refund,RequestInterface requestInterface</td>
   </tr>
   <tr>
-    <td><a href=docs/disbursement/getRefundStatus.md>Deposit status</a></td>
-    <td>getDepositStatus</td>
-     <td>String requestReferenceId,DepositStatusInterface depositStatusInterfacee</td> 
+    <td><a href=docs/disbursement/getRefundStatus.md>Refund status</a></td>
+    <td>getRefundStatus</td>
+     <td>String requestReferenceId,RefundStatusInterfacer refundStatusInterface</td> 
   </tr>
   <tr>  
     <td>Validate Consumer Identity</td>
