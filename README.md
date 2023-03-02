@@ -219,7 +219,7 @@ This table below describe the details required for collection functions
 <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/collection/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
     <tr>
@@ -347,7 +347,7 @@ This table below describe the details required for disbursement functions
 <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
     <tr>
@@ -495,7 +495,7 @@ This table below describe the details required for remittance functions
   <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/remittance/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
      <tr>
