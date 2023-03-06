@@ -352,12 +352,12 @@ This table below describe the details required for disbursement functions
   </tr>
     <tr>
      <td rowspan="3">Deposit</td>
-    <td><a href=docs/disbursement/depostV1.md>Deposit V1</a></td>
+    <td><a href=docs/disbursement/depositV1.md>Deposit V1</a></td>
     <td>depositV1</td>
      <td>Deposit deposit,RequestInterface requestInterface</td> 
     </tr>
    <tr>
-    <td><a href=docs/disbursement/depostV2.md>Deposit V2</a></td>
+    <td><a href=docs/disbursement/depositV2.md>Deposit V2</a></td>
     <td>depositV2</td>
      <td>Deposit deposit,RequestInterface requestInterface</td>
   </tr>
