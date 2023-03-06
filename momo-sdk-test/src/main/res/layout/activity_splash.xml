@@ -17,7 +17,8 @@
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="200dp"
-        android:contentDescription="@string/splash" />
+        android:contentDescription="@string/splash"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
