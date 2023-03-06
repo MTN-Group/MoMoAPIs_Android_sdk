@@ -9,7 +9,7 @@
 
 ```java
 
-    SDKManager.disbursement.requestToPayTransactionStatus(requestReferenceId, new RequestPayStatusInterface() {
+    SDKManager.disbursement.requestToPayTransactionStatus("<requestReferenceId>", new RequestPayStatusInterface() {
             @Override
             public void onRequestStatusSuccess(RequestPayStatus requestPayStatus) {
             
