@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.momo.sdk.callbacks.APIRequestCallback;
 import com.momo.sdk.config.CollectionConfiguration;
 import com.momo.sdk.config.DisbursementConfiguration;
+import com.momo.sdk.config.RemittanceConfiguration;
 import com.momo.sdk.config.UserConfiguration;
 import com.momo.sdk.model.AccountBalance;
 import com.momo.sdk.model.BCAuthorize;
@@ -465,11 +466,13 @@ public class MomoApi {
         } else if (subscriptionType.name().equalsIgnoreCase("collection")) {
             headers.put(APIConstants.AUTHORIZATION, Credentials.basic(CollectionConfiguration.CollectionConfigurationBuilder.getUserReferenceId(),
                     CollectionConfiguration.CollectionConfigurationBuilder.getApiKey()));
+        }else if(subscriptionType.name().equalsIgnoreCase("remittance")){
+            headers.put(APIConstants.AUTHORIZATION, Credentials.basic(RemittanceConfiguration.RemittanceConfigurationBuilder.getUserReferenceId(),
+                    RemittanceConfiguration.RemittanceConfigurationBuilder.getApiKey()));
         }
-
         headers.put(APIConstants.CONTENT_TYPE,"application/x-www-form-urlencoded");
         String grant_type = "urn:openid:params:grant-type:ciba";
-   requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.createOauth2token(subscriptionType.name().toLowerCase(),grant_type,authReqId,headers),apiRequestCallback ));
+       requestManager.request(new RequestManager.DelayedRequest<>(apiHelper.createOauth2token(subscriptionType.name().toLowerCase(),grant_type,authReqId,headers),apiRequestCallback ));
 
     }
 

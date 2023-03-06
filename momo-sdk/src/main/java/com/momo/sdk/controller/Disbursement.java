@@ -314,8 +314,6 @@ public class Disbursement {
      * @param referenceId           Reference
      * @param refundStatusInterface Listener for api operation
      */
-
-
     public void getRefundStatus(String referenceId, RefundStatusInterface refundStatusInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.DISBURSEMENT)) {
             ErrorResponse errorResponse = Utils.setError(16);

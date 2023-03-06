@@ -41,6 +41,7 @@ public class Remittance {
      * @param callBackURl server url for callback
      * @param requestInterface Listener for api operation
      */
+
     @SuppressWarnings("ConstantConditions")
     public void transfer(@NonNull Transfer transfer, String callBackURl, RequestInterface requestInterface) {
         if (!Utils.checkForInitialization(SubscriptionType.REMITTANCE)) {
@@ -370,9 +371,5 @@ public class Remittance {
                         userConsentInterface.onUserInfoFailure(errorDetails);
                     }
                 });
-
     }
-
-
-
 }
