@@ -28,8 +28,8 @@
 
 ```json
 {
-	"availableBalance": "0",
-	"currency": "EUR"
+  "availableBalance": "0",
+  "currency": "EUR"
 }
 
 ```
