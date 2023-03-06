@@ -5,7 +5,8 @@
     android:background="@color/black"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    tools:ignore="Overdraw">
 
 
     <ImageView
@@ -15,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:contentDescription="@string/splash" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
