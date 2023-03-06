@@ -8,6 +8,11 @@
 
 ### Usage/Examples
 
+```java
+     AccountHolder identifier = new AccountHolder();
+     identifier.setAccountHolderIdType("msisdn");
+     identifier.setAccountHolderId("0248888736");
+```
 
 ```java
 
