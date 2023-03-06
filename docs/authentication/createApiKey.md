@@ -11,7 +11,7 @@ Passing the reference id of created user into createApiKey() to get the api key
 
 ```java
 
- SDKManager.authentication.createApiKey(userReferenceId, new ApiKeyInterface() {
+ SDKManager.authentication.createApiKey("<userReferenceId>", new ApiKeyInterface() {
             @Override
             public void onApiKeyInterfaceSuccess(ApiKey apiKey) {
              
