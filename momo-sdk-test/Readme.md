@@ -391,7 +391,7 @@ Deposit operation is used to deposit an amount from the owner’s account to a p
 
 # Refund
 
-refund operation is used to refund an amount from the owner’s account to a payee account.
+Refund operation is used to refund an amount from the owner’s account to a payee account.
 
 ## Refund V1 - output
 
