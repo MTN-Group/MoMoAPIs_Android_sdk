@@ -34,14 +34,14 @@ Clone the project using SSH or HTTPS
 #### HTTPS
 
 ```
-https://github.com/gsmainclusivetechlab/mmapi-android-sdk.git
+https://github.com/gsmainclusivetechlab/momoapi-android-sdk.git
 
 ```
 
 #### SSH  
 
 ```
-git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
+git@github.com:gsmainclusivetechlab/momoapi-android-sdk.git
 
 ```
 
@@ -49,14 +49,14 @@ git@github.com:gsmainclusivetechlab/mmapi-android-sdk.git
 
 1.Open this repo in Android Studio,
 
-2.Select GSMATest Module and run the test module using android Emulator or Real device and then open the application from the installed device
+2.Select MomoTest Module and run the test module using android Emulator or Real device and then open the application from the installed device
 
 
 #### Prerequisites
 
 1.Android Studio 
 
-2.JDK 8 (or later)
+2.JDK 11 
 
 3.SDK
 
