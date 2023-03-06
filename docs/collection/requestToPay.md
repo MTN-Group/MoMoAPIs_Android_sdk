@@ -38,7 +38,8 @@ Construct a request pay model and set desired parameters
 
             @Override
             public void onRequestInterFaceFailure(MtnError mtnError) {
-               }
+            
+            }
 
 
    });
@@ -51,7 +52,6 @@ Construct a request pay model and set desired parameters
 {
   "status": "true",
   "X-Reference-Id":"0a8b994d-969a-4ef0-92e3-0f7e14eb5b96"
-
 }
 ```
 
