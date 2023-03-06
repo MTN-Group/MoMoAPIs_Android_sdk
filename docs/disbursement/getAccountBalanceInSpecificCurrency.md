@@ -25,7 +25,11 @@
 
 
 ### Example Output
-
+ 
+  {
+      "availableBalance": "0",
+      "currency": "EUR"
+  }
 
 
 
