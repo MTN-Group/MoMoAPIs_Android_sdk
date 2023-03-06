@@ -26,6 +26,12 @@
 
 ### Example Output
 
+```json
+ {
+   "availableBalance": "0",
+    "currency": "EUR"
+ }
 
+```
 
 
