@@ -35,7 +35,7 @@ Construct a account identifier object and set desired values
 
 ```json
 {
-	"result": true
+  "result": true
 }
 
 ```
