@@ -15,7 +15,7 @@ This SDK provides for an easy way to connect to [Momo API](https://momodeveloper
 Please refer to the following documentation for installation instructions and usage information.
 
 -   [API Documentation](https://momodeveloper.mtn.com/api-documentation)
--   [How to use the test Application](GSMATest/README.md)
+-   [How to use the test Application](momo-sdk-test/Readme.md)
 
 # Index 
 
@@ -219,7 +219,7 @@ This table below describe the details required for collection functions
 <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/collection/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
     <tr>
@@ -347,7 +347,7 @@ This table below describe the details required for disbursement functions
 <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/disbursement/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
     <tr>
@@ -375,13 +375,13 @@ This table below describe the details required for disbursement functions
     </tr>
    <tr>
     <td><a href=docs/disbursement/refundV2.md>Refund V2</a></td>
-    <td>depositV2</td>
+    <td>refundV2</td>
      <td>Refund refund,RequestInterface requestInterface</td>
   </tr>
   <tr>
-    <td><a href=docs/disbursement/getRefundStatus.md>Deposit status</a></td>
-    <td>getDepositStatus</td>
-     <td>String requestReferenceId,DepositStatusInterface depositStatusInterfacee</td> 
+    <td><a href=docs/disbursement/getRefundStatus.md>Refund status</a></td>
+    <td>getRefundStatus</td>
+     <td>String requestReferenceId,RefundStatusInterfacer refundStatusInterface</td> 
   </tr>
   <tr>  
     <td>Validate Consumer Identity</td>
@@ -495,7 +495,7 @@ This table below describe the details required for remittance functions
   <tr>
   <td>Get Balance in specific currency</td>
     <td><a href=docs/remittance/getAccountBalanceInSpecificCurrency.md>Get account balance in specific currency</a></td>
-    <td>getAccountBalanceInSpecificCurrency.md</td>
+    <td>getAccountBalanceInSpecificCurrency</td>
     <td>RequestBalanceInterface requestBalanceInterface</td>
   </tr>
      <tr>

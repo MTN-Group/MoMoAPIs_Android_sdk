@@ -1,7 +1,7 @@
 
 # Get Basic User info
 
-`Here, getBasicUserInfo() creates a POST request to disbursement/v1_0/accountholder/msisdn/{accountHolderMSISDN}/basicuserinfo`
+`Here, getBasicUserInfo() creates a POST request to remittance/v1_0/accountholder/msisdn/{accountHolderMSISDN}/basicuserinfo`
 
 > `This operation returns personal information of the account holder. The operation does not need any consent by the account holder`
 
@@ -11,7 +11,7 @@
 
 ```java
 
-    SDKManager.disbursement.getBasicUserInfo(accountIdentifier, new UserInfoInterface() {
+    SDKManager.remittance.getBasicUserInfo(accountIdentifier, new UserInfoInterface() {
             @Override
             public void onUserInfoSuccess(BasicUserInfo basicUserInfo) {
             
