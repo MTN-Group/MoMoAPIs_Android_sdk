@@ -14,7 +14,7 @@ Passing the reference id obtained from the createUser() function into getUserDet
 ```java
 
 
-  SDKManager.authentication.getUserDetails(userReferenceId, new UserDetailInterface() {
+  SDKManager.authentication.getUserDetails("<userReferenceId>", new UserDetailInterface() {
             @Override
             public void onUserDetailInterfaceSuccess(ApiUser apiUser) {
 
