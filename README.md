@@ -41,7 +41,7 @@ Optimum requirements to use this SDK are -
 1. **Android Studio `4.0`** or newer
 2. **Android Platform Version**: `API 32`
 3. **Build gradle**: `7.3.0`
-
+4. **Java version**: 11
 <a name="Setup"></a>
 
 # Getting Started
@@ -66,7 +66,7 @@ implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
 implementation "androidx.security:security-crypto:1.1.0-alpha05"
 
 ```
-Note:Make sure thay you have added these libaries in your application
+**Note**:Make sure thay you have added these libaries in your application
 
 # Use cases
      
