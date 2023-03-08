@@ -56,8 +56,17 @@ Add the below line in dependencies of your `build.gradle` file in your applicati
 
 ```groovy
 implementation files('libs/Momo-SDK-v1.0.0.aar')
-```
 
+//Retrofit libraries
+implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+
+//security
+implementation "androidx.security:security-crypto:1.1.0-alpha05"
+
+```
+Note:Make sure thay you have added these libaries in your application
 
 # Use cases
      
