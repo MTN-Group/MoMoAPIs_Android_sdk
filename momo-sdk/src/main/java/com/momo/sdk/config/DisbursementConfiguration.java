@@ -25,7 +25,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-@SuppressWarnings({"unused", "AccessStaticViaInstance"})
+@SuppressWarnings({"unused", "AccessStaticViaInstance", "resource"})
 public class DisbursementConfiguration {
 
     private final String subscriptionKey;
