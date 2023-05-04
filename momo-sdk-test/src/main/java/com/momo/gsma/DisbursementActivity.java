@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.momo.sdk.SDKManager;
+import com.momo.sdk.config.CollectionConfiguration;
 import com.momo.sdk.config.DisbursementConfiguration;
 import com.momo.sdk.interfaces.RequestInterface;
 import com.momo.sdk.interfaces.UserConsentInterface;
@@ -32,6 +33,8 @@ import com.momo.sdk.model.Transfer;
 import com.momo.sdk.model.UserInfo;
 import com.momo.sdk.model.collection.AccountHolder;
 import com.momo.sdk.model.collection.Payee;
+import com.momo.sdk.model.collection.Payer;
+import com.momo.sdk.model.collection.RequestPay;
 import com.momo.sdk.model.collection.Result;
 import com.momo.sdk.model.disbursement.Deposit;
 import com.momo.sdk.model.disbursement.DepositStatus;
@@ -172,7 +175,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                 //Refund
                 sbOutPut = new StringBuilder();
                 sbOutPut.append("Refund V1 - Output \n\n");
-                refundV1(5);
+                callCollectionTokenAPI(position);
                 break;
             case 6:
                 //Validate Consumer Identity
@@ -204,6 +207,79 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
         }
     }
+
+    private void callCollectionTokenAPI(int position) {
+        showProgress();
+        sbOutPut = new StringBuilder();
+
+
+        CollectionConfiguration collectionConfiguration = new CollectionConfiguration.
+                CollectionConfigurationBuilder().
+                setSubscriptionKey(TestAppConstants.collection_subscription).
+                setSubscriptionType(SubscriptionType.COLLECTION).
+                setCallBackUrl("webhook.site").
+                setEnvironment(Environment.SANDBOX).
+                setAPiKey(TestAppConstants.apiKey).
+                setUserReferenceId(TestAppConstants.userReferenceId).
+                setxTargetEnvironment("sandbox").
+                setOnInitializationResponse(new TokenInitializeInterface() {
+                    @Override
+                    public void onTokenInitializeSuccess(StatusResponse statusResponse) {
+                        requestPay(position);
+
+                    }
+
+                    @Override
+                    public void onTokenInitializeFailure(MtnError mtnError) {
+                        Log.d(TAG, "onTokenInitializeFailure: " + mtnError.getErrorBody().getMessage());
+                        sbOutPut = new StringBuilder();
+                        sbOutPut.append(new Gson().toJson(mtnError));
+                        hideProgress();
+                        runOnUiThread(() -> showToast(mtnError.getErrorBody().getMessage()));
+
+                    }
+                }).
+                build(this);
+
+    }
+
+    private void requestPay(int position) {
+        showProgress();
+
+        RequestPay requestPay = new RequestPay();
+        requestPay.setAmount("5.0");
+        requestPay.setCurrency("EUR");
+        requestPay.setExternalId("6353636");
+        requestPay.setPayerMessage("Pay for product a");
+        requestPay.setPayeeNote("payer note");
+
+        Payer payer = new Payer();
+
+        payer.setPartyId("0248888736");
+        payer.setPartyIdType("MSISDN");
+
+        requestPay.setPayer(payer);
+
+        SDKManager.collection.requestToPay(requestPay, "", new RequestInterface() {
+            @Override
+            public void onRequestInterfaceSuccess(StatusResponse statusResponse) {
+                  refundV1(position,statusResponse.getXReferenceId());
+
+            }
+
+            @Override
+            public void onRequestInterFaceFailure(MtnError mtnError) {
+                onApiFailure(position, mtnError);
+
+            }
+
+
+        });
+
+    }
+
+
+
 
     public void getUserInfoWithConsent(int position) {
         AccountHolder accountHolder = new AccountHolder();
@@ -487,7 +563,9 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
     }
 
-    public void refundV1(int position) {
+    public void refundV1(int position,String referenceId) {
+        sbOutPut.append("Refund V1 - output \n \n ");
+
         Refund refund = new Refund();
 
         refund.setAmount("5.0");
@@ -495,7 +573,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
         refund.setExternalId("6353636");
         refund.setPayerMessage("Pay for product a");
         refund.setPayeeNote("payer note");
-        refund.setReferenceIdToRefund("0c0649fc-d3d0-43e7-94c1-5dab1637098a");
+        refund.setReferenceIdToRefund(referenceId);
 
 
         SDKManager.disbursement.refundV1(refund, "", new RequestInterface() {
@@ -510,7 +588,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
                     customUseCaseAdapter.setStatus(1, position);
                     sbOutPut.append(new Gson().toJson(statusResponse));
                     //  txtResponse.setText(sbOutPut);
-                    refundV2(position);
+                    refundV2(position,referenceId);
 
                 }
             }
@@ -549,7 +627,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
 
     }
 
-    public void refundV2(int position) {
+    public void refundV2(int position,String referenceId) {
         sbOutPut.append("\n\n Refund V2 - Output \n\n");
         Refund refund = new Refund();
 
@@ -558,7 +636,7 @@ public class DisbursementActivity extends  BaseActivity implements  CustomUseCas
         refund.setExternalId("6353636");
         refund.setPayerMessage("Pay for product a");
         refund.setPayeeNote("payer note");
-        refund.setReferenceIdToRefund("0c0649fc-d3d0-43e7-94c1-5dab1637098a");
+        refund.setReferenceIdToRefund(referenceId);
 
 
         SDKManager.disbursement.refundV2(refund, "", new RequestInterface() {
